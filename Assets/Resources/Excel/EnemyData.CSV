@@ -1,0 +1,10 @@
+Type,MaxHp,Damage,Speed,IsIdleLeft
+Boar,8,2,2,FALSE
+DireBoar,10,3,3,FALSE
+GoblinGuard,8,0,2,FALSE
+EliteGoblinGuard,15,0,2,FALSE
+GoblinGiant,40,0,2,FALSE
+TrumpetFlower,8,0,0,FALSE
+Stake,9999,0,0,FALSE
+GoblinShaman,15,0,2,FALSE
+GunSharkEliteState,40,4,5,FALSE

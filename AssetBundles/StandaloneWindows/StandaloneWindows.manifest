@@ -1,0 +1,10 @@
+ManifestFileVersion: 0
+CRC: 2548384934
+AssetBundleManifest:
+  AssetBundleInfos:
+    Info_0:
+      Name: datas
+      Dependencies: {}
+    Info_1:
+      Name: prefabs/players
+      Dependencies: {}

@@ -1,0 +1,14 @@
+﻿PlantType,QualityType,isRenewable,PlantStates,PlantStates,StateGrowDays,StateGrowDays,HarvestType,HarvestName,HarvestNum
+GearFlower,White,FALSE,GearFlower,None,1,0,Material,Gear,4
+CycasRevoluta,White,FALSE,CycasRevoluta,None,1,0,Material,IronOre,4
+TrumpetFlower,White,FALSE,TrumpetFlower,None,1,0,Material,Biomass,4
+GemFlower,White,FALSE,GemFlower,None,1,0,Material,Gem,288
+Oak,Green,FALSE,Oak,None,3,0,Material,Wood,10
+MagicFlower,Green,FALSE,MagicFlower,MagicFlower1,2,3,Material,OrangeMagicFragments,1
+MirrorFlower,Blue,FALSE,MirrorFlower,None,1,0,Material,OrangeMagicFragments,1
+BinaryTree,Blue,FALSE,BinaryTree,None,1,0,Material,OrangeMagicFragments,1
+Watermelon,Blue,FALSE,Watermelon,None,1,0,Material,OrangeMagicFragments,1
+Chomper,Blue,FALSE,Chomper,None,1,0,Material,OrangeMagicFragments,1
+GuardFlower,Purple,FALSE,GuardFlower,None,1,0,Material,OrangeMagicFragments,1
+WonderfulFlower,Purple,FALSE,WonderfulFlower,None,1,0,Material,OrangeMagicFragments,1
+GemTree,Orange,TRUE,GemTree,GemTree1,2,4,Material,Gem,222

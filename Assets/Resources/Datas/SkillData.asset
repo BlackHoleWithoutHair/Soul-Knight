@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 775d6e0b3c0752740b340a27b24c6b21, type: 3}
+  m_Name: SkillData
+  m_EditorClassIdentifier: 
+  textAsset: {fileID: 4900000, guid: 81d77ad7b104bdb4b91d27520d3fe009, type: 3}
+  SkillShareAttrs:
+  - Type: 2
+    SkillDuration: 5
+    SkillCoolTime: 10
+    SkillName: "\u706B\u529B\u5168\u5F00"
+    SkillDescription: "\u590D\u5236\u5F53\u524D\u6B66\u5668\u4F9B\u4F60\u4F7F\u7528"
+    SeniorSkillDescription: "\u51FB\u8D25\u654C\u4EBA\u589E\u52A0\u6280\u80FD\u6301\u7EED\u65F6\u95F4\r"
+  - Type: 3
+    SkillDuration: 5
+    SkillCoolTime: 10
+    SkillName: "\u5168\u529B\u653B\u51FB"
+    SkillDescription: "\u540C\u65F6\u4F7F\u7528\u6240\u6709\u6B66\u5668\u8FDB\u884C\u653B\u51FB"
+    SeniorSkillDescription: "\u51FB\u8D25\u654C\u4EBA\u589E\u52A0\u6280\u80FD\u6301\u7EED\u65F6\u95F4\r"
+  - Type: 0
+    SkillDuration: 0
+    SkillCoolTime: 2.5
+    SkillName: "\u7FFB\u6EDA"
+    SkillDescription: "\u5411\u524D\u7FFB\u6EDA\uFF0C\u671F\u95F4\u65E0\u654C"
+    SeniorSkillDescription: "\u7FFB\u6EDA\u7ED3\u675F\u63D0\u9AD8\u66B4\u51FB\u7387\r"
+  - Type: 1
+    SkillDuration: 0.4
+    SkillCoolTime: 4
+    SkillName: "\u5C45\u5408\u65A9"
+    SkillDescription: "\u5411\u524D\u7A81\u8FDB\u4E00\u6BB5\u8DDD\u79BB\u5E76\u653B\u51FB\u6CBF\u9014\u7684\u654C\u4EBA"
+    SeniorSkillDescription: "\u84C4\u80FD\u6B21\u6570\u589E\u52A0\r"

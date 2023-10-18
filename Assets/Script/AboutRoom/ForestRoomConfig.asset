@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92ef4bd1c2d696e47950b4a4a8069709, type: 3}
+  m_Name: ForestRoomConfig
+  m_EditorClassIdentifier: 
+  LevelGraph: {fileID: 11400000, guid: b5b578dd6027dd0428d803af1ab2c13f, type: 2}
+  levelGraphs:
+  - {fileID: 11400000, guid: 53e77519556566f4bbedea6f8f2088b4, type: 2}
+  UseRandomLevelGraph: 0
+  ExtraEnemyRoomChance: 0.9
+  ExtraEnemyRoomDeadEndChance: 0.1
+  TreasureRoomDeadEndChance: 0.5
+  SecretRoomChance: 0
+  SecretRoomDeadEndChance: 0
+  RoomTemplates:
+    BasicRoomTemplates:
+    - {fileID: 6289411968770833349, guid: 52cee89650bafe3438b86d3eb8e8ffb0, type: 3}
+    BossRoomTemplates:
+    - {fileID: 2963299079367215770, guid: 6ad6a6512d15be3449861304ccc0d363, type: 3}
+    EnemyRoomTemplates:
+    - {fileID: 6289411968770833349, guid: 1c8e35264d329674691d27021e92b350, type: 3}
+    - {fileID: 6922245848833479306, guid: 7858fec75420a8a43a6c126481f967db, type: 3}
+    - {fileID: 2963299079367215770, guid: 1974dfc37c1900544bf0f14cb06f859a, type: 3}
+    - {fileID: 2963299079367215770, guid: 3be8a61ac9f6c8a41b79cd4a4ef2107c, type: 3}
+    - {fileID: 8664446783558927945, guid: 95450b2ee68937b4a9967d8d3722d7df, type: 3}
+    - {fileID: 6289411968770833349, guid: 52cee89650bafe3438b86d3eb8e8ffb0, type: 3}
+    - {fileID: 6922245848833479306, guid: 4eddb940f63a8884fbbc161e9c5a832a, type: 3}
+    - {fileID: 2468386704303777438, guid: b4073eaa6a1d99148a96e00c593d8d47, type: 3}
+    - {fileID: 2963299079367215770, guid: 6ad6a6512d15be3449861304ccc0d363, type: 3}
+    - {fileID: 5754433423875371349, guid: 8a604aa2f5073b3468df435fbf7a6389, type: 3}
+    - {fileID: 8664446783558927945, guid: fb02e658026b7654caa95e3c83ef31aa, type: 3}
+    EliteEnemyRoomTemplates:
+    - {fileID: 2963299079367215770, guid: 6ad6a6512d15be3449861304ccc0d363, type: 3}
+    - {fileID: 6289411968770833349, guid: 52cee89650bafe3438b86d3eb8e8ffb0, type: 3}
+    CorridorRoomTemplates:
+    - {fileID: 1458931212381518705, guid: 794ff401cbf9c2f46b6b65056dc59984, type: 3}
+    - {fileID: 1092174797384735462, guid: 99431ffe6bf45a248ada496a4d19205b, type: 3}
+    BirthRoomTemplates:
+    - {fileID: 6289411968770833349, guid: 52cee89650bafe3438b86d3eb8e8ffb0, type: 3}
+    TeleportRoomTemplates:
+    - {fileID: 6592719878068041049, guid: f68a4f3f0f351f54293bdeba193e9aa5, type: 3}
+    HubRoomTemplates: []
+    TreasureRoomTemplates:
+    - {fileID: 2238937567229538647, guid: f90b7ce77eb0b5847aa7e9869ae980d4, type: 3}
+    - {fileID: 9049413439036918495, guid: 6d736086601c7c940b76b34bc8fe124f, type: 3}
+    ShopRoomTemplates:
+    - {fileID: 6961025669979149495, guid: 79bcc05da053886429889a7c35be81d2, type: 3}
+    SecretRoomTemplates: []

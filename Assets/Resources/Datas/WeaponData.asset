@@ -1,0 +1,115 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b0f4009fcff1f74ca111dd9ee28d9cc, type: 3}
+  m_Name: WeaponData
+  m_EditorClassIdentifier: 
+  textAsset: {fileID: 4900000, guid: 11b9ed77fc60c714084a0ec3c1a4ee5c, type: 3}
+  WeaponShareAttrs:
+  - DebuffType: 5
+    Damage: 3
+    FireRate: 4
+    ScatteringRate: 5
+    Speed: 30
+    Type: 0
+    MagicSpend: 0
+    CriticalRate: 0
+    SpeedDecrease: 0.1
+  - DebuffType: 5
+    Damage: 2
+    FireRate: 1.5
+    ScatteringRate: 5
+    Speed: 30
+    Type: 4
+    MagicSpend: 0
+    CriticalRate: 0
+    SpeedDecrease: 0.2
+  - DebuffType: 5
+    Damage: 3
+    FireRate: 4
+    ScatteringRate: 5
+    Speed: 30
+    Type: 10
+    MagicSpend: 0
+    CriticalRate: 10
+    SpeedDecrease: 0.1
+  - DebuffType: 2
+    Damage: 5
+    FireRate: 3
+    ScatteringRate: 0
+    Speed: 30
+    Type: 1
+    MagicSpend: 2
+    CriticalRate: 30
+    SpeedDecrease: 0.1
+  - DebuffType: 0
+    Damage: 8
+    FireRate: 1
+    ScatteringRate: 0
+    Speed: 0
+    Type: 2
+    MagicSpend: 3
+    CriticalRate: 40
+    SpeedDecrease: 0.1
+  - DebuffType: 5
+    Damage: 3
+    FireRate: 6
+    ScatteringRate: 10
+    Speed: 30
+    Type: 3
+    MagicSpend: 1
+    CriticalRate: 5
+    SpeedDecrease: 0.3
+  - DebuffType: 5
+    Damage: 3
+    FireRate: 6
+    ScatteringRate: 10
+    Speed: 30
+    Type: 5
+    MagicSpend: 1
+    CriticalRate: 12
+    SpeedDecrease: 0.1
+  - DebuffType: 5
+    Damage: 2
+    FireRate: 6
+    ScatteringRate: 15
+    Speed: 30
+    Type: 6
+    MagicSpend: 0
+    CriticalRate: 5
+    SpeedDecrease: 0.1
+  - DebuffType: 5
+    Damage: 2
+    FireRate: 6
+    ScatteringRate: 10
+    Speed: 30
+    Type: 7
+    MagicSpend: 0
+    CriticalRate: 5
+    SpeedDecrease: 0.1
+  - DebuffType: 5
+    Damage: 3
+    FireRate: 6
+    ScatteringRate: 10
+    Speed: 30
+    Type: 8
+    MagicSpend: 1
+    CriticalRate: 10
+    SpeedDecrease: 0.1
+  - DebuffType: 5
+    Damage: 2
+    FireRate: 6
+    ScatteringRate: 0
+    Speed: 30
+    Type: 9
+    MagicSpend: 2
+    CriticalRate: 0
+    SpeedDecrease: 0.2

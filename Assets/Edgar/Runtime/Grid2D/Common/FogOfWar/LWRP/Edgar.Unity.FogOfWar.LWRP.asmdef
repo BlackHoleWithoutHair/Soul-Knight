@@ -1,0 +1,30 @@
+{
+    "name": "Edgar.Unity.FogOfWar.LWRP",
+    "references": [
+        "Edgar.Unity",
+        "Unity.RenderPipelines.Lightweight.Runtime",
+        "Unity.RenderPipelines.Core.Runtime"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [
+        "EDGAR_LWRP",
+        "EDGAR_RP_CORE"
+    ],
+    "versionDefines": [
+        {
+            "name": "com.unity.render-pipelines.lightweight",
+            "expression": "6.5",
+            "define": "EDGAR_LWRP"
+        },
+        {
+            "name": "com.unity.render-pipelines.core",
+            "expression": "",
+            "define": "EDGAR_RP_CORE"
+        }
+    ]
+}

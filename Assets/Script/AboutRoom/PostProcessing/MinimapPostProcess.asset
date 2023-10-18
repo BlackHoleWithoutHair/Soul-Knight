@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7a477b89e84b8b40aecbed0f5760a37, type: 3}
+  m_Name: MinimapPostProcess
+  m_EditorClassIdentifier: 
+  Layer: 13
+  UseMultipleTilemaps: 1
+  Layers:
+  - Tilemaps: Floor
+    DisplayMode: 0
+    Color: {r: 0.18, g: 0.2, b: 0.34, a: 1}
+    Size: 1
+    Tile: {fileID: 0}
+    Material: {fileID: 0}
+  - Tilemaps: Walls
+    DisplayMode: 2
+    Color: {r: 0.72, g: 0.72, b: 0.72, a: 1}
+    Size: 1
+    Tile: {fileID: 0}
+    Material: {fileID: 2100000, guid: 1ce9f0903fcfaf143828733a4021ede7, type: 2}
+  - Tilemaps: Collideable
+    DisplayMode: 1
+    Color: {r: 0.72, g: 0.72, b: 0.72, a: 1}
+    Size: 1
+    Tile: {fileID: 11400000, guid: 1a682c2c59881fb4581d8abf604a1b0c, type: 2}
+    Material: {fileID: 2100000, guid: c6c1dcea4c441ed4387c178f026c88c1, type: 2}

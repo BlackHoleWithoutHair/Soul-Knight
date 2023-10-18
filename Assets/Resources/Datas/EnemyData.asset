@@ -1,0 +1,66 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbe14496f2144394481dcd79ff1f3648, type: 3}
+  m_Name: EnemyData
+  m_EditorClassIdentifier: 
+  textAsset: {fileID: 4900000, guid: 14a9a76575d1abb4b8fc21bcdbe631f4, type: 3}
+  EnemyShareAttrs:
+  - MaxHp: 8
+    Speed: 3
+    IsIdleLeft: 0
+    Type: 5
+    Damage: 2
+    BurnTime: 2
+    PoisoningTime: 5
+    DizzyTime: 2
+    ElectricityTime: 6
+    FreezeTime: 2.75
+  - MaxHp: 8
+    Speed: 1
+    IsIdleLeft: 0
+    Type: 3
+    Damage: 0
+    BurnTime: 2
+    PoisoningTime: 5
+    DizzyTime: 2
+    ElectricityTime: 6
+    FreezeTime: 2.75
+  - MaxHp: 15
+    Speed: 1
+    IsIdleLeft: 0
+    Type: 4
+    Damage: 0
+    BurnTime: 2
+    PoisoningTime: 5
+    DizzyTime: 2
+    ElectricityTime: 6
+    FreezeTime: 2.75
+  - MaxHp: 8
+    Speed: 0
+    IsIdleLeft: 0
+    Type: 2
+    Damage: 0
+    BurnTime: 2
+    PoisoningTime: 5
+    DizzyTime: 2
+    ElectricityTime: 6
+    FreezeTime: 2.75
+  - MaxHp: 9999
+    Speed: 0
+    IsIdleLeft: 0
+    Type: 0
+    Damage: 0
+    BurnTime: 2
+    PoisoningTime: 5
+    DizzyTime: 2
+    ElectricityTime: 6
+    FreezeTime: 2.75

@@ -1,0 +1,31 @@
+{
+    "name": "Edgar.Unity.FogOfWar.URP",
+    "references": [
+        "Edgar.Unity",
+        "Unity.RenderPipelines.Core.Runtime",
+        "Unity.RenderPipelines.Universal.Runtime"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [
+        "EDGAR_URP",
+        "EDGAR_RP_CORE"
+    ],
+    "versionDefines": [
+        {
+            "name": "com.unity.render-pipelines.universal",
+            "expression": "",
+            "define": "EDGAR_URP"
+        },
+        {
+            "name": "com.unity.render-pipelines.core",
+            "expression": "",
+            "define": "EDGAR_RP_CORE"
+        }
+    ],
+    "noEngineReferences": false
+}

@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 752cd9cd0f5060f4287f374f990b9d88, type: 3}
+  m_Name: CompositionData
+  m_EditorClassIdentifier: 
+  textAsset: {fileID: 4900000, guid: f220375503da0c845b268acec2d52c69, type: 3}
+  datas:
+  - weaponType: 0
+    materialInfos:
+    - materialType: 2
+      num: 1
+    - materialType: 0
+      num: 1
+    - materialType: 3
+      num: 1
+  - weaponType: 1
+    materialInfos:
+    - materialType: 2
+      num: 4
+  - weaponType: 18
+    materialInfos:
+    - materialType: 12
+      num: 1
+  - weaponType: 2
+    materialInfos:
+    - materialType: 0
+      num: 2
+    - materialType: 3
+      num: 2
+  - weaponType: 3
+    materialInfos:
+    - materialType: 1
+      num: 4
+  - weaponType: 4
+    materialInfos:
+    - materialType: 2
+      num: 1
+    - materialType: 0
+      num: 2

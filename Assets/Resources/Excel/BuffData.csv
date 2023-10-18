@@ -1,0 +1,7 @@
+﻿buffType,stackType,PlayerDuration,EnemyDuration,intervalTime,PlayerDamage,EnemyDamage,SpeedDecrease,name
+Freeze,NotStack,1.375,2.75,0,0,0,0,冰冻
+Dizzy,NotStack,2,2,0,0,0,0,眩晕
+Burn,NotStack,2,2,0.5,2,3,0,灼烧
+Poisoning,NotStack,5,5,0.5,1,2,0.3,中毒
+Electricity,NotStack,6,6,0.4,2,3,0,感电
+None,NotStack,0,0,0,0,0,0,null

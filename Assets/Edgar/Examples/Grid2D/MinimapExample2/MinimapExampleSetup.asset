@@ -1,0 +1,15 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 660dc0ffd74b34f4c93002b5aab6a66f, type: 3}
+  m_Name: MinimapExampleSetup
+  m_EditorClassIdentifier: 
+  MinimapPostProcess: {fileID: 11400000, guid: b479a4933fa065e4092db1c4748d255b, type: 2}

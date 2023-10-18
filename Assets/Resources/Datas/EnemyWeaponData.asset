@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4e92c179d6551d41a09b855a85fb68c, type: 3}
+  m_Name: EnemyWeaponData
+  m_EditorClassIdentifier: 
+  textAsset: {fileID: 4900000, guid: 62c9e3888ba7d444b85932a3bf3faf34, type: 3}
+  EnemyWeaponShareAttrs:
+  - DebuffType: 5
+    Damage: 3
+    FireRate: 0
+    ScatteringRate: 0
+    Speed: 0
+    Type: 0
+  - DebuffType: 5
+    Damage: 4
+    FireRate: 0
+    ScatteringRate: 0
+    Speed: 10
+    Type: 1
+  - DebuffType: 5
+    Damage: 2
+    FireRate: 2
+    ScatteringRate: 0
+    Speed: 10
+    Type: 2
+  - DebuffType: 5
+    Damage: 3
+    FireRate: 0
+    ScatteringRate: 0
+    Speed: 10
+    Type: 3
+  - DebuffType: 5
+    Damage: 3
+    FireRate: 0
+    ScatteringRate: 0
+    Speed: 10
+    Type: 4
+  - DebuffType: 3
+    Damage: 3
+    FireRate: 0
+    ScatteringRate: 0
+    Speed: 10
+    Type: 5
+  - DebuffType: 5
+    Damage: 3
+    FireRate: 0
+    ScatteringRate: 0
+    Speed: 0
+    Type: 6

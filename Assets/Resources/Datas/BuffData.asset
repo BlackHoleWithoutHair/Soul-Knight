@@ -1,0 +1,70 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d69175877ed75964a9e225cee440fe2e, type: 3}
+  m_Name: BuffData
+  m_EditorClassIdentifier: 
+  textAsset: {fileID: 4900000, guid: b4fe7000977d05e41933a4e1be125785, type: 3}
+  BuffShareAttrs:
+  - buffType: 0
+    stackType: 1
+    PlayerDuration: 1.375
+    EnemyDuration: 2.75
+    intervalTime: 0
+    PlayerDamage: 0
+    EnemyDamage: 0
+    SpeedDecrease: 0
+    name: "\u51B0\u51BB\r"
+  - buffType: 1
+    stackType: 1
+    PlayerDuration: 2
+    EnemyDuration: 2
+    intervalTime: 0
+    PlayerDamage: 0
+    EnemyDamage: 0
+    SpeedDecrease: 0
+    name: "\u7729\u6655\r"
+  - buffType: 2
+    stackType: 1
+    PlayerDuration: 2
+    EnemyDuration: 2
+    intervalTime: 0.5
+    PlayerDamage: 2
+    EnemyDamage: 3
+    SpeedDecrease: 0
+    name: "\u707C\u70E7\r"
+  - buffType: 3
+    stackType: 1
+    PlayerDuration: 5
+    EnemyDuration: 5
+    intervalTime: 0.5
+    PlayerDamage: 1
+    EnemyDamage: 2
+    SpeedDecrease: 0.3
+    name: "\u4E2D\u6BD2\r"
+  - buffType: 4
+    stackType: 1
+    PlayerDuration: 6
+    EnemyDuration: 6
+    intervalTime: 0.4
+    PlayerDamage: 2
+    EnemyDamage: 3
+    SpeedDecrease: 0
+    name: "\u611F\u7535\r"
+  - buffType: 5
+    stackType: 1
+    PlayerDuration: 0
+    EnemyDuration: 0
+    intervalTime: 0
+    PlayerDamage: 0
+    EnemyDamage: 0
+    SpeedDecrease: 0
+    name: "null\r"

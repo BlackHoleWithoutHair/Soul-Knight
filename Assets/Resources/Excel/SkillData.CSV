@@ -1,0 +1,6 @@
+﻿Type,SkillDuration,SkillCoolTime,SkillName,SkillDescription,SeniorSkillDescription
+FireOnAllCylinders,5,10,火力全开,复制当前武器供你使用,击败敌人增加技能持续时间
+FullScaleAttack,5,10,全力攻击,同时使用所有武器进行攻击,击败敌人增加技能持续时间
+Roll,0,2.5,翻滚,向前翻滚，期间无敌,翻滚结束提高暴击率
+Cut,0.4,4,居合斩,向前突进一段距离并攻击沿途的敌人,蓄能次数增加
+RecoveryMagicalCircle,1.7,14,恢复法阵,使用恢复法阵为我方单位恢复血量,获得额外的护甲持续回复

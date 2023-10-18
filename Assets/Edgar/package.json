@@ -1,0 +1,18 @@
+{
+    "name": "com.ondrejnepozitek.edgar.unity",
+    "version": "2.0.4",
+    "displayName": "Edgar - Procedural Level Generator",
+    "description": "2D procedural level generator",
+    "unity": "2019.3",
+    "author": {
+        "name": "Ondřej Nepožitek",
+        "email": "ondra@nepozitek.cz"
+    },
+    "samples": [
+        {
+          "displayName": "Examples",
+          "description": "All example scenes. They currently cannot be added individually because of package manager limitations.",
+          "path": "Examples~"
+        }
+    ]
+}

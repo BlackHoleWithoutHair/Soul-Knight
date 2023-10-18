@@ -1,0 +1,14 @@
+﻿Type,SkillTypes,SkillTypes,SkinTypes,SkinTypes,IdleWeapon,MaxHp,Armor,Magic,Critical,HandAttackDamage,Speed,FightingSpeed,FinishFightingSpeed,IsIdleLeft,ArmorRecoveryTime,HurtArmorRecoveryTime,HurtInvincibleTime,PlayerName
+Knight,FireOnAllCylinders,FullScaleAttack,Knight,KnightLava,BadPistol,6,5,180,5,4,12,7.5,11.5,FALSE,1,4,0.5,骑士
+Rogue,Roll,Cut,Rogue,RogueKun,BadPistol,5,2,180,10,5,12,7.5,11.5,FALSE,1,4,0.5,游侠
+Wizard,FireOnAllCylinders,None,Wizard,None,TheCode,3,5,240,0,3,12,7.5,11.5,FALSE,1,4,0.5,法师
+Assassin,FireOnAllCylinders,None,Assassin,None,BadPistol,4,4,180,10,5,12,7.5,11.5,FALSE,1,4,0.5,刺客
+Alchemist,FireOnAllCylinders,None,Alchemist,None,BadPistol,5,5,180,5,4,12,7.5,11.5,FALSE,1,4,0.5,炼金术士
+Engineer,FireOnAllCylinders,None,Engineer,None,BadPistol,5,5,180,5,3,12,7.5,11.5,FALSE,1,4,0.5,工程师
+Vampire,FireOnAllCylinders,None,Vampire,None,CrimsonWineGlass,3,4,120,5,3,12,7.5,11.5,FALSE,1,4,0.5,吸血鬼
+Elf,FireOnAllCylinders,None,Elf,None,BadPistol,5,4,180,5,4,12,7.5,11.5,FALSE,1,4,0.5,精灵
+Werewolf,FireOnAllCylinders,None,Werewolf,None,BadPistol,11,1,120,10,5,12,7.5,11.5,FALSE,1,4,0.5,狼人
+Pastor,RecoveryMagicalCircle,None,Pastor,None,WoodenCross,3,5,200,0,3,12,7.5,11.5,FALSE,1,4,0.5,牧师
+Druid,FireOnAllCylinders,None,Druid,None,BadPistol,6,3,130,5,5,12,7.5,11.5,FALSE,1,4,0.5,德鲁伊
+Berserker,FireOnAllCylinders,None,Berserker,None,BadPistol,9,3,150,5,5,12,7.5,11.5,FALSE,1,4,0.5,狂战士
+Paladin,FireOnAllCylinders,None,Paladin,None,BadPistol,1,8,120,0,4,12,7.5,11.5,FALSE,1,4,0.5,圣骑士

@@ -1,0 +1,21 @@
+ManifestFileVersion: 0
+CRC: 2680206654
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 23496c2bc5267983cf7276cce3da3138
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: c48b88964b38824ebfc481e0b388c570
+HashAppended: 0
+ClassTypes:
+- Class: 114
+  Script: {fileID: 11500000, guid: 5d87fa11543c2b54892594ca2ac09baa, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers:
+- AssemblyName: Assembly-CSharp
+  ClassName: PlayerShareAttribute
+Assets:
+- Assets/Script/ScriptableObject/PlayerData.asset
+Dependencies: []

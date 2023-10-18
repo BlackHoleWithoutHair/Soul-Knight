@@ -1,0 +1,68 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Obstacles
+  - Enemy
+  - Weapon
+  - Pet
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - Obstacle
+  - Player
+  - Enemy
+  - Pet
+  - PlayerCollider
+  - PathObstacle
+  - OnlyDontStopPet
+  - Minimap
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Floor
+    uniqueID: 1260110971
+    locked: 0
+  - name: Enemy
+    uniqueID: 255558627
+    locked: 0
+  - name: EnemyWeapon
+    uniqueID: 2618221161
+    locked: 0
+  - name: Player
+    uniqueID: 2946420071
+    locked: 0
+  - name: Weapon
+    uniqueID: 2453379855
+    locked: 0
+  - name: Bullet
+    uniqueID: 2553156455
+    locked: 0
+  - name: UI
+    uniqueID: 3982977759
+    locked: 0

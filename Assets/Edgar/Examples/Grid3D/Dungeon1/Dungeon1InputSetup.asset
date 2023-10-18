@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fba5c94daa45214e9f552cc3dd43b69, type: 3}
+  m_Name: Dungeon1InputSetup
+  m_EditorClassIdentifier: 
+  LevelGraph: {fileID: 11400000, guid: 6921ecc3650e8d3489448193b0a48b98, type: 2}
+  UseCorridors: 1
+  RoomTemplates:
+    Basic:
+    - {fileID: 8812575793971638446, guid: e96d899cd660cdb4eadf4d6633a4e5c3, type: 3}
+    - {fileID: 3500990192483548761, guid: bdbb88a0be10d734b811c1d92e25e9d7, type: 3}
+    - {fileID: 8812575793971638446, guid: d6678e148f6a53f4b97033fb31f5a916, type: 3}
+    - {fileID: 3500990192483548761, guid: c0a5120de0d483844966a21f41814619, type: 3}
+    Boss:
+    - {fileID: 1610637055072654338, guid: c0cf5e086254eed4591d98f8b8647b0b, type: 3}
+    BossEntrance:
+    - {fileID: 6318373366574984797, guid: 4e904bab893537a4d98d0348646e625f, type: 3}
+    Social:
+    - {fileID: 8812575793971638446, guid: d0c93d20ff440f845a5aeb194b6566a7, type: 3}
+    - {fileID: 8812575793971638446, guid: 5673d8b1d3520574d880b0072fa25338, type: 3}
+    - {fileID: 8812575793971638446, guid: d6678e148f6a53f4b97033fb31f5a916, type: 3}
+    - {fileID: 3500990192483548761, guid: 88fd33eaf001eb04db0aca22415a447d, type: 3}
+    Entrance:
+    - {fileID: 5666691269311990768, guid: 9fe7da07ca770374d91ab3e6d1b5363c, type: 3}
+    Corridors:
+    - {fileID: 5666691269311990768, guid: 1419c099d027f074ca747e369a326c2c, type: 3}
+    - {fileID: 5666691269311990768, guid: 1419c099d027f074ca747e369a326c2c, type: 3}
+    - {fileID: 5666691269311990768, guid: 81026eed6ae6cda4a8993eddc8c2f355, type: 3}
+    - {fileID: 5666691269311990768, guid: 7d5755032503e5141a6e10feb94d9cbb, type: 3}
+    - {fileID: 5666691269311990768, guid: 6d4741c8d5d5e0e4d8bcf98d2ab26418, type: 3}
+    - {fileID: 5666691269311990768, guid: b3d480e584c8f564ab761efff28085d9, type: 3}
+    - {fileID: 5666691269311990768, guid: 7556c2d5febb06449a7dfc42e0d13b21, type: 3}
+    - {fileID: 5666691269311990768, guid: 3065e3c7ea52ae14ca6d38ddce4066c1, type: 3}
+    Cave:
+    - {fileID: 8812575793971638446, guid: a09e088a0613f15448b894a9e7116d34, type: 3}
+    - {fileID: 8812575793971638446, guid: 08e46e6aec19d45479b9277ef3451048, type: 3}
+    Trap:
+    - {fileID: 8812575793971638446, guid: bd15657361ed07e41bc8de1cf9a501b1, type: 3}
+    Hub:
+    - {fileID: 3500990192483548761, guid: 1b938ce83a3f21e42a1615c8ac189004, type: 3}
