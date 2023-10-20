@@ -8,11 +8,11 @@ public class DireBoarIdleState : EnemyState
     {
 
     }
-    public override void GameStart()
+    protected override void StateStart()
     {
-        base.GameStart();
+        base.StateStart();
         m_rb.velocity = Vector2.zero;
-        m_Animator.SetBool("isRun", false);
+        m_Animator.SetBool("isIdle", true);
         if (!isFirstEnter)
         {
             isFirstEnter = true;
@@ -22,15 +22,6 @@ public class DireBoarIdleState : EnemyState
         {
             CoroutinePool.Instance.StartCoroutine(AttackPlayer(), this);
         }
-    }
-    public override void GameUpdate()
-    {
-        base.GameUpdate();
-
-    }
-    public override void GameExit()
-    {
-        base.GameExit();
     }
     private IEnumerator AttackPlayer()
     {

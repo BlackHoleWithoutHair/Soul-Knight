@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.ComponentModel;
 using UnityEngine;
 
 public class EnemyDistribution
@@ -25,11 +26,12 @@ public class EnemyFactory
     {
         UnityTool.Instance.WriteEnemyDistributionFromTextAssetToList(distributions, ProxyResourceFactory.Instance.Factory.GetExcelTextAsset("ForestEnemyDistribution"));
     }
-    public IEnemy GetEnemy(EnemyType type)
+    public IEnemy GetEnemy(EnemyType type,bool isElite)
     {
         GameObject obj = Object.Instantiate(ProxyResourceFactory.Instance.Factory.GetEnemy(type));
         Transform parent = obj.transform.Find("GunOriginPoint");
         IEnemy enemy = null;
+        EnemyWeaponType weaponType = EnemyWeaponType.None;
         switch (type)
         {
             case EnemyType.Stake:
@@ -52,13 +54,13 @@ public class EnemyFactory
                 switch (Random.Range(0, 3))
                 {
                     case 0:
-                        enemy.AddWeapon(WeaponFactory.Instance.GetEnemyWeapon(EnemyWeaponType.Handgun, enemy));
+                        weaponType = EnemyWeaponType.Handgun;
                         break;
                     case 1:
-                        enemy.AddWeapon(WeaponFactory.Instance.GetEnemyWeapon(EnemyWeaponType.Bow, enemy));
+                        weaponType = EnemyWeaponType.Bow;
                         break;
                     case 2:
-                        enemy.AddWeapon(WeaponFactory.Instance.GetEnemyWeapon(EnemyWeaponType.Pike, enemy));
+                        weaponType = EnemyWeaponType.Pike;
                         break;
                 }
                 break;
@@ -67,26 +69,31 @@ public class EnemyFactory
                 switch (Random.Range(0, 3))
                 {
                     case 0:
-                        enemy.AddWeapon(WeaponFactory.Instance.GetEnemyWeapon(EnemyWeaponType.Shotgun, enemy));
+                        weaponType = EnemyWeaponType.Shotgun;
                         break;
                     case 1:
-                        enemy.AddWeapon(WeaponFactory.Instance.GetEnemyWeapon(EnemyWeaponType.Blowpipe, enemy));
+                        weaponType = EnemyWeaponType.Blowpipe;
                         break;
                     case 2:
-                        enemy.AddWeapon(WeaponFactory.Instance.GetEnemyWeapon(EnemyWeaponType.Hoe, enemy));
+                        weaponType = EnemyWeaponType.Hoe;
                         break;
                 }
                 break;
             case EnemyType.GoblinGiant:
                 enemy = new GoblinGiant(obj);
-                enemy.AddWeapon(WeaponFactory.Instance.GetEnemyWeapon(EnemyWeaponType.Hammer, enemy));
+                weaponType = EnemyWeaponType.Hammer;
                 break;
             case EnemyType.GoblinShaman:
                 enemy = new GoblinShaman(obj);
-                enemy.AddWeapon(WeaponFactory.Instance.GetEnemyWeapon(EnemyWeaponType.GoblinMagicStaff, enemy));
+                weaponType = EnemyWeaponType.GoblinMagicStaff;
                 break;
 
         }
+        if(weaponType!=EnemyWeaponType.None)
+        {
+            enemy.AddWeapon(WeaponFactory.Instance.GetEnemyWeapon(weaponType, enemy));
+        }
+        (enemy as ICharacter).m_Attr = AttributeFactory.Instance.GetEnemyAttr(type, isElite, weaponType);
         obj.GetComponent<Symbol>().SetCharacter(enemy);
         if (enemy == null)
         {
@@ -94,16 +101,53 @@ public class EnemyFactory
         }
         return enemy;
     }
-    public IEnemy GetRandomEnemyByStage(int Stage)
+    public IBoss GetBoss(BossType type)
     {
-        int smallStage = Stage - ((Stage / 5 + 1) - 1) * 5;
-        foreach (EnemyDistribution distribution in distributions)
+        GameObject obj = Object.Instantiate(ProxyResourceFactory.Instance.Factory.GetBoss(type));
+        IBoss boss = null;
+        switch(type)
         {
-            if (distribution.stage == smallStage)
+            case BossType.DevilSnare:
+                boss=new DevilSnare(obj); 
+                break;
+        }
+        return boss;
+    }
+    public IEnemy GetRandomEnemy()
+    {
+        int smallStage = MemoryModelCommand.Instance.GetSmallStage();
+        bool isElite = Random.Range(0, 10) == 0 ? true : false;
+        while(true)
+        {
+            foreach (EnemyDistribution distribution in distributions)
             {
-                return GetEnemy(distribution.types[Random.Range(0, distribution.types.Count)]);
+                if (distribution.stage == smallStage)
+                {
+                    EnemyType type = distribution.types[Random.Range(0, distribution.types.Count)];
+                    if (EnemyCommand.Instance.ContainState(type, isElite))
+                    {
+                        return GetEnemy(type, isElite);
+                    }
+                }
             }
         }
-        return null;
+    }
+    public IEnemy GetEliteEnemy()
+    {
+        int smallStage = MemoryModelCommand.Instance.GetSmallStage();
+        while (true)
+        {
+            foreach (EnemyDistribution distribution in distributions)
+            {
+                if (distribution.stage == smallStage)
+                {
+                    EnemyType type = distribution.types[Random.Range(0, distribution.types.Count)];
+                    if (EnemyCommand.Instance.ContainState(type, true))
+                    {
+                        return GetEnemy(type, true);
+                    }
+                }
+            }
+        }
     }
 }

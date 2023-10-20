@@ -2,10 +2,7 @@ using UnityEngine;
 
 public class TrumpetFlower : IEnemy
 {
-    public TrumpetFlower(GameObject obj) : base(obj)
-    {
-        m_Attr = AttributeFactory.Instance.GetEnemyAttr(EnemyType.TrumpetFlower);
-    }
+    public TrumpetFlower(GameObject obj) : base(obj) { }
     protected override void OnCharacterStart()
     {
         base.OnCharacterStart();

@@ -23,4 +23,12 @@
         model.Money = 0;
         model.Stage = 1;
     }
+    public int GetBigStage()
+    {
+        return (model.Stage-1)/5 + 1;
+    }
+    public int GetSmallStage()
+    {
+        return model.Stage - (GetBigStage() - 1) * 5;
+    }
 }

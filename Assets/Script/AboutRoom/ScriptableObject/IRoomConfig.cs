@@ -5,6 +5,7 @@ using UnityEngine;
 public class IRoomConfig : ScriptableObject
 {
     public LevelGraph LevelGraph;
+    public LevelGraph LevelGraphBoss;
     public List<LevelGraph> levelGraphs;
     public bool UseRandomLevelGraph;
     public float ExtraEnemyRoomChance;

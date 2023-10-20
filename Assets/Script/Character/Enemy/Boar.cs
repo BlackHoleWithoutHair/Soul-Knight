@@ -2,10 +2,7 @@ using UnityEngine;
 
 public class Boar : IEnemy
 {
-    public Boar(GameObject obj) : base(obj)
-    {
-        m_Attr = AttributeFactory.Instance.GetEnemyAttr(EnemyType.Boar);
-    }
+    public Boar(GameObject obj) : base(obj) { }
     protected override void OnCharacterStart()
     {
         base.OnCharacterStart();

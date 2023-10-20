@@ -39,7 +39,7 @@ public class Hoe : IEnemyWeapon
         if (!isAttackHit)
         {
             isAttackHit = true;
-            (obj.transform.GetComponent<Symbol>().GetCharacter() as IPlayer).UnderWeaponAttack(m_Attr);
+            (obj.transform.GetComponent<Symbol>().GetCharacter() as IPlayer).UnderAttack((m_Character.m_Attr as EnemyAttribute).m_ShareAttr.Damage);
         }
     }
 }

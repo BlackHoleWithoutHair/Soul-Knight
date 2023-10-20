@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9d51852e19691343a47025e7480578a, type: 3}
+  m_Name: BossData
+  m_EditorClassIdentifier: 
+  textAsset: {fileID: 4900000, guid: c41fb50b6687ed2499d6b038f0a70848, type: 3}
+  attrs:
+  - MaxHp: 510
+    Speed: 0
+    IsIdleLeft: 0
+    BossType: 0
+    BossCategory: 0
+  - MaxHp: 750
+    Speed: 0
+    IsIdleLeft: 0
+    BossType: 0
+    BossCategory: 1
+  - MaxHp: 900
+    Speed: 0
+    IsIdleLeft: 0
+    BossType: 0
+    BossCategory: 2

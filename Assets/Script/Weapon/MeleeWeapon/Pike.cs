@@ -51,7 +51,7 @@ public class Pike : IEnemyWeapon
         if (!isAttackHit)
         {
             isAttackHit = true;
-            (obj.transform.parent.GetComponent<Symbol>().GetCharacter() as IPlayer).UnderWeaponAttack(m_Attr);
+            (obj.transform.parent.GetComponent<Symbol>().GetCharacter() as IPlayer).UnderAttack((m_Character.m_Attr as EnemyAttribute).m_ShareAttr.Damage);
         }
     }
 }

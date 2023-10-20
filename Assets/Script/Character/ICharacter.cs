@@ -43,7 +43,9 @@ public abstract class ICharacter
         }
     }
     private bool isSuspend;
+    private bool isStopRun;
     private bool isInit;
+    private bool isStart;
     public ICharacter(GameObject obj)
     {
         gameObject = obj;
@@ -55,17 +57,14 @@ public abstract class ICharacter
         {
             m_Attr.isPause = false;
         });
-    }
-    protected virtual void GameStart()
-    {
-        OnCharacterStart();
+
     }
     public virtual void GameUpdate()
     {
-        if (!isInit)
+        if(!isInit)
         {
             isInit = true;
-            GameStart();
+            OnInit();
         }
         if (m_Attr.CurrentHp <= 0 && IsDie == false)
         {
@@ -94,16 +93,30 @@ public abstract class ICharacter
                     isSuspend = false;
                     OnCharacterSuspendExit();
                 }
-                OnCharacterUpdate();
+                if(!m_Attr.isRun)
+                {
+                    if(!isStopRun)
+                    {
+                        isStopRun = true;
+                        OnCharacterStopRunEnter();
+                    }
+                    OnCharacterStopUpdate();
+                }
+                else
+                {
+                    if(isStopRun)
+                    {
+                        isStopRun = false;
+                        OnCharacterStopExit();
+                    }
+                    OnCharacterUpdate();
+                }
             }
         }
         AlwaysUpdate();
     }
-    protected virtual void AlwaysUpdate()
-    {
-
-    }
-
+    protected virtual void AlwaysUpdate() { }
+    protected virtual void OnInit() { }
 
     protected virtual void OnCharacterStart()
     {
@@ -113,9 +126,13 @@ public abstract class ICharacter
             return;
         }
     }
-    protected virtual void OnCharacterUpdate()
+    protected virtual void OnCharacterUpdate() 
     {
-
+        if(!isStart)
+        {
+            isStart = true;
+            OnCharacterStart();
+        }
     }
     protected virtual void OnCharacterSuspendEnter()
     {
@@ -129,14 +146,14 @@ public abstract class ICharacter
     {
         m_Animator.speed = 1;
     }
-    protected virtual void OnCharacterDieStart()
+    protected virtual void OnCharacterStopRunEnter()
     {
-
+        m_Animator.SetBool("isIdle", true);
     }
-    protected virtual void OnCharaterDieUpdate()
-    {
-
-    }
+    protected virtual void OnCharacterStopUpdate() { }
+    protected virtual void OnCharacterStopExit() { }
+    protected virtual void OnCharacterDieStart() { }
+    protected virtual void OnCharaterDieUpdate() { }
     public virtual void UnderAttack(int damage)
     {
         m_Attr.CurrentHp -= damage;

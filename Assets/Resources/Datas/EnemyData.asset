@@ -12,55 +12,152 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbe14496f2144394481dcd79ff1f3648, type: 3}
   m_Name: EnemyData
   m_EditorClassIdentifier: 
-  textAsset: {fileID: 4900000, guid: 14a9a76575d1abb4b8fc21bcdbe631f4, type: 3}
+  textAsset: {fileID: 4900000, guid: 3d179e61125c71d459cda26a35e7e082, type: 3}
   EnemyShareAttrs:
   - MaxHp: 8
+    Speed: 2
+    IsIdleLeft: 0
+    Type: 7
+    WeaponType: 0
+    isElite: 0
+    Damage: 2
+  - MaxHp: 26
+    Speed: 3
+    IsIdleLeft: 0
+    Type: 7
+    WeaponType: 0
+    isElite: 1
+    Damage: 4
+  - MaxHp: 10
+    Speed: 4
+    IsIdleLeft: 0
+    Type: 8
+    WeaponType: 0
+    isElite: 0
+    Damage: 3
+  - MaxHp: 30
+    Speed: 5
+    IsIdleLeft: 0
+    Type: 8
+    WeaponType: 0
+    isElite: 1
+    Damage: 4
+  - MaxHp: 8
+    Speed: 2
+    IsIdleLeft: 0
+    Type: 3
+    WeaponType: 3
+    isElite: 0
+    Damage: 2
+  - MaxHp: 8
+    Speed: 2
+    IsIdleLeft: 0
+    Type: 3
+    WeaponType: 1
+    isElite: 0
+    Damage: 3
+  - MaxHp: 8
+    Speed: 2
+    IsIdleLeft: 0
+    Type: 3
+    WeaponType: 2
+    isElite: 0
+    Damage: 4
+  - MaxHp: 32
+    Speed: 3
+    IsIdleLeft: 0
+    Type: 3
+    WeaponType: 3
+    isElite: 1
+    Damage: 3
+  - MaxHp: 32
+    Speed: 3
+    IsIdleLeft: 0
+    Type: 3
+    WeaponType: 1
+    isElite: 1
+    Damage: 3
+  - MaxHp: 32
+    Speed: 3
+    IsIdleLeft: 0
+    Type: 3
+    WeaponType: 2
+    isElite: 1
+    Damage: 5
+  - MaxHp: 15
+    Speed: 2
+    IsIdleLeft: 0
+    Type: 6
+    WeaponType: 4
+    isElite: 0
+    Damage: 3
+  - MaxHp: 15
+    Speed: 2
+    IsIdleLeft: 0
+    Type: 6
+    WeaponType: 6
+    isElite: 0
+    Damage: 3
+  - MaxHp: 15
+    Speed: 2
+    IsIdleLeft: 0
+    Type: 6
+    WeaponType: 8
+    isElite: 0
+    Damage: 3
+  - MaxHp: 40
+    Speed: 3
+    IsIdleLeft: 0
+    Type: 6
+    WeaponType: 4
+    isElite: 1
+    Damage: 3
+  - MaxHp: 40
+    Speed: 3
+    IsIdleLeft: 0
+    Type: 6
+    WeaponType: 6
+    isElite: 1
+    Damage: 3
+  - MaxHp: 40
+    Speed: 3
+    IsIdleLeft: 0
+    Type: 6
+    WeaponType: 8
+    isElite: 1
+    Damage: 3
+  - MaxHp: 15
+    Speed: 2
+    IsIdleLeft: 0
+    Type: 5
+    WeaponType: 0
+    isElite: 0
+    Damage: 3
+  - MaxHp: 45
     Speed: 3
     IsIdleLeft: 0
     Type: 5
-    Damage: 2
-    BurnTime: 2
-    PoisoningTime: 5
-    DizzyTime: 2
-    ElectricityTime: 6
-    FreezeTime: 2.75
-  - MaxHp: 8
-    Speed: 1
-    IsIdleLeft: 0
-    Type: 3
-    Damage: 0
-    BurnTime: 2
-    PoisoningTime: 5
-    DizzyTime: 2
-    ElectricityTime: 6
-    FreezeTime: 2.75
-  - MaxHp: 15
-    Speed: 1
-    IsIdleLeft: 0
-    Type: 4
-    Damage: 0
-    BurnTime: 2
-    PoisoningTime: 5
-    DizzyTime: 2
-    ElectricityTime: 6
-    FreezeTime: 2.75
+    WeaponType: 0
+    isElite: 1
+    Damage: 3
   - MaxHp: 8
     Speed: 0
     IsIdleLeft: 0
     Type: 2
-    Damage: 0
-    BurnTime: 2
-    PoisoningTime: 5
-    DizzyTime: 2
-    ElectricityTime: 6
-    FreezeTime: 2.75
-  - MaxHp: 9999
+    WeaponType: 0
+    isElite: 0
+    Damage: 3
+  - MaxHp: 44
     Speed: 0
     IsIdleLeft: 0
-    Type: 0
-    Damage: 0
-    BurnTime: 2
-    PoisoningTime: 5
-    DizzyTime: 2
-    ElectricityTime: 6
-    FreezeTime: 2.75
+    Type: 2
+    WeaponType: 0
+    isElite: 1
+    Damage: 3
+  - MaxHp: 40
+    Speed: 5
+    IsIdleLeft: 0
+    Type: 9
+    WeaponType: 0
+    isElite: 1
+    Damage: 4

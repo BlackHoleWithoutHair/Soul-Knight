@@ -1,33 +1,42 @@
 public abstract class IState
 {
-    private bool isInit;
     public IStateController m_Controller;
+    private bool isInit;
+    private bool isStart;
     public IState(IStateController controller)
     {
         m_Controller = controller;
-    }
-    public virtual void GameStart()
-    {
-        if (!isInit)
-        {
-            isInit = true;
-            StateInit();
-        }
-        StateStart();
     }
     public virtual void GameUpdate()
     {
         StateAnyUpdate();
         StateUpdate();
     }
-    public virtual void GameExit()
+    protected virtual void StateInit() { }
+    protected virtual void StateStart() 
+    {
+        if(!isInit)
+        {
+            isInit = true;
+            StateInit();
+        }
+    }
+    protected virtual void StateUpdate() 
+    {
+        if(!isStart)
+        {
+            isStart = true;
+            StateStart();
+        }
+    }
+    protected virtual void StateEnd() 
+    {
+        isStart = false;
+    }
+    protected virtual void StateAnyUpdate() { }
+    public void OnExit()
     {
         StateEnd();
     }
-    protected virtual void StateInit() { }
-    protected virtual void StateStart() { }
-    protected virtual void StateUpdate() { }
-    protected virtual void StateEnd() { }
-    protected virtual void StateAnyUpdate() { }
 }
 

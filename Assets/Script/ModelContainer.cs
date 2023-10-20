@@ -13,6 +13,7 @@ public class ModelContainer : Singleton<ModelContainer>
 
         models.Add(new PlayerModel());
         models.Add(new EnemyModel());
+        models.Add(new BossModel());
     }
     public T GetModel<T>() where T : AbstractModel
     {

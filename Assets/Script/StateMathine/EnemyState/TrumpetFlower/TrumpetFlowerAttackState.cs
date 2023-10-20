@@ -7,10 +7,10 @@ public class TrumpetFlowerAttackState : EnemyState
     {
         m_WeaponAttr = AttributeFactory.Instance.GetEnemyWeaponAttr(EnemyWeaponType.TrumpetFlower);
     }
-    public override void GameStart()
+    protected override void StateStart()
     {
-        base.GameStart();
-        m_Animator.SetBool("isAttack", true);
+        base.StateStart();
+        m_Animator.SetBool("isIdle", false);
         CoroutinePool.Instance.StartCoroutine(Warning(0.4f, () =>
         {
             for (int i = 0; i < 9; i++)
@@ -19,14 +19,5 @@ public class TrumpetFlowerAttackState : EnemyState
             }
             m_Controller.SetOtherState(typeof(TrumpetFlowerIdleState));
         }), this);
-    }
-    public override void GameUpdate()
-    {
-        base.GameUpdate();
-    }
-    public override void GameExit()
-    {
-        base.GameExit();
-        CoroutinePool.Instance.StopAllCoroutineInObject(this);
     }
 }

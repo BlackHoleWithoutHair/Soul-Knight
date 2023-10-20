@@ -4,15 +4,12 @@ using UnityEngine;
 public class GoblinShamanIdleState : EnemyState
 {
     private bool isFirstEnter;
-    public GoblinShamanIdleState(EnemyStateController controller) : base(controller)
+    public GoblinShamanIdleState(EnemyStateController controller) : base(controller) { }
+    protected override void StateStart()
     {
-
-    }
-    public override void GameStart()
-    {
-        base.GameStart();
+        base.StateStart();
         m_rb.velocity = Vector2.zero;
-        m_Animator.SetBool("isWalk", false);
+        m_Animator.SetBool("isIdle", true);
         if (!isFirstEnter)
         {
             isFirstEnter = true;
@@ -23,15 +20,6 @@ public class GoblinShamanIdleState : EnemyState
             CoroutinePool.Instance.StartCoroutine(WaitForAttack(), this);
         }
         CoroutinePool.Instance.StartCoroutine(WaitForAttack(), this);
-    }
-    public override void GameUpdate()
-    {
-        base.GameUpdate();
-    }
-    public override void GameExit()
-    {
-        base.GameExit();
-        CoroutinePool.Instance.StopAllCoroutineInObject(this);
     }
     private IEnumerator WaitForAttack()
     {

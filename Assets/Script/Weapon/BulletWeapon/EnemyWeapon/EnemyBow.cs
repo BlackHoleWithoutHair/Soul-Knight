@@ -31,6 +31,7 @@ public class EnemyBow : IEnemyWeapon
         firstSprite.enabled = true;
         nextSprite.enabled = false;
         arrow.gameObject.transform.SetParent(null);
+        (arrow as IEnemyBullet).SetDamage((m_Character.m_Attr as EnemyAttribute).m_ShareAttr.Damage);
         arrow.SetRotation(GetShotRotation());
         arrow.SetPosition(arrow.gameObject.transform.position);
         arrow.AddToController();

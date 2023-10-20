@@ -1,25 +1,19 @@
 using System.Collections;
+using System.Net.Sockets;
 using UnityEngine;
 
 public class TrumpetFlowerIdleState : EnemyState
 {
-    public TrumpetFlowerIdleState(EnemyStateController controller) : base(controller)
+    public TrumpetFlowerIdleState(EnemyStateController controller) : base(controller) { }
+    protected override void StateStart()
     {
-
-    }
-    public override void GameStart()
-    {
-        base.GameStart();
-        m_Animator.SetBool("isAttack", false);
+        base.StateStart();
+        m_Animator.SetBool("isIdle", true);
         CoroutinePool.Instance.StartCoroutine(WaitForAttack(), this);
     }
-    public override void GameUpdate()
+    protected override void StateEnd()
     {
-        base.GameUpdate();
-    }
-    public override void GameExit()
-    {
-        base.GameExit();
+        base.StateEnd();
         CoroutinePool.Instance.StopAllCoroutineInObject(this);
     }
     private IEnumerator WaitForAttack()

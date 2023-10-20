@@ -2,6 +2,7 @@ using UnityEngine;
 
 public abstract class IEnemyBullet : IBullet
 {
+    protected int Damage;
     protected EnemyBulletType type;
     public IEnemyBullet(GameObject obj,EnemyWeaponShareAttribute attr) : base(obj, attr)
     {
@@ -25,7 +26,7 @@ public abstract class IEnemyBullet : IBullet
         if (attr.HurtInvincibleTimer >= attr.m_ShareAttr.HurtInvincibleTime)
         {
             isHitWall = true;
-            (obj.transform.GetComponent<Symbol>().GetCharacter() as IPlayer).UnderWeaponAttack(m_Attr as EnemyWeaponShareAttribute);
+            (obj.transform.GetComponent<Symbol>().GetCharacter() as IPlayer).UnderAttack(Damage);
         }
     }
     public override void Remove()
@@ -35,5 +36,9 @@ public abstract class IEnemyBullet : IBullet
         {
             pool.ReturnItem(type, this);
         }
+    }
+    public void SetDamage(int damage)
+    {
+        Damage=damage;
     }
 }

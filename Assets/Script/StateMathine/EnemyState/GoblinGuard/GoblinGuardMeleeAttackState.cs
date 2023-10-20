@@ -12,12 +12,11 @@ public class GoblinGuardMeleeAttackState : EnemyState
     {
         //TriggerSystem.Instance.RegisterObserver(TriggerType.OnTriggerEnter, m_Effect, player.gameObject, OnHitPlayer);
     }
-
-    public override void GameStart()
+    protected override void StateStart()
     {
-        base.GameStart();
+        base.StateStart();
         m_Attr.isAttack = true;
-        m_Animator.SetBool("isRun", true);
+        m_Animator.SetBool("isIdle", false);
         Timer = 0;
     }
     public override void GameUpdate()
@@ -70,9 +69,9 @@ public class GoblinGuardMeleeAttackState : EnemyState
             return;
         }
     }
-    public override void GameExit()
+    protected override void StateEnd()
     {
-        base.GameExit();
+        base.StateEnd();
         m_Attr.isAttack = false;
         StopSeekerLoop();
     }

@@ -2,10 +2,7 @@
 
 public class GoblinShaman : IEnemy
 {
-    public GoblinShaman(GameObject obj) : base(obj)
-    {
-        m_Attr = AttributeFactory.Instance.GetEnemyAttr(EnemyType.GoblinShaman);
-    }
+    public GoblinShaman(GameObject obj) : base(obj) { }
     protected override void OnCharacterStart()
     {
         base.OnCharacterStart();

@@ -32,6 +32,7 @@ public enum PlayerWeaponType
 }
 public enum EnemyWeaponType
 {
+    None,
     Pike,
     Bow,
     Handgun,

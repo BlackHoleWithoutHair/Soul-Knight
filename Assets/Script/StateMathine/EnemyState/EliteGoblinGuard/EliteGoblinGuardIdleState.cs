@@ -8,11 +8,11 @@ public class EliteGoblinGuardIdleState : EnemyState
     {
 
     }
-    public override void GameStart()
+    protected override void StateStart()
     {
-        base.GameStart();
+        base.StateStart();
         m_rb.velocity = Vector2.zero;
-        m_Animator.SetBool("isWalk", false);
+        m_Animator.SetBool("isIdle", true);
         if (!isFirstEnter)
         {
             isFirstEnter = true;
@@ -23,13 +23,9 @@ public class EliteGoblinGuardIdleState : EnemyState
             CoroutinePool.Instance.StartCoroutine(WaitForAttack(), this);
         }
     }
-    public override void GameUpdate()
+    protected override void StateEnd()
     {
-        base.GameUpdate();
-    }
-    public override void GameExit()
-    {
-        base.GameExit();
+        base.StateEnd();
         CoroutinePool.Instance.StopAllCoroutineInObject(this);
     }
     private IEnumerator WaitForAttack()

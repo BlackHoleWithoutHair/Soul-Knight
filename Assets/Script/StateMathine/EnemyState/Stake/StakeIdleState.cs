@@ -1,14 +1,9 @@
 public class StakeIdleState : EnemyState
 {
-    public StakeIdleState(EnemyStateController controller) : base(controller)
+    public StakeIdleState(EnemyStateController controller) : base(controller) { }
+    protected override void StateStart()
     {
-
+        base.StateStart();
+        m_Animator.SetBool("isIdle", true);
     }
-    public override void GameStart()
-    {
-        base.GameStart();
-        m_Animator.SetBool("isAttack", false);
-
-    }
-
 }

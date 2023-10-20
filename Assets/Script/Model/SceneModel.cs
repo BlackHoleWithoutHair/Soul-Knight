@@ -1,4 +1,5 @@
-﻿using UnityEngine.SceneManagement;
+﻿using System;
+using UnityEngine.SceneManagement;
 
 public class SceneModel : AbstractModel
 {
@@ -7,16 +8,16 @@ public class SceneModel : AbstractModel
     public SceneType sceneType;
     protected override void OnInit()
     {
-        SceneIndex = GetActiveSceneIndex();
-        SetSceneType(SceneIndex);
+        SetValue();
     }
     private int GetActiveSceneIndex()
     {
         return SceneManager.GetActiveScene().buildIndex;
     }
-    private void SetSceneType(int index)
+    public void SetValue()
     {
-        switch (index)
+        SceneIndex = GetActiveSceneIndex();
+        switch (SceneIndex)
         {
             case 0:
                 sceneName = SceneName.MainMenuScene;

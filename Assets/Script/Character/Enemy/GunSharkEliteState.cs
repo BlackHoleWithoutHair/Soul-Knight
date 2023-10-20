@@ -2,10 +2,7 @@
 
 public class GunSharkEliteState : IEnemy
 {
-    public GunSharkEliteState(GameObject obj) : base(obj)
-    {
-        m_Attr = AttributeFactory.Instance.GetEnemyAttr(EnemyType.GunSharkEliteState);
-    }
+    public GunSharkEliteState(GameObject obj) : base(obj) { }
     protected override void OnCharacterStart()
     {
         base.OnCharacterStart();

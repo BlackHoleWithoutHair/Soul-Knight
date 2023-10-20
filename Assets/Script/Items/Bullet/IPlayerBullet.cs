@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class IPlayerBullet : IBullet
 {
+    public new PlayerWeaponShareAttribute m_Attr { get => base.m_Attr as PlayerWeaponShareAttribute; protected set => base.m_Attr = value; }
     protected PlayerBulletType type;
     public IPlayerBullet( GameObject obj, PlayerWeaponShareAttribute attr) : base(obj, attr)
     {

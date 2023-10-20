@@ -4,15 +4,12 @@ using UnityEngine;
 public class GunSharkEliteStateIdleState : EnemyState
 {
     private bool isFirstEnter;
-    public GunSharkEliteStateIdleState(EnemyStateController controller) : base(controller)
+    public GunSharkEliteStateIdleState(EnemyStateController controller) : base(controller) { }
+    protected override void StateStart()
     {
-
-    }
-    public override void GameStart()
-    {
-        base.GameStart();
+        base.StateStart();
         m_rb.velocity = Vector2.zero;
-        m_Animator.SetBool("isRun", false);
+        m_Animator.SetBool("isIdle", true);
         if (!isFirstEnter)
         {
             isFirstEnter = true;
@@ -22,15 +19,6 @@ public class GunSharkEliteStateIdleState : EnemyState
         {
             CoroutinePool.Instance.StartCoroutine(AttackPlayer(), this);
         }
-    }
-    public override void GameUpdate()
-    {
-        base.GameUpdate();
-
-    }
-    public override void GameExit()
-    {
-        base.GameExit();
     }
     private IEnumerator AttackPlayer()
     {

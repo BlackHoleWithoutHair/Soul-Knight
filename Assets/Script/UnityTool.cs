@@ -170,6 +170,7 @@ public class UnityTool
         if (typeof(Enum).IsAssignableFrom(type))
         {
             //Debug.Log(type.ToString() + " " + s);
+           
             return Enum.Parse(type, s);
         }
         return Convert.ChangeType(s, type);
@@ -213,11 +214,9 @@ public class UnityTool
         }
         for (int i = 1; i < lineText.Length; i++)
         {
-            if (lineText[i] == "")
-            {
-                continue;
-            }
+            if (lineText[i] == "") continue;
             string[] rows = lineText[i].Split(',');
+            if (rows[0] == "") continue;
             T obj = new T();
             //clear the list in listinfo every line
             foreach (ListInfo listInfo in listOfListInfo)
@@ -227,10 +226,7 @@ public class UnityTool
             for (int j = 0; j < rows.Length; j++)
             {
                 FieldInfo info = type.GetField(fieldName[j]);
-                if (info == null)
-                {
-                    continue;
-                }
+                if (info == null) continue;
                 //if the field is type of list ,assign value to the list in listInfo
                 if (typeof(System.Collections.IList).IsAssignableFrom(info.FieldType))
                 {
@@ -298,9 +294,18 @@ public class UnityTool
             if (textLine[i] == "") continue;
             string[] textRow = textLine[i].Split(",");
             CompositionData data = new CompositionData();
+            bool isExist=true;
             for (int j = 1; j < textRow.Length; j++)
             {
-                data.weaponType = Enum.Parse<PlayerWeaponType>(textRow[0]);
+                if(Enum.TryParse(textRow[0],out PlayerWeaponType type))
+                {
+                    data.weaponType = type;
+                }
+                else
+                {
+                    isExist = false;
+                    break;
+                }
                 if (textRow[j] != "")
                 {
                     MaterialInfo info = new MaterialInfo();
@@ -309,7 +314,11 @@ public class UnityTool
                     data.materialInfos.Add(info);
                 }
             }
-            list.Add(data);
+            if(isExist)
+            {
+                list.Add(data);
+            }
+
         }
     }
     public void WriteLanguageDataFromTextToList(List<LanguageModel> list, TextAsset textAsset)

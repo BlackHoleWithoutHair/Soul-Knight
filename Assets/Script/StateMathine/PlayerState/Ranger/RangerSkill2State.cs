@@ -1,9 +1,9 @@
 public class RangerSkill2State : PlayerState
 {
     public RangerSkill2State(PlayerStateController controller) : base(controller) { }
-    public override void GameStart()
+    protected override void StateStart()
     {
-        base.GameStart();
+        base.StateStart();
         player.Skill.StartSkill();
     }
     public override void GameUpdate()
@@ -13,9 +13,5 @@ public class RangerSkill2State : PlayerState
         {
             m_Controller.SetOtherState(typeof(RangerIdleState));
         }
-    }
-    public override void GameExit()
-    {
-        base.GameExit();
     }
 }

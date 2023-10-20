@@ -31,12 +31,11 @@ public abstract class IStateController
             }
             if (m_State != null)
             {
-                m_State.GameExit();
+                m_State.OnExit();
             }
             if (stateDic[name] != GetLast(StateList))
             {
                 m_State = stateDic[name];
-                m_State?.GameStart();
                 StateList.Add(m_State);
             }
             if (StateList.Count == 3)
@@ -65,10 +64,9 @@ public abstract class IStateController
             {
                 if (m_State != null)
                 {
-                    m_State.GameExit();
+                    m_State.OnExit();
                 }
                 m_State = stateDic[name];
-                m_State?.GameStart();
                 StateList.Add(m_State);
             }
             if (StateList.Count == 3)
@@ -95,10 +93,9 @@ public abstract class IStateController
             }
             if (m_State != null)
             {
-                m_State.GameExit();
+                m_State.OnExit();
             }
             m_State = stateDic[name];
-            m_State?.GameStart();
             StateList.Add(m_State);
             if (StateList.Count == 3)
             {
@@ -142,7 +139,7 @@ public abstract class IStateController
     }
     public void StopCurrentState()
     {
-        m_State?.GameExit();
+        m_State?.OnExit();
         if (m_State != null)
         {
             CoroutinePool.Instance.StopAllCoroutineInObject(m_State);

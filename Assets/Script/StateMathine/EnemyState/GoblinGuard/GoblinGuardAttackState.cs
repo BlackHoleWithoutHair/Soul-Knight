@@ -9,16 +9,13 @@ public class GoblinGuardAttackState : EnemyState
     private float RoamingTimer;
 
     private Vector2 TargetPos;
-    public GoblinGuardAttackState(EnemyStateController controller) : base(controller)
+    public GoblinGuardAttackState(EnemyStateController controller) : base(controller) { }
+    protected override void StateStart()
     {
-
-    }
-    public override void GameStart()
-    {
-        base.GameStart();
+        base.StateStart();
         m_State = EnemyCondition.Roaming;
         m_Attr.isAttack = true;
-        m_Animator.SetBool("isRun", true);
+        m_Animator.SetBool("isIdle", false);
         RoamingTimer = 1.5f;
         Timer = 0;
         StartSeekerLoop();
@@ -60,9 +57,9 @@ public class GoblinGuardAttackState : EnemyState
             return;
         }
     }
-    public override void GameExit()
+    protected override void StateEnd()
     {
-        base.GameExit();
+        base.StateEnd();
         m_Attr.isAttack = false;
         StopSeekerLoop();
     }

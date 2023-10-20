@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using UnityEngine;
 
 public class ResourcesFactory : IResourceFactory
@@ -14,6 +15,7 @@ public class ResourcesFactory : IResourceFactory
     private string PetAnimatorPath = "Animations/Pet/";
     private string PlayerPath = "Prefabs/Players/";
     private string EnemyPath = "Prefabs/Enemies/";
+    private string BossPath = "Prefabs/Boss/";
     private string PanelPath = "Prefabs/Panels/";
     private string WeaponPath = "Prefabs/Weapons/";
     private string EnemyWeaponPath = "Prefabs/Weapons/EnemyWeapons/";
@@ -72,6 +74,9 @@ public class ResourcesFactory : IResourceFactory
 
             case nameof(PlantScriptableObject):
                 return Resources.Load<T>(DataPath + "PlantData");
+            case nameof(BossScriptableObject):
+                return Resources.Load<T>(DataPath + "BossData");
+
             default:
                 return default(T);
         }
@@ -163,7 +168,10 @@ public class ResourcesFactory : IResourceFactory
     {
         return Resources.Load<GameObject>(EnemyPath + type);
     }
-
+    public GameObject GetBoss(BossType type)
+    {
+        return Resources.Load<GameObject>(BossPath + type);
+    }
     public GameObject GetEffect(EffectType type)
     {
         if (EffectDic.TryGetValue(type, out GameObject obj))

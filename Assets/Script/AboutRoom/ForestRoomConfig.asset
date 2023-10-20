@@ -13,9 +13,19 @@ MonoBehaviour:
   m_Name: ForestRoomConfig
   m_EditorClassIdentifier: 
   LevelGraph: {fileID: 11400000, guid: b5b578dd6027dd0428d803af1ab2c13f, type: 2}
+  LevelGraphBoss: {fileID: 11400000, guid: fb308d0ce87091441b46b836948f7de3, type: 2}
   levelGraphs:
   - {fileID: 11400000, guid: 53e77519556566f4bbedea6f8f2088b4, type: 2}
-  UseRandomLevelGraph: 0
+  - {fileID: 11400000, guid: b5b578dd6027dd0428d803af1ab2c13f, type: 2}
+  - {fileID: 11400000, guid: b5b578dd6027dd0428d803af1ab2c13f, type: 2}
+  - {fileID: 11400000, guid: b5b578dd6027dd0428d803af1ab2c13f, type: 2}
+  - {fileID: 11400000, guid: b5b578dd6027dd0428d803af1ab2c13f, type: 2}
+  - {fileID: 11400000, guid: b5b578dd6027dd0428d803af1ab2c13f, type: 2}
+  - {fileID: 11400000, guid: b5b578dd6027dd0428d803af1ab2c13f, type: 2}
+  - {fileID: 11400000, guid: b5b578dd6027dd0428d803af1ab2c13f, type: 2}
+  - {fileID: 11400000, guid: b5b578dd6027dd0428d803af1ab2c13f, type: 2}
+  - {fileID: 11400000, guid: b5b578dd6027dd0428d803af1ab2c13f, type: 2}
+  UseRandomLevelGraph: 1
   ExtraEnemyRoomChance: 0.9
   ExtraEnemyRoomDeadEndChance: 0.1
   TreasureRoomDeadEndChance: 0.5

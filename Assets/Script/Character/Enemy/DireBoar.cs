@@ -2,10 +2,7 @@ using UnityEngine;
 
 public class DireBoar : IEnemy
 {
-    public DireBoar(GameObject obj) : base(obj)
-    {
-        m_Attr = AttributeFactory.Instance.GetEnemyAttr(EnemyType.DireBoar);
-    }
+    public DireBoar(GameObject obj) : base(obj) { }
     protected override void OnCharacterStart()
     {
         base.OnCharacterStart();

@@ -1,6 +1,7 @@
 using Edgar.Unity;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor.UI;
 using UnityEngine;
 [CreateAssetMenu(fileName = "GungeonCustomInput", menuName = "ScriptableObjects/GungeonCustomInput")]
 public class GungeonCustomInput : DungeonGeneratorInputBaseGrid2D
@@ -17,23 +18,31 @@ public class GungeonCustomInput : DungeonGeneratorInputBaseGrid2D
     {
         AllRooms = new List<RoomInfo>();
         var levelDescription = new LevelDescriptionGrid2D();
-        if (!roomConfig.UseRandomLevelGraph)
+        if(MemoryModelCommand.Instance.GetSmallStage()==5)
         {
-            selectLevelGraph = roomConfig.LevelGraph;
+            selectLevelGraph = roomConfig.LevelGraphBoss;
         }
         else
         {
-            roomConfig.levelGraphs.Add(roomConfig.LevelGraph);
-            selectLevelGraph = roomConfig.levelGraphs[Random.Next(roomConfig.levelGraphs.Count)];
+            if (!roomConfig.UseRandomLevelGraph)
+            {
+                selectLevelGraph = roomConfig.LevelGraph;
+            }
+            else
+            {
+                roomConfig.levelGraphs.Add(roomConfig.LevelGraph);
+                selectLevelGraph = roomConfig.levelGraphs[Random.Next(roomConfig.levelGraphs.Count)];
+            }
         }
+
         // Manually add all the rooms to the level description
-        foreach (var room in roomConfig.LevelGraph.Rooms.Cast<CustomRoom>())
+        foreach (var room in selectLevelGraph.Rooms.Cast<CustomRoom>())
         {
             levelDescription.AddRoom(room, roomConfig.RoomTemplates.GetRoomTemplates(room).ToList());
         }
 
         // Go through individual connections between basic rooms to add corridor rooms
-        foreach (var connection in roomConfig.LevelGraph.Connections)
+        foreach (var connection in selectLevelGraph.Connections)
         {
             var corridorRoom = ScriptableObject.CreateInstance<CustomRoom>();
             corridorRoom.RoomType = RoomType.Corridor;

@@ -85,8 +85,8 @@ MonoBehaviour:
   - {fileID: 8040047764474340816}
   - {fileID: -6519462808395568060}
   EditorData:
-    PanOffset: {x: -950.5693, y: -366.41483}
-    Zoom: 0.8960766
+    PanOffset: {x: -751.9918, y: -260.13525}
+    Zoom: 0.48336416
   RoomType: CustomRoom
   ConnectionType: CustomConnection
   IsDirected: 0

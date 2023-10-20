@@ -5,7 +5,8 @@ public abstract class CharacterAttribute
     public bool isEnemy;
     public bool isFreeze;
     public bool isDizzy;
-    public bool isPause;
+    public bool isPause;//界面暂停时调用
+    public bool isRun;
     public float SpeedDecreaseFac;
     protected CharacterShareAttr m_Attr;
     public CharacterAttribute(CharacterShareAttr attr)

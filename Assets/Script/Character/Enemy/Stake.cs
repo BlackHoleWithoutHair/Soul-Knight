@@ -2,10 +2,7 @@ using UnityEngine;
 
 public class Stake : IEnemy
 {
-    public Stake(GameObject obj) : base(obj)
-    {
-        m_Attr = AttributeFactory.Instance.GetEnemyAttr(EnemyType.Stake);
-    }
+    public Stake(GameObject obj) : base(obj) { }
     protected override void OnCharacterStart()
     {
         base.OnCharacterStart();

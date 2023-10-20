@@ -2,10 +2,7 @@ using UnityEngine;
 
 public class GoblinGiant : IEnemy
 {
-    public GoblinGiant(GameObject obj) : base(obj)
-    {
-        m_Attr = AttributeFactory.Instance.GetEnemyAttr(EnemyType.GoblinGiant);
-    }
+    public GoblinGiant(GameObject obj) : base(obj) { }
     protected override void OnCharacterStart()
     {
         base.OnCharacterStart();

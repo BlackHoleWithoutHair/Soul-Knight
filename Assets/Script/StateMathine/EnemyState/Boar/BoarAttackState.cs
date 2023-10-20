@@ -9,14 +9,13 @@ public class BoarAttackState : EnemyState
     {
         TriggerCenter.Instance.RegisterObserver(TriggerType.OnTriggerEnter, m_HitPlayerBox, "Player", OnHitPlayer);
     }
-
-    public override void GameStart()
+    protected override void StateStart()
     {
-        base.GameStart();
+        base.StateStart();
         m_State = EnemyCondition.Roaming;
         m_HitPlayerBox.SetActive(true);
         m_Attr.isAttack = true;
-        m_Animator.SetBool("isRun", true);
+        m_Animator.SetBool("isIdle", false);
         Timer = 0;
         RandomTimer = 2;
         StartSeekerLoop();
@@ -61,9 +60,9 @@ public class BoarAttackState : EnemyState
             return;
         }
     }
-    public override void GameExit()
+    protected override void StateEnd()
     {
-        base.GameExit();
+        base.StateEnd();
         m_HitPlayerBox.SetActive(false);
         m_Attr.isAttack = false;
         StopSeekerLoop();

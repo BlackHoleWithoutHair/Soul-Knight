@@ -42,7 +42,7 @@ public abstract class IPlayer : ICharacter
         }
         oldFirstWeapon = m_Attr.FirstWeapon;
         oldSecondWeapon = m_Attr.SecondWeapon;
-
+        m_Attr.isRun = true;
     }
     protected override void OnCharacterStart()
     {
@@ -164,31 +164,6 @@ public abstract class IPlayer : ICharacter
         else
         {
             m_Attr.CurrentHp -= damage;
-        }
-        if (m_Attr.CurrentHp < 0)
-        {
-            m_Attr.CurrentHp = 0;
-        }
-    }
-    public virtual void UnderWeaponAttack(EnemyWeaponShareAttribute attr)
-    {
-        m_Attr.HurtArmorRecoveryTimer = 0;
-        m_Attr.HurtInvincibleTimer = 0;
-        if (m_Attr.CurrentArmor > 0)
-        {
-            if (m_Attr.CurrentArmor - attr.Damage >= 0)
-            {
-                m_Attr.CurrentArmor -= attr.Damage;
-            }
-            else
-            {
-                m_Attr.CurrentHp -= attr.Damage - m_Attr.CurrentArmor;
-                m_Attr.CurrentArmor = 0;
-            }
-        }
-        else
-        {
-            m_Attr.CurrentHp -= attr.Damage;
         }
         if (m_Attr.CurrentHp < 0)
         {

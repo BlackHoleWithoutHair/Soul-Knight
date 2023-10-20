@@ -8,7 +8,6 @@ public class IEnemy : ICharacter
     public IEnemyWeapon m_Weapon { get; protected set; }
     public Room m_Room;
     protected EnemyStateController m_StateController;
-    protected GameObject GunOriginPoint;
     protected GameObject DecHpPoint;
     protected GameObject Exclamation;
     protected TextMeshProUGUI m_TextTotleDamage;
@@ -16,22 +15,32 @@ public class IEnemy : ICharacter
     private MaterialPropertyBlock block;
     private Vector2 weaponDir;
     private float DamageAccumulateTimer;
+
     public IEnemy(GameObject obj) : base(obj)
     {
         m_StateController = new EnemyStateController(this);
         block = new MaterialPropertyBlock();
-        m_Animator = gameObject.GetComponent<Animator>();
+        m_Animator = gameObject?.GetComponent<Animator>();
         m_rb = gameObject.GetComponent<Rigidbody2D>();
-        GunOriginPoint = gameObject.transform.Find("GunOriginPoint")?.gameObject;
         DecHpPoint = gameObject.transform.Find("DecHpPoint")?.gameObject;
         Exclamation = gameObject.transform.Find("Exclamation")?.gameObject;
         FootCircle = gameObject.transform.Find("FootCircle")?.gameObject;
         m_TextTotleDamage = gameObject.transform.Find("TextTotleDamage")?.GetChild(0).GetComponent<TextMeshProUGUI>();
+        EventCenter.Instance.RegisterObserver<Room>(EventType.OnPlayerEnterBattleRoom, (room) =>
+        {
+            if(m_Room==room)
+            {
+                m_Attr.isRun = true;
+            }
+        });
     }
     protected override void OnCharacterStart()
     {
         base.OnCharacterStart();
-        m_Attr = base.m_Attr as EnemyAttribute;
+        if(m_Attr.m_ShareAttr.isElite)
+        {
+            transform.localScale= Vector3.one*1.5f;
+        }
         m_Attr.CurrentHp = m_Attr.m_ShareAttr.MaxHp;
         DamageAccumulateTimer = 2f;
     }
@@ -77,6 +86,10 @@ public class IEnemy : ICharacter
     protected override void OnCharacterDieStart()
     {
         base.OnCharacterDieStart();
+        if(m_Room!=null)
+        {
+            m_Room.CurrentEnemyNum -= 1;
+        }
         Exclamation?.SetActive(false);
         m_TextTotleDamage?.gameObject.SetActive(false);
         Object.Destroy(m_Weapon?.gameObject);
@@ -104,7 +117,10 @@ public class IEnemy : ICharacter
     }
     public override void UnderAttack(int damage)
     {
-        base.UnderAttack(damage);
+        if(m_Attr.isRun)
+        {
+            base.UnderAttack(damage);
+        }
         DamageAccumulateTimer = 0;
         if(m_TextTotleDamage!=null)
         {
@@ -135,7 +151,7 @@ public class IEnemy : ICharacter
     }
     public void SetFootCircleActive(bool isopen)
     {
-        FootCircle.SetActive(isopen);
+        FootCircle?.SetActive(isopen);
     }
 
 }

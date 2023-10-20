@@ -2,10 +2,7 @@ using UnityEngine;
 
 public class EliteGoblinGuard : IEnemy
 {
-    public EliteGoblinGuard(GameObject obj) : base(obj)
-    {
-        m_Attr = AttributeFactory.Instance.GetEnemyAttr(EnemyType.EliteGoblinGuard);
-    }
+    public EliteGoblinGuard(GameObject obj) : base(obj) { }
     protected override void OnCharacterStart()
     {
         base.OnCharacterStart();

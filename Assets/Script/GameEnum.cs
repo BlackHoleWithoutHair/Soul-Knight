@@ -152,8 +152,12 @@ public enum EnemyType
     Boar,
     DireBoar,
     GunShark,
-    GunSharkEliteState,
 }
+public enum BossType
+{
+    DevilSnare,
+}
+
 public enum PlantState
 {
     NeedWater,

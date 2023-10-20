@@ -1,3 +1,4 @@
+using System.Data;
 using UnityEngine;
 
 public class GunSharkEliteStateRunState : EnemyState
@@ -12,12 +13,11 @@ public class GunSharkEliteStateRunState : EnemyState
         m_EffectAnim = m_HitPlayerBox.GetComponent<Animator>();
         m_Render = m_HitPlayerBox.GetComponent<SpriteRenderer>();
     }
-
-    public override void GameStart()
+    protected override void StateStart()
     {
-        base.GameStart();
+        base.StateStart();
         m_HitPlayerBox.SetActive(true);
-        m_Animator.SetBool("isRun", true);
+        m_Animator.SetBool("isIdle", false);
         Timer = 0;
         StartSeekerLoop();
     }
@@ -61,9 +61,9 @@ public class GunSharkEliteStateRunState : EnemyState
             return;
         }
     }
-    public override void GameExit()
+    protected override void StateEnd()
     {
-        base.GameExit();
+        base.StateEnd();
         m_HitPlayerBox.SetActive(false);
         m_Attr.isAttack = false;
         StopSeekerLoop();

@@ -10,6 +10,7 @@ public enum EventType
     OnPlayerClick,
     OnSceneChangeComplete,
     OnCameraArriveAtPlayer,
+    OnPlayerEnterBattleRoom,
 
     OnFindRoomResponse,
     OnFinishSelectPlayer,

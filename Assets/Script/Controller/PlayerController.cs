@@ -149,7 +149,7 @@ public class PlayerController : AbstractController
 
         if (ModelContainer.Instance.GetModel<SceneModel>().sceneName == SceneName.BattleScene)
         {
-            m_Player.m_Attr.isPause = true;
+            m_Player.m_Attr.isRun = false;
         }
     }
     public void AddPlayer(PlayerAttribute attr, CharacterPack p)

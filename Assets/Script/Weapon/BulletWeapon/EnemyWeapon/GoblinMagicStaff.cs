@@ -29,7 +29,9 @@ public class GoblinMagicStaff : IEnemyWeapon
                 isFire = false;
                 for (int i = -1; i <= 1; i++)
                 {
-                    EffectFactory.Instance.GetEnemyBullet(EnemyBulletType.EnemyBullet5, m_Attr, FirePoint.transform.position, Quaternion.Euler(0, 0, i * 15) * GetShotRotation()).AddToController();
+                    IBullet bullet = EffectFactory.Instance.GetEnemyBullet(EnemyBulletType.EnemyBullet5, m_Attr, FirePoint.transform.position, Quaternion.Euler(0, 0, i * 15) * GetShotRotation());
+                    (bullet as IEnemyBullet).SetDamage((m_Character.m_Attr as EnemyAttribute).m_ShareAttr.Damage);
+                    bullet.AddToController();
                 }
             }
         }

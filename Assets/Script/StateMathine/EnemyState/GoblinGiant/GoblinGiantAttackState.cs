@@ -8,16 +8,13 @@ public class GoblinGiantAttackState : EnemyState
     //the timer start when enemy roaming
     private float RoamingTimer;
     private Vector2 TargetPos;
-    public GoblinGiantAttackState(EnemyStateController controller) : base(controller)
+    public GoblinGiantAttackState(EnemyStateController controller) : base(controller) { }
+    protected override void StateStart()
     {
-
-    }
-    public override void GameStart()
-    {
-        base.GameStart();
+        base.StateStart();
         m_State = EnemyCondition.Roaming;
         m_Attr.isAttack = true;
-        m_Animator.SetBool("isWalk", true);
+        m_Animator.SetBool("isIdle", false);
         RoamingTimer = 1.5f;
         Timer = 0;
         StartSeekerLoop();
@@ -59,9 +56,9 @@ public class GoblinGiantAttackState : EnemyState
             return;
         }
     }
-    public override void GameExit()
+    protected override void StateEnd()
     {
-        base.GameExit();
+        base.StateEnd();
         m_Attr.isAttack = false;
         StopSeekerLoop();
     }

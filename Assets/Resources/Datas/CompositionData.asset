@@ -46,3 +46,15 @@ MonoBehaviour:
       num: 1
     - materialType: 0
       num: 2
+  - weaponType: 24
+    materialInfos:
+    - materialType: 2
+      num: 4
+  - weaponType: 14
+    materialInfos:
+    - materialType: 2
+      num: 1
+    - materialType: 0
+      num: 2
+    - materialType: 3
+      num: 1

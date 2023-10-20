@@ -96,7 +96,10 @@ public class AbFactory : IResourceFactory
     {
         return null;
     }
-
+    public GameObject GetBoss(BossType type)
+    {
+        return null;
+    }
     public GameObject GetDebuff(BuffType type)
     {
         return null;

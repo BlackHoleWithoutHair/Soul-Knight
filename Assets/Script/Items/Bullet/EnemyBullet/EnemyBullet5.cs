@@ -13,13 +13,15 @@ public class EnemyBullet5 : IEnemyBullet
         Timer += Time.deltaTime;
         if (Timer > 1)
         {
+            Damage = 2;
             EnemyWeaponShareAttribute attr = new EnemyWeaponShareAttribute();
             attr.Speed = 5;
-            attr.Damage = 2;
             attr.DebuffType = BuffType.None;
             for (int i = -1; i <= 1; i++)
             {
-                EffectFactory.Instance.GetEnemyBullet(EnemyBulletType.EnemyBullet1, attr, gameObject.transform.position, Quaternion.Euler(0, 0, i * 15) * m_Rot).AddToController();
+                IBullet bullet = EffectFactory.Instance.GetEnemyBullet(EnemyBulletType.EnemyBullet1, attr, gameObject.transform.position, Quaternion.Euler(0, 0, i * 15) * m_Rot);
+                (bullet as IEnemyBullet).SetDamage(Damage);
+                bullet.AddToController();
             }
             Remove();
         }

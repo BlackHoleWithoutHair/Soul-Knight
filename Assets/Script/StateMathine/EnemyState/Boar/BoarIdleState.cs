@@ -8,11 +8,11 @@ public class BoarIdleState : EnemyState
     {
 
     }
-    public override void GameStart()
+    protected override void StateStart()
     {
-        base.GameStart();
+        base.StateStart();
         m_rb.velocity = Vector2.zero;
-        m_Animator.SetBool("isRun", false);
+        m_Animator.SetBool("isIdle", true);
         if (!isFirstEnter)
         {
             isFirstEnter = true;

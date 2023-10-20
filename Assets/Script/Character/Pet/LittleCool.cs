@@ -5,6 +5,7 @@ public class LittleCool : IPlayerPet
     public LittleCool(GameObject obj,IPlayer player):base(obj,player)
     {
         m_Attr = AttributeFactory.Instance.GetPlayerAttr(PlayerType.Knight);
+        m_Attr.isRun = true;
     }
     protected override void OnCharacterStart()
     {

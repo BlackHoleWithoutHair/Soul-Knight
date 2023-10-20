@@ -12,6 +12,7 @@ public interface IResourceFactory
     TextAsset GetExcelTextAsset(string name);
     GameObject GetPlayer(string type);
     GameObject GetEnemy(EnemyType type);
+    GameObject GetBoss(BossType type);
     GameObject GetPanel(string name);
     GameObject GetEnemyWeapon(EnemyWeaponType type);
     GameObject GetWeapon(PlayerWeaponType type);

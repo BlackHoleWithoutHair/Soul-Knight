@@ -9,7 +9,7 @@
     protected override void OnInit()
     {
         PetType = PetType.LittleCool;
-        Stage = 3;
+        Stage = 5;
         Money = 0;
     }
 }

@@ -42,16 +42,20 @@ namespace BattleScene
         {
             GameObject Tilemaps = GameObject.Find("Generated Level").transform.Find("Tilemaps").gameObject;
             GameObject Wall = Tilemaps.transform.Find("Walls").gameObject;
-            //Tilemaps.transform.Find("Floor").gameObject.transform.localPosition = new Vector3(0, 0.5f, 0);
+            Transform Collideable = Tilemaps.transform.Find("Collideable");
+            Tilemaps.transform.Find("Floor").gameObject.transform.localPosition = new Vector3(0, 0.5f, 0);
             Wall.layer = LayerMask.NameToLayer("Obstacle");
             Wall.tag = "Obstacles";
             Wall.GetComponent<CompositeCollider2D>().geometryType = CompositeCollider2D.GeometryType.Polygons;
             Wall.GetComponent<CompositeCollider2D>().offsetDistance = 0.3f;
             Wall.GetComponent<CompositeCollider2D>().vertexDistance = 0.01f;
-            Tilemaps.transform.Find("Collideable").GetComponent<TilemapRenderer>().sortOrder = TilemapRenderer.SortOrder.TopLeft;
-            Tilemaps.transform.Find("Collideable").GetComponent<TilemapRenderer>().mode = TilemapRenderer.Mode.Individual;
-            Tilemaps.transform.Find("Collideable").gameObject.layer = LayerMask.NameToLayer("Obstacle");
-            Tilemaps.transform.Find("Collideable").gameObject.tag = "Obstacles";
+            Collideable.GetComponent<TilemapRenderer>().sortOrder = TilemapRenderer.SortOrder.TopLeft;
+            Collideable.GetComponent<TilemapRenderer>().mode = TilemapRenderer.Mode.Individual;
+            Collideable.GetComponent<CompositeCollider2D>().geometryType = CompositeCollider2D.GeometryType.Polygons;
+            Collideable.GetComponent<CompositeCollider2D>().offsetDistance = 0.3f;
+            Collideable.GetComponent<CompositeCollider2D>().vertexDistance = 0.01f;
+            Collideable.gameObject.layer = LayerMask.NameToLayer("Obstacle");
+            Collideable.gameObject.tag = "Obstacles";
         }
     }
 }

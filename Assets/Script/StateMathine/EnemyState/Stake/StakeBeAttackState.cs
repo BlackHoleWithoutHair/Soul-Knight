@@ -3,14 +3,11 @@ using UnityEngine;
 public class StakeBeAttackState : EnemyState
 {
     private AnimatorStateInfo info;
-    public StakeBeAttackState(EnemyStateController controller) : base(controller)
+    public StakeBeAttackState(EnemyStateController controller) : base(controller) { }
+    protected override void StateStart()
     {
-
-    }
-    public override void GameStart()
-    {
-        base.GameStart();
-        m_Animator.SetBool("isAttack", true);
+        base.StateStart();
+        m_Animator.SetBool("isIdle", false);
     }
     public override void GameUpdate()
     {

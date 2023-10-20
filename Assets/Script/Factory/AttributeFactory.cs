@@ -7,9 +7,13 @@ public class AttributeFactory : Singleton<AttributeFactory>
     {
         return new PlayerAttribute(PlayerCommand.Instance.GetPlayerShareAttr(type));
     }
-    public EnemyAttribute GetEnemyAttr(EnemyType type)
+    public EnemyAttribute GetEnemyAttr(EnemyType type,bool isElite,EnemyWeaponType weaponType)
     {
-        return new EnemyAttribute(EnemyCommand.Instance.GetEnemyShareAttr(type));
+        return new EnemyAttribute(EnemyCommand.Instance.GetEnemyShareAttr(type,isElite,weaponType));
+    }
+    public BossAttribute GetBossAttr(BossType type,BossCategory category)
+    {
+        return new BossAttribute(BossCommand.Instance.GetBossShareAttr(type, category));
     }
     public PlayerWeaponShareAttribute GetPlayerWeaponAttr(PlayerWeaponType type)
     {

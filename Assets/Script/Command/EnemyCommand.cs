@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Linq;
+using UnityEngine;
 
 public class EnemyCommand : Singleton<EnemyCommand>
 {
@@ -7,16 +8,17 @@ public class EnemyCommand : Singleton<EnemyCommand>
     {
         model = ModelContainer.Instance.GetModel<EnemyModel>();
     }
-    public EnemyShareAttr GetEnemyShareAttr(EnemyType type)
+    public EnemyShareAttr GetEnemyShareAttr(EnemyType type,bool isElite,EnemyWeaponType weaponType)
     {
-        foreach (EnemyShareAttr attr in model.attrs)
+        EnemyShareAttr attr = model.attrs.Where(x => x.Type == type && x.isElite == isElite && x.WeaponType == weaponType).ToArray()[0];
+        if(attr==null)
         {
-            if (attr.Type == type)
-            {
-                return attr;
-            }
+            Debug.Log("EnemyCommand GetEnemyShareAttr " + type + " return null");
         }
-        Debug.Log("EnemyCommand GetEnemyShareAttr " + type + " return null");
-        return null;
+        return attr;
+    }
+    public bool ContainState(EnemyType type,bool isElite)
+    {
+        return model.attrs.Any(x => x.Type == type && x.isElite == isElite);
     }
 }
