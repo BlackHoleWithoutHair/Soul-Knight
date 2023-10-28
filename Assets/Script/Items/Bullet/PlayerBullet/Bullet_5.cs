@@ -6,7 +6,7 @@ public class Bullet_5 : IPlayerBullet
     private bool isStart;
     private IEnemy enemy;
     private Vector2 targetDirection;
-    public Bullet_5(GameObject obj, PlayerWeaponShareAttribute attr) : base(obj, attr)
+    public Bullet_5(GameObject obj) : base(obj)
     {
         type = PlayerBulletType.Bullet_5;
     }
@@ -20,13 +20,13 @@ public class Bullet_5 : IPlayerBullet
             isStart = true;
         });
     }
-    protected override void BeforeHitWallUpdate()
+    protected override void BeforeHitObstacleUpdate()
     {
         if (isStart)
         {
             if (enemy == null)
             {
-                base.BeforeHitWallUpdate();
+                base.BeforeHitObstacleUpdate();
             }
             else
             {
@@ -40,16 +40,15 @@ public class Bullet_5 : IPlayerBullet
 
 
     }
-    protected override void AfterHitWallStart()
+    protected override void OnHitWall()
     {
-        base.AfterHitWallStart();
-        IEffectBoom boom = EffectFactory.Instance.GetEffectBoom(EffectBoomType.EffectBoom_1, gameObject.transform.position);
-        boom.SetColor(new Color(1, 0, 1));
-        boom.AddToController();
+        base.OnHitWall();
+        CreateBoomEffect(EffectBoomType.EffectBoom_1, BulletColorType.Magenta);
     }
-    protected override void AfterHitWallUpdate()
+    protected override void OnHitCharacter()
     {
-        base.AfterHitWallUpdate();
+        base.OnHitCharacter();
+        CreateBoomEffect(EffectBoomType.EffectBoom_1, BulletColorType.Magenta);
     }
     private IEnemy GetClosestEnemy()
     {

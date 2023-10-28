@@ -15,15 +15,6 @@ public class Freeze : Item
         CoroutinePool.Instance.StartCoroutine(FreezeTimer());
         gameObject.transform.localScale = Vector3.one;
     }
-    public override void GameUpdate()
-    {
-        base.GameUpdate();
-
-    }
-    public override void OnExit()
-    {
-        base.OnExit();
-    }
     private IEnumerator FreezeTimer()
     {
         yield return new WaitForSeconds(FreezeTime);

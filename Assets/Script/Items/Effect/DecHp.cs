@@ -1,21 +1,27 @@
 ﻿using DG.Tweening;
+using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class DecHp:Item
+public class DecHp : Item
 {
     private CanvasGroup group;
-    private Text text;
-    public DecHp(GameObject obj) : base(obj) 
+    private TextMeshProUGUI text;
+    public DecHp(GameObject obj) : base(obj)
     {
-        text = transform.Find("Text").GetComponent<Text>();
+        text = transform.Find("Text").GetComponent<TextMeshProUGUI>();
         group = transform.GetComponent<CanvasGroup>();
     }
     public void SetTextValue(int damage)
     {
-        text.text=damage.ToString();
+        text.text = damage.ToString();
     }
-    public void DoAnimation()
+    public override void OnEnter()
+    {
+        base.OnEnter();
+        text.color = Color.HSVToRGB(Random.Range(0f, 360f)/360f, 1, 1);
+        DoAnimation();
+    }
+    private void DoAnimation()
     {
         group.alpha = 0;
         group.transform.localScale = Vector3.one * 0.5f;

@@ -9,10 +9,10 @@ public class UIController : AbstractController
     private Coroutine coroutine;
     public UIController()
     {
-        switch(SceneModelCommand.Instance.GetActiveSceneName())
+        switch (SceneModelCommand.Instance.GetActiveSceneName())
         {
             case SceneName.MainMenuScene:
-                rootPanel=new MainMenuScene.RootPanel();
+                rootPanel = new MainMenuScene.PanelRoot();
                 break;
             case SceneName.MiddleScene:
                 rootPanel = new MiddleScene.PanelRoot();
@@ -22,7 +22,7 @@ public class UIController : AbstractController
                 break;
         }
         Notice = UnityTool.Instance.GetGameObjectFromCanvas("Notice");
-        if(Notice!=null)
+        if (Notice != null)
         {
             Notice.SetActive(true);
             Notice.GetComponent<CanvasGroup>().alpha = 0;

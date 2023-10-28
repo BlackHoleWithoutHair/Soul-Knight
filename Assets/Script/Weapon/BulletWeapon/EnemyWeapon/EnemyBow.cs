@@ -12,7 +12,7 @@ public class EnemyBow : IEnemyWeapon
     protected override void OnInit()
     {
         base.OnInit();
-        firstSprite = UnityTool.Instance.GetComponentFromChild<SpriteRenderer>(m_GameObject, m_Attr.Type.ToString());
+        firstSprite = UnityTool.Instance.GetComponentFromChild<SpriteRenderer>(gameObject, m_Attr.Type.ToString());
         nextSprite = firstSprite.transform.GetChild(0).GetComponent<SpriteRenderer>();
     }
     protected override void OnBeforeFireStart()
@@ -20,7 +20,7 @@ public class EnemyBow : IEnemyWeapon
         base.OnBeforeFireStart();
         firstSprite.enabled = false;
         nextSprite.enabled = true;
-        arrow = EffectFactory.Instance.GetEnemyBullet(EnemyBulletType.EnemyRedArrow, m_Attr, FirePoint.transform.position, GetShotRotation());
+        arrow = EffectFactory.Instance.GetEnemyBullet(EnemyBulletType.EnemyRedArrow, m_Attr, m_Character.m_Attr.GetShareAttr() as EnemyShareAttr, FirePoint.transform.position, GetShotRotation());
         arrow.gameObject.transform.SetParent(FirePoint.transform);
         arrow.gameObject.transform.localPosition = Vector3.zero;
         arrow.gameObject.transform.localRotation = Quaternion.identity;
@@ -31,7 +31,6 @@ public class EnemyBow : IEnemyWeapon
         firstSprite.enabled = true;
         nextSprite.enabled = false;
         arrow.gameObject.transform.SetParent(null);
-        (arrow as IEnemyBullet).SetDamage((m_Character.m_Attr as EnemyAttribute).m_ShareAttr.Damage);
         arrow.SetRotation(GetShotRotation());
         arrow.SetPosition(arrow.gameObject.transform.position);
         arrow.AddToController();

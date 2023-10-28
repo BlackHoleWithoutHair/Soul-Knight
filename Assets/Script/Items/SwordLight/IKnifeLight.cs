@@ -6,7 +6,7 @@ public class IKnifeLight : Item
     protected Animator m_Animator;
     protected PlayerWeaponShareAttribute m_Attr;
     protected AnimatorStateInfo info;
-    public IKnifeLight(GameObject obj, Quaternion rot, PlayerWeaponShareAttribute attr) : base( obj)
+    public IKnifeLight(GameObject obj, Quaternion rot, PlayerWeaponShareAttribute attr) : base(obj)
     {
         m_Attr = attr;
         m_Rot = rot;
@@ -23,19 +23,19 @@ public class IKnifeLight : Item
         base.OnEnter();
         gameObject.transform.rotation = m_Rot;
     }
-    public override void GameUpdate()
+    protected override void OnUpdate()
     {
-        base.GameUpdate();
+        base.OnUpdate();
         info = m_Animator.GetCurrentAnimatorStateInfo(0);
         if (info.normalizedTime > 1)
         {
             Remove();
         }
     }
-    public override void Remove()
+    protected override void OnExit()
     {
-        base.Remove();
-        if (pool != null)
+        base.OnExit();
+        if(!isDestroyOnRemove)
         {
             pool.ReturnItem(type, this);
         }

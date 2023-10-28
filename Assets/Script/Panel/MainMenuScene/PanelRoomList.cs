@@ -82,7 +82,6 @@ public class PanelRoomList : IPanel
                                 {
                                     isJoinRoomResponse = true;
                                 }
-
                             });
                         }
                     });

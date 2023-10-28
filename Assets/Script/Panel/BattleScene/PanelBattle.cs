@@ -1,13 +1,13 @@
 using MiddleScene;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Playables;
 using UnityEngine.UI;
 
 namespace BattleScene
 {
     public class PanelBattle : IPanel
     {
-        private Animator m_Animator;
         private Button ButtonPause;
         private Slider SliderHp;
         private Slider SliderMp;
@@ -19,15 +19,16 @@ namespace BattleScene
         private TextMeshProUGUI TextMiddle;
 
         private MemoryModel m_MemoryModel;
-
+        private PlayableDirector TimeLine;
         private bool isFirstEnter;
         public PanelBattle(IPanel parent) : base(parent)
         {
             isFirstEnter = true;
             m_GameObject = UnityTool.Instance.GetGameObjectFromCanvas(GetType().Name);
-            m_Animator = m_GameObject.GetComponent<Animator>();
+            TimeLine = GameObject.Find("TimeLine").GetComponent<PlayableDirector>();
             children.Add(new PanelPause(this));
             children.Add(new PanelResurrection(this));
+            children.Add(new PanelBossCutScene(this));
             m_MemoryModel = ModelContainer.Instance.GetModel<MemoryModel>();
         }
         protected override void OnInit()
@@ -42,6 +43,15 @@ namespace BattleScene
             TextArmor = UnityTool.Instance.GetComponentFromChild<TextMeshProUGUI>(SliderArmor.gameObject, "Text");
             TextMoney = UnityTool.Instance.GetComponentFromChild<TextMeshProUGUI>(m_GameObject, "TextMoney");
             TextMiddle = UnityTool.Instance.GetComponentFromChild<TextMeshProUGUI>(m_GameObject, "TextMiddle");
+            EventCenter.Instance.RegisterObserver<Room>(EventType.OnPlayerEnterBossRoom, (enterRoom) =>
+            {
+                EventCenter.Instance.NotisfyObserver(EventType.OnPause);
+                CoroutinePool.Instance.DelayInvoke(() =>
+                {
+                    EnterPanel(typeof(PanelBossCutScene));
+                    OnResume();
+                }, 0.5f);
+            });
             ButtonPause.onClick.AddListener(() =>
             {
                 EnterPanel(typeof(PanelPause));
@@ -51,23 +61,22 @@ namespace BattleScene
         protected override void OnEnter()
         {
             base.OnEnter();
-            if(isFirstEnter)
+            if (isFirstEnter)
             {
                 isFirstEnter = false;
-                m_Animator.enabled = true;
-                CoroutinePool.Instance.StartAnimatorCallback(m_Animator, "SceneStart", () =>
+                TimeLine.Play();
+                CoroutinePool.Instance.DelayInvoke(() =>
                 {
-                    
+                    gameObject.GetComponent<Animator>().enabled = false;
                     GameMediator.Instance.GetController<PlayerController>().Player.EnterBattleScene();
                     GameMediator.Instance.GetController<PlayerController>().Player.m_Attr.isRun = true;
-                });
+                }, (float)TimeLine.duration);
                 TextMiddle.text = GetStageText();
             }
         }
         protected override void OnUpdate()
         {
             base.OnUpdate();
-            //Debug.Log(GetPlayer().m_Attr.CurrentHp);
             if (GetPlayer() != null)
             {
                 SliderHp.value = GetPlayer().m_Attr.CurrentHp / (float)GetPlayer().m_Attr.m_ShareAttr.MaxHp;

@@ -7,7 +7,7 @@ public class Bullet_4 : IPlayerBullet
     private float StartAngle;
     private float RandomAngle;
     private IEnemy enemy;
-    public Bullet_4(GameObject obj, PlayerWeaponShareAttribute attr) : base(obj, attr)
+    public Bullet_4(GameObject obj) : base(obj)
     {
         type = PlayerBulletType.Bullet_4;
     }
@@ -18,12 +18,11 @@ public class Bullet_4 : IPlayerBullet
         RandomAngle = Random.Range(0, 30);
         gameObject.transform.Find("Trail").GetComponent<TrailRenderer>().Clear();
     }
-    protected override void BeforeHitWallUpdate()
+    protected override void BeforeHitObstacleUpdate()
     {
-
         if (enemy == null)
         {
-            base.BeforeHitWallUpdate();
+            base.BeforeHitObstacleUpdate();
         }
         else
         {
@@ -59,16 +58,15 @@ public class Bullet_4 : IPlayerBullet
             gameObject.transform.position += gameObject.transform.rotation * Vector3.right * m_Attr.Speed * Time.deltaTime;
         }
     }
-    protected override void AfterHitWallStart()
+    protected override void OnHitWall()
     {
-        base.AfterHitWallStart();
-        IEffectBoom boom = ItemPool.Instance.GetEffectBoom(EffectBoomType.EffectBoom_2, gameObject.transform.position);
-        boom.SetColor(new Color(1, 1, 0));
-        boom.AddToController();
+        base.OnHitWall();
+        CreateBoomEffect(EffectBoomType.EffectBoom_2, BulletColorType.Yellow);
     }
-    protected override void AfterHitWallUpdate()
+    protected override void OnHitCharacter()
     {
-        base.AfterHitWallUpdate();
+        base.OnHitCharacter();
+        CreateBoomEffect(EffectBoomType.EffectBoom_2, BulletColorType.Yellow);
     }
     private IEnemy GetClosestEnemy()
     {

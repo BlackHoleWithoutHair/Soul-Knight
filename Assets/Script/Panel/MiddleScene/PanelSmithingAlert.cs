@@ -16,13 +16,11 @@ public class PanelSmithingAlert : IPanel
     private TextMeshProUGUI TextMagic;
     private TextMeshProUGUI TextCritical;
     private TextMeshProUGUI TextScattering;
+
+    private List<MaterialInfo> infos;
     public PanelSmithingAlert(IPanel parent) : base(parent)
     {
         m_GameObject = UnityTool.Instance.GetGameObjectFromCanvas(GetType().Name);
-        EventCenter.Instance.RegisterObserver<PlayerWeaponShareAttribute>(EventType.OnConfirmSmithingWeapon, (attr) =>
-        {
-            m_Attr = attr;
-        });
     }
     protected override void OnInit()
     {
@@ -46,6 +44,10 @@ public class PanelSmithingAlert : IPanel
             GameObject weapon = WeaponFactory.Instance.GetPlayerWeaponObj(m_Attr.Type, SmithingTable.transform.Find("WeaponCreatePoint").transform.position);
             weapon.transform.SetParent(SmithingTable.transform);
             SetWeaponCollider(weapon);
+            foreach (MaterialInfo info in infos)
+            {
+                ArchiveCommand.Instance.SpendMaterial(info.materialType, info.num);
+            }
             OnExit();
             parent.OnExit();
         });
@@ -60,13 +62,14 @@ public class PanelSmithingAlert : IPanel
         TextScattering.text = m_Attr.ScatteringRate.ToString();
         ImageWeapon.sprite = ProxyResourceFactory.Instance.Factory.GetWeaponSprite(m_Attr.Type.ToString());
 
-        UnityTool.Instance.DestroyChildrenExceptFirstChild(DivMaterialVer.transform.parent);
-        List<MaterialInfo> infos = AttributeFactory.Instance.GetCompositionData(m_Attr.Type).materialInfos;
-        for (int i = 0; i < infos.Count; i++)
+        infos = AttributeFactory.Instance.GetCompositionData(m_Attr.Type).materialInfos;
+        int i;
+        for (i = 0; i < infos.Count; i++)
         {
-            if (i == 0)
+            if (i <DivMaterialVer.transform.parent.childCount)
             {
-                SetMaterialInfo(DivMaterialVer, infos[i]);
+                Transform child=DivMaterialVer.transform.parent.GetChild(i);
+                SetMaterialInfo(child.gameObject, infos[i]);
             }
             else
             {
@@ -74,6 +77,7 @@ public class PanelSmithingAlert : IPanel
                 SetMaterialInfo(obj, infos[i]);
             }
         }
+        UnityTool.Instance.ClearResidualChild(DivMaterialVer.transform.parent, i);
 
     }
     private void SetWeaponCollider(GameObject weapon)
@@ -90,6 +94,11 @@ public class PanelSmithingAlert : IPanel
     {
         obj.transform.Find("ImageMaterial").GetComponent<Image>().sprite = ProxyResourceFactory.Instance.Factory.GetMaterialSprite(info.materialType.ToString());
         obj.transform.Find("TextSpend").GetComponent<TextMeshProUGUI>().text = info.num.ToString();
+        obj.transform.Find("TextTotle").GetComponent<TextMeshProUGUI>().text = ArchiveQuery.Instance.GetMaterialNum(info.materialType).ToString();
+        obj.SetActive(true);
     }
-
+    public void SetAttr(PlayerWeaponShareAttribute attr)
+    {
+        m_Attr = attr;
+    }
 }

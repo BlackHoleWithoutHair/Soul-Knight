@@ -62,22 +62,23 @@ public class ItemPool
             InitInfos();
         });
     }
-    public IBullet GetPlayerBullet(PlayerBulletType type, PlayerWeaponShareAttribute attr, Vector2 pos, Quaternion rot)
+    public IBullet GetPlayerBullet(PlayerBulletType type, PlayerWeaponShareAttribute attr,IPlayerWeapon weapon, Vector2 pos, Quaternion rot)
     {
-        if(poolDic.ContainsKey(type))
+        if (poolDic.ContainsKey(type))
         {
-            IBullet bullet = poolDic[type].bulletPool.Get() as IBullet;
-            bullet.SetAttr(attr);
+            IPlayerBullet bullet = poolDic[type].bulletPool.Get() as IPlayerBullet;
+            bullet.SetAttr(AttributeAdapter.Instance.PlayerWeaponShareAttrToBulletShareAttr(attr));
             bullet.SetPosition(pos);
             bullet.SetRotation(rot);
             bullet.SetPool(this);
+            bullet.SetWeapon(weapon);
             return bullet;
         }
         return null;
     }
     public IKnifeLight GetPlayerKnifeLight(KnifeLightType type, PlayerWeaponShareAttribute attr, Vector2 pos, Quaternion rot)
     {
-        if(poolDic.ContainsKey(type))
+        if (poolDic.ContainsKey(type))
         {
             IKnifeLight bullet = poolDic[type].bulletPool.Get() as IKnifeLight;
             bullet.SetAttr(attr);
@@ -90,7 +91,20 @@ public class ItemPool
     }
     public IBullet GetEnemyBullet(EnemyBulletType type, PlayerWeaponShareAttribute attr, Vector2 pos, Quaternion rot)
     {
-        if(poolDic.ContainsKey(type))
+        if (poolDic.ContainsKey(type))
+        {
+            IBullet bullet = poolDic[type].bulletPool.Get() as IBullet;
+            bullet.SetAttr(AttributeAdapter.Instance.PlayerWeaponShareAttrToBulletShareAttr(attr));
+            bullet.SetPosition(pos);
+            bullet.SetRotation(rot);
+            bullet.SetPool(this);
+            return bullet;
+        }
+        return null;
+    }
+    public IBullet GetEnemyBullet(EnemyBulletType type, IBulletShareAttribute attr, Vector2 pos, Quaternion rot)
+    {
+        if (poolDic.ContainsKey(type))
         {
             IBullet bullet = poolDic[type].bulletPool.Get() as IBullet;
             bullet.SetAttr(attr);
@@ -103,28 +117,29 @@ public class ItemPool
     }
     public IEffectBoom GetEffectBoom(EffectBoomType type, Vector2 pos)
     {
-        if(poolDic.ContainsKey(type))
+        if (poolDic.ContainsKey(type))
         {
-            IEffectBoom boom =poolDic[type].bulletPool.Get() as IEffectBoom;
+            IEffectBoom boom = poolDic[type].bulletPool.Get() as IEffectBoom;
             boom.SetPosition(pos);
             boom.SetPool(this);
             return boom;
         }
         return null;
     }
-    public Item GetItem(Enum type,Vector2 pos)
+    public Item GetItem(Enum type, Vector2 pos)
     {
-        if(poolDic.ContainsKey(type))
+        if (poolDic.ContainsKey(type))
         {
             Item item = poolDic[type].bulletPool.Get();
             item.SetPosition(pos);
+            item.SetPool(this);
             return item;
         }
         return null;
     }
     public void ReturnItem(Enum type, Item boom)
     {
-        if(poolDic.ContainsKey(type))
+        if (poolDic.ContainsKey(type))
         {
             poolDic[type].bulletPool.Release(boom);
         }
@@ -141,7 +156,7 @@ public class ItemPool
 
         foreach (PlayerBulletType type in Enum.GetValues(typeof(PlayerBulletType)))
         {
-            ItemPoolInfo info=new ItemPoolInfo(() =>
+            ItemPoolInfo info = new ItemPoolInfo(() =>
             {
                 return EffectFactory.Instance.GetPlayerBullet(type, null, Vector2.zero, Quaternion.identity);
             });
@@ -161,7 +176,7 @@ public class ItemPool
         {
             ItemPoolInfo info = new ItemPoolInfo(() =>
             {
-                return EffectFactory.Instance.GetEffectBoom(type,Vector2.zero);
+                return EffectFactory.Instance.GetEffectBoom(type, Vector2.zero);
             });
             poolDic.Add(type, info);
         }
@@ -174,11 +189,11 @@ public class ItemPool
             });
             poolDic.Add(type, info);
         }
-        foreach(EffectType type in Enum.GetValues(typeof(EffectType)))
+        foreach (EffectType type in Enum.GetValues(typeof(EffectType)))
         {
             ItemPoolInfo info = new ItemPoolInfo(() =>
             {
-                return EffectFactory.Instance.GetEffect(type, Vector2.zero,0);
+                return EffectFactory.Instance.GetEffect(type, Vector2.zero);
             });
             poolDic.Add(type, info);
         }

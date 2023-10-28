@@ -11,6 +11,10 @@ public class Knight : IPlayer
     protected override void OnCharacterUpdate()
     {
         base.OnCharacterUpdate();
+        if(InputUtility.Instance.GetKeyDown(KeyAction.Skill)&&CanUseSkill())
+        {
+            m_Skill.StartSkill();
+        }
     }
     protected override void OnCharaterDieUpdate()
     {

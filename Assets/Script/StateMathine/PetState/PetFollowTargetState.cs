@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class PetFollowTargetState:PetState
+public class PetFollowTargetState : PetState
 {
     private Seeker seeker;
     private Path path;
@@ -21,7 +21,7 @@ public class PetFollowTargetState:PetState
         base.StateStart();
         isPetShouldBackToPlayer = false;
         m_Animator.SetBool("isWalk", true);
-        CoroutinePool.Instance.StartCoroutine(SeekerLoop(),this);
+        CoroutinePool.Instance.StartCoroutine(SeekerLoop(), this);
     }
     protected override void StateUpdate()
     {
@@ -52,21 +52,21 @@ public class PetFollowTargetState:PetState
     {
         if (path == null) return;
         if (CurrentWayPoint >= path.vectorPath.Count) return;
-        pet.transform.position += (path.vectorPath[CurrentWayPoint] - pet.transform.position).normalized*8f*Time.deltaTime;
+        pet.transform.position += (path.vectorPath[CurrentWayPoint] - pet.transform.position).normalized * 8f * Time.deltaTime;
         //m_rb.velocity = (path.vectorPath[CurrentWayPoint] - pet.transform.position).normalized * 8;
         //Debug.Log(((path.vectorPath[CurrentWayPoint] - pet.transform.position).normalized * 8).magnitude+" "+ m_rb.velocity.magnitude);
-        if (Vector2.Distance(path.vectorPath[CurrentWayPoint],pet.transform.position)<nextWayPointDis)
+        if (Vector2.Distance(path.vectorPath[CurrentWayPoint], pet.transform.position) < nextWayPointDis)
         {
             CurrentWayPoint++;
         }
     }
     private IEnumerator SeekerLoop()
     {
-        while(true)
+        while (true)
         {
             if (seeker.IsDone())
             {
-                if (GetDistanceToTarget(player.gameObject) < 20&&!isPetShouldBackToPlayer)
+                if (GetDistanceToTarget(player.gameObject) < 20 && !isPetShouldBackToPlayer)
                 {
                     if (m_Controller.target is IPlayer)
                     {
@@ -87,7 +87,7 @@ public class PetFollowTargetState:PetState
                     isPetShouldBackToPlayer = true;
                     m_Controller.target = player;
                 }
-                
+
                 seeker.StartPath(pet.transform.position, m_Controller.target.transform.position, SavePath);
             }
             yield return new WaitForSeconds(0.5f);
@@ -95,7 +95,7 @@ public class PetFollowTargetState:PetState
     }
     private void SavePath(Path path)
     {
-        if(!path.error)
+        if (!path.error)
         {
             this.path = path;
             CurrentWayPoint = 0;

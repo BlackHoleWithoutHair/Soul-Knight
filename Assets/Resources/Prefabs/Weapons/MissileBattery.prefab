@@ -112,6 +112,7 @@ GameObject:
   - component: {fileID: 5435858825595298823}
   - component: {fileID: 5762926040748737606}
   - component: {fileID: 3382267479434085407}
+  - component: {fileID: 2629514898854079687}
   m_Layer: 0
   m_Name: MissileBattery
   m_TagString: Untagged
@@ -212,6 +213,26 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.125, y: 0.625}
   m_EdgeRadius: 0
+--- !u!95 &2629514898854079687
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4995848053635729068}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: eb45eada7e1ee1e43883b9be2c2c4edf, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!1 &6111726969876469186
 GameObject:
   m_ObjectHideFlags: 0

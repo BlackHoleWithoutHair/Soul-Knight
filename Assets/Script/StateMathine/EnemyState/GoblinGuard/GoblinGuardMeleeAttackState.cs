@@ -30,7 +30,7 @@ public class GoblinGuardMeleeAttackState : EnemyState
                 {
                     m_State = EnemyCondition.ChaseTarget;
                 }
-                if(isReachTarget)
+                if (isReachTarget)
                 {
                     TargetPos = GetRamdomPositionAroundEnemy(5);
                 }
@@ -56,7 +56,6 @@ public class GoblinGuardMeleeAttackState : EnemyState
             case EnemyCondition.Attack:
 
                 m_State = EnemyCondition.Roaming;
-                m_Character.m_Weapon.StartBeforeFireUpdate();
                 CoroutinePool.Instance.StartCoroutine(Warning(0.4f, () =>
                 {
                     CoroutinePool.Instance.StartCoroutine(UseWeapon());

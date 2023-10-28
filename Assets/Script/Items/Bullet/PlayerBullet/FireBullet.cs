@@ -3,16 +3,19 @@ namespace MiddleScene
 {
     public class FireBullet : IPlayerBullet
     {
-        public FireBullet(GameObject obj, PlayerWeaponShareAttribute attr) : base(obj, attr)
+        public FireBullet(GameObject obj) : base(obj)
         {
             type = PlayerBulletType.FireBullet;
         }
-        protected override void AfterHitWallStart()
+        protected override void OnHitWall()
         {
-            base.AfterHitWallStart();
-            IEffectBoom boom = EffectFactory.Instance.GetEffectBoom(EffectBoomType.EffectBoom_1, gameObject.transform.position);
-            boom.SetColor(new Color(1, 0.4f, 0));
-            boom.AddToController();
+            base.OnHitWall();
+            CreateBoomEffect(EffectBoomType.EffectBoom_1, BulletColorType.Orange);
+        }
+        protected override void OnHitCharacter()
+        {
+            base.OnHitCharacter();
+            CreateBoomEffect(EffectBoomType.EffectBoom_1, BulletColorType.Orange);
         }
     }
 }

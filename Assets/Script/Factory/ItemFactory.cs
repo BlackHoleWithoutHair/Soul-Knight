@@ -1,12 +1,10 @@
 ﻿using UnityEngine;
-
-
 public class ItemFactory : Singleton<ItemFactory>
 {
     private ItemFactory() { }
     public GameObject GetTreasureBox(TreasureBoxType type, Vector2 pos)
     {
-        GameObject obj = UnityEngine.Object.Instantiate(ProxyResourceFactory.Instance.Factory.GetTreasureBox(type));
+        GameObject obj = Object.Instantiate(ProxyResourceFactory.Instance.Factory.GetTreasureBox(type));
         obj.transform.position = pos;
         return obj;
     }
@@ -50,6 +48,13 @@ public class ItemFactory : Singleton<ItemFactory>
         WorldMaterial material = new WorldMaterial(type, obj);
         material.SetPosition(pos);
         return material;
+    }
+    public WorldSeed GetSeed(SeedType type, Vector2 pos)
+    {
+        GameObject obj = Object.Instantiate(ProxyResourceFactory.Instance.Factory.GetItem("SeedTemplate"));
+        WorldSeed seed = new WorldSeed(type, obj);
+        seed.SetPosition(pos);
+        return seed;
     }
     public WorldMaterial GetMaterial(MaterialType type, GameObject obj)
     {

@@ -1,8 +1,8 @@
 #if UNITY_EDITOR
 using System.Collections.Generic;
-using UnityEngine;
-using UnityEditor;
 using TMPro;
+using UnityEditor;
+using UnityEngine;
 /// <summary>
 /// 需要指定字体的路径 名字   路径放到Resources文件夹中
 /// </summary>

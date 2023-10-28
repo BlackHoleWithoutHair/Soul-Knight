@@ -7,18 +7,9 @@ public class H2O : IPlayerUnAccumulateWeapon
     private float BurstInterval;
     public H2O(GameObject obj, ICharacter character) : base(obj, character)
     {
-        m_Attr = AttributeFactory.Instance.GetPlayerWeaponAttr(PlayerWeaponType.H2O);
+        m_Attr = WeaponCommand.Instance.GetPlayerWeaponShareAttr(PlayerWeaponType.H2O);
         BurstTimes = 3;
         BurstInterval = 0.1f;
-    }
-    protected override void OnEnter()
-    {
-        base.OnEnter();
-
-    }
-    public override void OnUpdate()
-    {
-        base.OnUpdate();
     }
     protected override void OnFire()
     {
@@ -30,7 +21,9 @@ public class H2O : IPlayerUnAccumulateWeapon
         while (BurstTimes > 0)
         {
             BurstTimes--;
-            ItemPool.Instance.GetPlayerBullet(PlayerBulletType.Bullet_2, m_Attr, FirePoint.transform.position, GetShotRot()).AddToController();
+            CreateBullet(PlayerBulletType.Bullet_2, m_Attr).AddToController();
+            PlayRecoilAnim();
+            ShowFireSpark(BulletColorType.Cyan);
             yield return new WaitForSeconds(BurstInterval);
         }
         BurstTimes = 3;

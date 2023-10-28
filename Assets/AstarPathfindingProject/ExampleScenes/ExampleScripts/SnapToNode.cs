@@ -1,5 +1,5 @@
-using UnityEngine;
 using Pathfinding;
+using UnityEngine;
 
 /// <summary>
 /// Helper editor script to snap an object to the closest node.
@@ -7,14 +7,18 @@ using Pathfinding;
 /// </summary>
 [ExecuteInEditMode]
 [HelpURL("http://arongranberg.com/astar/docs/class_snap_to_node.php")]
-public class SnapToNode : MonoBehaviour {
-	void Update () {
-		if (transform.hasChanged && AstarPath.active != null) {
-			var node = AstarPath.active.GetNearest(transform.position, NNConstraint.None).node;
-			if (node != null) {
-				transform.position = (Vector3)node.position;
-				transform.hasChanged = false;
-			}
-		}
-	}
+public class SnapToNode : MonoBehaviour
+{
+    void Update()
+    {
+        if (transform.hasChanged && AstarPath.active != null)
+        {
+            var node = AstarPath.active.GetNearest(transform.position, NNConstraint.None).node;
+            if (node != null)
+            {
+                transform.position = (Vector3)node.position;
+                transform.hasChanged = false;
+            }
+        }
+    }
 }

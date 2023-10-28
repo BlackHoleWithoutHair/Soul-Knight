@@ -3,10 +3,7 @@
 public class IPlayerAccumulateWeapon : IPlayerWeapon
 {
     private bool isKeyDown;
-    public IPlayerAccumulateWeapon(GameObject obj, ICharacter player) : base(obj, player)
-    {
-
-    }
+    public IPlayerAccumulateWeapon(GameObject obj, ICharacter player) : base(obj, player) { }
     protected override void OnEnter()
     {
         base.OnEnter();

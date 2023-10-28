@@ -2,9 +2,9 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PanelUnlockGarden:IPanel
+public class PanelUnlockGarden : IPanel
 {
-    public PanelUnlockGarden(IPanel parent):base(parent)
+    public PanelUnlockGarden(IPanel parent) : base(parent)
     {
         m_GameObject = UnityTool.Instance.GetGameObjectFromCanvas(GetType().Name);
         isShowPanelAfterExit = true;

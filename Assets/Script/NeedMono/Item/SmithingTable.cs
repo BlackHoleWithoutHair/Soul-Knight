@@ -19,7 +19,7 @@ public class SmithingTable : MonoBehaviour
             if (!isContainWeapon())
             {
                 Name.SetActive(true);
-                if (InputUtility.Instance.GetKeyDown(KeyAction.Use)&&isReceiveInput)
+                if (InputUtility.Instance.GetKeyDown(KeyAction.Use) && isReceiveInput)
                 {
                     isReceiveInput = false;
                     isEnter = false;

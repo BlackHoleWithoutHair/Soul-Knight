@@ -4,12 +4,12 @@ public class RangerSkill2State : PlayerState
     protected override void StateStart()
     {
         base.StateStart();
-        player.Skill.StartSkill();
+        player.m_Skill.StartSkill();
     }
     public override void GameUpdate()
     {
         base.GameUpdate();
-        if (!player.Skill.isSkillUpdate)
+        if (!player.m_Skill.isSkillUpdate)
         {
             m_Controller.SetOtherState(typeof(RangerIdleState));
         }

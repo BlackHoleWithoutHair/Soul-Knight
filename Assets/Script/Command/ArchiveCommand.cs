@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 public class ArchiveCommand : Singleton<ArchiveCommand>
 {
@@ -19,7 +20,7 @@ public class ArchiveCommand : Singleton<ArchiveCommand>
             }
         }
     }
-    public void AddMaterial(MaterialType type,int num)
+    public void AddMaterial(MaterialType type, int num)
     {
         for (int i = 0; i < materialInfos.Count; i++)
         {
@@ -29,11 +30,19 @@ public class ArchiveCommand : Singleton<ArchiveCommand>
             }
         }
     }
+    public void AddSeed(SeedType type, int num)
+    {
+        SeedData[] datas = model.GameData.seedDatas.Where(seed => seed.SeedType == type).ToArray();
+        if (datas.Length != 0)
+        {
+            datas[0].num += num;
+        }
+    }
     public void SpendMaterial(MaterialType type, int num)
     {
-        for(int i =0;i<materialInfos.Count;i++)
+        for (int i = 0; i < materialInfos.Count; i++)
         {
-            if (materialInfos[i].materialType==type)
+            if (materialInfos[i].materialType == type)
             {
                 materialInfos[i].num -= num;
             }
@@ -52,7 +61,7 @@ public class ArchiveCommand : Singleton<ArchiveCommand>
     }
     public void RemovePlant(int index)
     {
-        foreach(GardenInfo info in model.GameData.gardenInfos)
+        foreach (GardenInfo info in model.GameData.gardenInfos)
         {
             if (info.index == index)
             {
@@ -62,7 +71,7 @@ public class ArchiveCommand : Singleton<ArchiveCommand>
             }
         }
     }
-    public void Plant(SeedType type,int index)
+    public void Plant(SeedType type, int index)
     {
         foreach (GardenInfo info in model.GameData.gardenInfos)
         {

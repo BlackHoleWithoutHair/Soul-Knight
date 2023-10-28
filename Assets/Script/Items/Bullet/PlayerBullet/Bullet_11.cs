@@ -5,7 +5,7 @@ public class Bullet_11 : IPlayerBullet
 {
     private float fac;
     private float RandomSpeed;
-    public Bullet_11(GameObject obj, PlayerWeaponShareAttribute attr) : base(obj, attr)
+    public Bullet_11(GameObject obj) : base(obj)
     {
         type = PlayerBulletType.Bullet_11;
     }
@@ -16,7 +16,7 @@ public class Bullet_11 : IPlayerBullet
         fac = 1.0f;
         RandomSpeed = Random.Range(0.5f, 1) * m_Attr.Speed;
     }
-    protected override void BeforeHitWallUpdate()
+    protected override void BeforeHitObstacleUpdate()
     {
         gameObject.transform.position += RandomSpeed * (m_Rot * Vector2.right) * Time.deltaTime * fac;
         fac = Mathf.Clamp(fac - Time.deltaTime, 0.1f, 1f);
@@ -25,10 +25,5 @@ public class Bullet_11 : IPlayerBullet
     {
         yield return new WaitForSeconds(1.5f);
         Remove();
-    }
-    public override void Remove()
-    {
-        base.Remove();
-        CoroutinePool.Instance.StopAllCoroutineInObject(this);
     }
 }

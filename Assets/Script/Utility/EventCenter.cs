@@ -8,9 +8,12 @@ public enum EventType
     OnEnemyHurt,
     OnPlayerHurt,
     OnPlayerClick,
+    OnBossCutSceneFinish,
     OnSceneChangeComplete,
+    OnPlayerEnterBossRoom,
     OnCameraArriveAtPlayer,
     OnPlayerEnterBattleRoom,
+
 
     OnFindRoomResponse,
     OnFinishSelectPlayer,
@@ -24,7 +27,6 @@ public enum EventType
     OnWantUseFridge,
     OnWantUseSafeBox,
     OnWantUnlockGarden,
-    OnConfirmSmithingWeapon,
 
 
     OnPause,

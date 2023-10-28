@@ -7,7 +7,7 @@ public class WorldMaterial : Item
     private GameObject playerObj;
     private TextMeshProUGUI TextName;
     private GameObject MaterialName;
-    public WorldMaterial(MaterialType type, GameObject obj) : base( obj)
+    public WorldMaterial(MaterialType type, GameObject obj) : base(obj)
     {
         materialType = type;
     }
@@ -18,7 +18,7 @@ public class WorldMaterial : Item
         MaterialName = gameObject.transform.Find("MaterialName").gameObject;
         TextName.text = LanguageCommand.Instance.GetTranslation(materialType.ToString());
         TriggerCenter.Instance.RegisterObserver(TriggerType.OnTriggerEnter, gameObject, "Player", (obj) =>
-        {   
+        {
             MaterialName.SetActive(true);
             playerObj = obj;
         });
@@ -28,9 +28,9 @@ public class WorldMaterial : Item
             playerObj = null;
         });
     }
-    public override void GameUpdate()
+    protected override void OnUpdate()
     {
-        base.GameUpdate();
+        base.OnUpdate();
         if (playerObj != null && InputUtility.Instance.GetKeyDown(KeyAction.Use))
         {
             ArchiveCommand.Instance.AddMaterial(materialType);

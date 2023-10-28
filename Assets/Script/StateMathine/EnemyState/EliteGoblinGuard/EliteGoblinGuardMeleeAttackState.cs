@@ -29,7 +29,7 @@ public class EliteGoblinGuardMeleeAttackState : EnemyState
                 {
                     m_State = EnemyCondition.ChaseTarget;
                 }
-                if(isReachTarget)
+                if (isReachTarget)
                 {
                     TargetPos = GetRamdomPositionAroundEnemy(5);
                 }
@@ -45,7 +45,7 @@ public class EliteGoblinGuardMeleeAttackState : EnemyState
                 {
                     m_State = EnemyCondition.Attack;
                 }
-                if(isReachTarget)
+                if (isReachTarget)
                 {
                     TargetPos = player.transform.position;
                 }

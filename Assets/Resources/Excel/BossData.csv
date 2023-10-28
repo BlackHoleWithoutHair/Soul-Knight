@@ -1,4 +1,4 @@
-﻿BossType,BossCategory,MaxHp,Speed,IsIdleLeft
-DevilSnare,Normal,510,0,FALSE
-DevilSnare,Elite,750,0,FALSE
-DevilSnare,Challenge,900,0,FALSE
+﻿BossType,BossCategory,MaxHp,Speed,IsIdleLeft,DropSeeds,DropSeeds,DropSeeds
+DevilSnare,Normal,510,0,FALSE,TrumpetFlower,GemFlower,GearFlower
+DevilSnare,Elite,750,0,FALSE,TrumpetFlower,GemFlower,GearFlower
+DevilSnare,Challenge,900,0,FALSE,TrumpetFlower,GemFlower,GearFlower

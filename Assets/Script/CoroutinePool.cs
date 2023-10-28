@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class CoroutinePool : MonoBehaviour
 {
@@ -43,16 +44,29 @@ public class CoroutinePool : MonoBehaviour
         }
         foreach (Coroutine coroutine in CoroutineDic[obj])
         {
-            if(coroutine!=null)
-            {
+            if (coroutine != null)
+            {               
                 StopCoroutine(coroutine);
             }
         }
         CoroutineDic[obj].Clear();
     }
+    public void DelayInvoke(UnityAction action, float time)
+    {
+        StartCoroutine(WaitForInvoke(action, time));
+    }
+    private IEnumerator WaitForInvoke(UnityAction action, float time)
+    {
+        yield return new WaitForSeconds(time);
+        action.Invoke();
+    }
     public void StartAnimatorCallback(Animator anim, string stateName, System.Action action)
     {
         StartCoroutine(AnimatorCallback(anim, stateName, action));
+    }
+    public void StartAnimatorCallback(Animator anim, string stateName, System.Action action, object obj)
+    {
+        StartCoroutine(AnimatorCallback(anim, stateName, action), this);
     }
     private IEnumerator AnimatorCallback(Animator anim, string stateName, System.Action callback)
     {

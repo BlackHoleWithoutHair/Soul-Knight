@@ -31,7 +31,7 @@ namespace MiddleScene
         {
             base.OnUpdate();
             TextGem.text = ArchiveCommand.Instance.GetMaterialNum(MaterialType.Gem).ToString();
-            if(!GameMediator.Instance.isFinishSelecctPlayer)
+            if (!GameMediator.Instance.isFinishSelecctPlayer)
             {
                 if (Input.GetMouseButtonDown(0))
                 {

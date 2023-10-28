@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class DireBoar : IEnemy
+public class DireBoar : IEmployeeEnemy
 {
     public DireBoar(GameObject obj) : base(obj) { }
     protected override void OnCharacterStart()

@@ -52,9 +52,9 @@ public class RoomController : AbstractController
                 }
                 else if ((roomInstance.Room as CustomRoom).RoomType == RoomType.EnemyRoom)
                 {
-                    SpawnEnemies(room,false);
+                    SpawnEnemies(room, false);
                 }
-                else if((roomInstance.Room as CustomRoom).RoomType==RoomType.EliteEnemyRoom)
+                else if ((roomInstance.Room as CustomRoom).RoomType == RoomType.EliteEnemyRoom)
                 {
                     SpawnEnemies(room, true);
                 }
@@ -62,13 +62,15 @@ public class RoomController : AbstractController
                 {
                     CreateOtherTreasureBox(room);
                 }
-                else if((roomInstance.Room as CustomRoom).RoomType == RoomType.BossRoom)
+                else if ((roomInstance.Room as CustomRoom).RoomType == RoomType.BossRoom)
                 {
-                    enemyController.AddBoss(GetFloorCenter(room));
+                    room.WaveNum = 0;
+                    enemyController.AddBoss(room, GetFloorCenter(room));
                 }
-                TriggerCenter.Instance.RegisterObserver(TriggerType.OnTriggerEnter, player.gameObject,GetFloorCollider(room).gameObject, obj =>
+                TriggerCenter.Instance.RegisterObserver(TriggerType.OnTriggerEnter, player.gameObject, GetFloorCollider(room).gameObject, obj =>
                 {
-                    if ((roomInstance.Room as CustomRoom).RoomType == RoomType.EnemyRoom)
+                    RoomType roomType = (roomInstance.Room as CustomRoom).RoomType;
+                    if (roomType == RoomType.EnemyRoom || roomType == RoomType.EliteEnemyRoom || roomType == RoomType.BossRoom)
                     {
                         enterRoom = room;
                         isEnterEnemyFloor = true;
@@ -76,9 +78,10 @@ public class RoomController : AbstractController
                         isClearEnemyStart = false;
                     }
                 });
-                TriggerCenter.Instance.RegisterObserver(TriggerType.OnTriggerExit, player.gameObject,GetFloorCollider(room).gameObject, obj =>
+                TriggerCenter.Instance.RegisterObserver(TriggerType.OnTriggerExit, player.gameObject, GetFloorCollider(room).gameObject, obj =>
                 {
-                    if ((roomInstance.Room as CustomRoom).RoomType == RoomType.EnemyRoom)
+                    RoomType roomType = (roomInstance.Room as CustomRoom).RoomType;
+                    if (roomType == RoomType.EnemyRoom || roomType == RoomType.EliteEnemyRoom || roomType == RoomType.BossRoom)
                     {
                         isEnterEnemyFloor = false;
                     }
@@ -89,27 +92,35 @@ public class RoomController : AbstractController
     protected override void AlwaysUpdate()
     {
         base.AlwaysUpdate();
-        if(isEnterEnemyFloor)
+        if (isEnterEnemyFloor)
         {
+            RoomType roomType = (enterRoom.roomInstanceGrid2D.Room as CustomRoom).RoomType;
             if (IsPlayerInFloor(GetFloorCollider(enterRoom).bounds, player.gameObject.transform.Find("BulletCheckBox").GetComponent<CapsuleCollider2D>().bounds))
             {
-                if(!isEnterEnemyFloorStart)
+                if (!isEnterEnemyFloorStart)
                 {
                     isEnterEnemyFloorStart = true;
-                    //enemyController.SetRoom(enterRoom);
-                    EventCenter.Instance.NotisfyObserver(EventType.OnPlayerEnterBattleRoom, enterRoom);
+
+                    if (roomType != RoomType.BossRoom)
+                    {
+                        EventCenter.Instance.NotisfyObserver(EventType.OnPlayerEnterBattleRoom, enterRoom);
+                    }
+                    else
+                    {
+                        EventCenter.Instance.NotisfyObserver(EventType.OnPlayerEnterBossRoom, enterRoom);
+                    }
                     CloseDoor(enterRoom.roomInstanceGrid2D);
                 }
             }
-            if (enterRoom.CurrentEnemyNum==0 && enterRoom.WaveNum > 0)
+            if (enterRoom.CurrentEnemyNum == 0 && enterRoom.WaveNum > 0)
             {
-                if((enterRoom.roomInstanceGrid2D.Room as CustomRoom).RoomType==RoomType.EliteEnemyRoom)
+                if ((enterRoom.roomInstanceGrid2D.Room as CustomRoom).RoomType == RoomType.EliteEnemyRoom)
                 {
-                    SpawnEnemies(enterRoom,true);
+                    SpawnEnemies(enterRoom, true);
                 }
                 else
                 {
-                    SpawnEnemies(enterRoom,false);
+                    SpawnEnemies(enterRoom, false);
                 }
             }
             else if (enterRoom.CurrentEnemyNum == 0 && !isClearEnemyStart)
@@ -120,6 +131,7 @@ public class RoomController : AbstractController
                 OpenDoor(enterRoom.roomInstanceGrid2D);
                 TriggerCenter.Instance.RemoveObserver(TriggerType.OnTriggerEnter, player.gameObject, GetFloorCollider(enterRoom).gameObject);
             }
+
         }
     }
     private void CloseDoor(RoomInstanceGrid2D roomInstance)
@@ -135,6 +147,10 @@ public class RoomController : AbstractController
     {
         m_FinishAnim.gameObject.SetActive(true);
         m_FinishAnim.Play("Finish", 0, 0);
+        CoroutinePool.Instance.StartAnimatorCallback(m_FinishAnim, "Finish", () =>
+        {
+            m_FinishAnim.gameObject.SetActive(false);
+        });
     }
     private void OpenDoor(RoomInstanceGrid2D roomInstance)
     {
@@ -147,7 +163,7 @@ public class RoomController : AbstractController
     }
     private void CreateWhiteTreasureBox(Room room)
     {
-        ItemFactory.Instance.GetTreasureBox(TreasureBoxType.White, RandomPointInBounds(UnityTool.Instance.GetComponentFromChild<CompositeCollider2D>(room.roomInstanceGrid2D.RoomTemplateInstance, "Floor").bounds, 3));
+        ItemFactory.Instance.GetTreasureBox(TreasureBoxType.White, RandomPointInBounds(GetFloorCollider(room).bounds, 3));
     }
     private void CreateOtherTreasureBox(Room room)
     {
@@ -189,7 +205,7 @@ public class RoomController : AbstractController
 
             if (dir.y < 0 && Mathf.Abs(dir.x) < floorBounds.extents.x - 2)//down
             {
-                if (dir.y > -floorBounds.extents.y + 1)
+                if (dir.y > -floorBounds.extents.y + 1.5)
                 {
                     return true;
                 }
@@ -218,11 +234,11 @@ public class RoomController : AbstractController
         }
         return false;
     }
-    private void SpawnEnemies(Room room,bool isElite)
+    private void SpawnEnemies(Room room, bool isElite)
     {
         CompositeCollider2D FloorCollider = GetFloorCollider(room);
         var totalEnemiesCount = room.SpawnEnemyNum;
-        while ( room.CurrentEnemyNum< totalEnemiesCount)
+        while (room.CurrentEnemyNum < totalEnemiesCount)
         {
             // Find random position inside floor collider bounds
             var position = RandomPointInBounds(FloorCollider.bounds, 2f);
@@ -241,8 +257,7 @@ public class RoomController : AbstractController
             // Pick random enemy prefab
 
             // Create an instance of the enemy and set position and parent
-            enemyController.SpawnEnemy(room, position, isEnterEnemyFloorStart,isElite);
-            room.CurrentEnemyNum++;
+            enemyController.SpawnEnemy(room, position, isEnterEnemyFloorStart, isElite);
         }
         room.WaveNum--;
     }
@@ -263,6 +278,24 @@ public class RoomController : AbstractController
     private Vector2 GetFloorCenter(Room room)
     {
         return UnityTool.Instance.GetComponentFromChild<CompositeCollider2D>(room.roomInstanceGrid2D.RoomTemplateInstance, "Floor").bounds.center;
+    }
+    public Vector3 RandomPointInFloor(Room room, float margin = 0)
+    {
+        CompositeCollider2D collider = GetFloorCollider(room);
+        while (true)
+        {
+            Vector2 position = RandomPointInBounds(collider.bounds, margin);
+            if (!collider.OverlapPoint(position))
+            {
+                continue;
+            }
+            // We want to make sure that there is no other collider in the radius of 1
+            if (Physics2D.OverlapCircleAll(position, 1f).Any(x => !x.isTrigger))
+            {
+                continue;
+            }
+            return position;
+        }
     }
     public CompositeCollider2D GetFloorCollider(Room room)
     {

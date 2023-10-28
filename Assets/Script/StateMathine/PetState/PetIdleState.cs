@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class PetIdleState : PetState
 {
-    public PetIdleState(PetStateController controller):base(controller) { }
+    public PetIdleState(PetStateController controller) : base(controller) { }
     protected override void StateStart()
     {
         base.StateStart();
@@ -22,7 +22,7 @@ public class PetIdleState : PetState
             m_Controller.SetOtherState(typeof(PetFollowTargetState));
             return;
         }
-        if(GetDistanceToTarget(player.gameObject)>20)
+        if (GetDistanceToTarget(player.gameObject) > 20)
         {
             m_Controller.SetOtherState(typeof(PetFollowTargetState));
             return;
@@ -37,7 +37,7 @@ public class PetIdleState : PetState
     {
         while (true)
         {
-            if(m_Controller.target.IsDie)//打死一个敌人就会回到玩家身边
+            if (m_Controller.target.IsDie)//打死一个敌人就会回到玩家身边
             {
                 m_Controller.target = player;
                 yield break;

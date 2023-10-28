@@ -43,7 +43,7 @@ public class Garden : MonoBehaviour
     {
         if (isEnter)
         {
-            if (m_Plant==null)
+            if (m_Plant == null)
             {
                 m_TextName.SetActive(true);
             }
@@ -51,18 +51,18 @@ public class Garden : MonoBehaviour
             {
                 m_GardenUI.gameObject.SetActive(true);
             }
-            if(InputUtility.Instance.GetKeyDown(KeyAction.Use)&&isReceiveInput)
+            if (InputUtility.Instance.GetKeyDown(KeyAction.Use) && isReceiveInput)
             {
                 isReceiveInput = false;
-                if (!m_GardenInfo.isLocked && m_Plant==null)
+                if (!m_GardenInfo.isLocked && m_Plant == null)
                 {
                     EventCenter.Instance.NotisfyObserver(EventType.OnWantPlant, this);
                 }
-                if(m_GardenInfo.isLocked)
+                if (m_GardenInfo.isLocked)
                 {
                     EventCenter.Instance.NotisfyObserver(EventType.OnWantUnlockGarden, this);
                 }
-                if(m_Plant!=null&&m_Plant.PlantState==PlantState.Ripening)
+                if (m_Plant != null && m_Plant.PlantState == PlantState.Ripening)
                 {
                     m_Plant.SaveHarvest();
                     RemovePlant();
@@ -88,7 +88,7 @@ public class Garden : MonoBehaviour
     }
     public void PlantSeed(SeedType type)
     {
-        ArchiveCommand.Instance.Plant(type,GardenInfo.index);
+        ArchiveCommand.Instance.Plant(type, GardenInfo.index);
         m_Plant = ItemFactory.Instance.GetPlant(gameObject, this);
         m_GardenUI = new GardenUI(this, transform.Find("PlantCanvas").gameObject);
     }

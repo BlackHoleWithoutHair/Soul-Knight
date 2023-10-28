@@ -12,13 +12,12 @@ public class ItemController : AbstractController
         base.AlwaysUpdate();
         for (int i = 0; i < items.Count; i++)
         {
-            if (items[i].ShouldBeRemove == false)
+            if (items[i].isAlreadyRemove == false)
             {
                 items[i].GameUpdate();
             }
             else
             {
-                items[i].OnExit();
                 items.RemoveAt(i);
             }
         }

@@ -32,7 +32,7 @@ public class DireBoarRunState : EnemyState
                     m_State = EnemyCondition.Attack;
                 }
                 m_Attr.isAttack = false;
-                if(isReachTarget)
+                if (isReachTarget)
                 {
                     TargetPos = GetRamdomPositionAroundEnemy(6);
                 }
@@ -49,7 +49,7 @@ public class DireBoarRunState : EnemyState
                 m_Attr.isAttack = true;
                 m_EffectAnim.enabled = true;
                 m_Render.enabled = true;
-                if(isReachTarget)
+                if (isReachTarget)
                 {
                     TargetPos = player.transform.position;
                 }

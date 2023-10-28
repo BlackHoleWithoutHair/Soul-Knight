@@ -8,6 +8,7 @@ namespace MiddleScene
         public GameFacade m_Facade => mediator;
         void Start()
         {
+            Time.timeScale = 1;
             mediator = new GameFacade();
             Debug.Log(Application.persistentDataPath);
         }

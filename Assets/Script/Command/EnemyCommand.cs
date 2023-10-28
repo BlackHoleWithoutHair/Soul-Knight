@@ -8,16 +8,16 @@ public class EnemyCommand : Singleton<EnemyCommand>
     {
         model = ModelContainer.Instance.GetModel<EnemyModel>();
     }
-    public EnemyShareAttr GetEnemyShareAttr(EnemyType type,bool isElite,EnemyWeaponType weaponType)
+    public EnemyShareAttr GetEnemyShareAttr(EnemyType type, bool isElite, EnemyWeaponType weaponType)
     {
         EnemyShareAttr attr = model.attrs.Where(x => x.Type == type && x.isElite == isElite && x.WeaponType == weaponType).ToArray()[0];
-        if(attr==null)
+        if (attr == null)
         {
             Debug.Log("EnemyCommand GetEnemyShareAttr " + type + " return null");
         }
         return attr;
     }
-    public bool ContainState(EnemyType type,bool isElite)
+    public bool ContainState(EnemyType type, bool isElite)
     {
         return model.attrs.Any(x => x.Type == type && x.isElite == isElite);
     }

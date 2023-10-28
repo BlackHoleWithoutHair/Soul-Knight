@@ -5,7 +5,6 @@ public class SkillAttribute
     private SkillShareAttribute Attr;
     public SkillAttrStrategy m_ShareAttr;
     public int CurrentLv;
-    public float SkillCoolTimer;
     public SkillAttribute(SkillShareAttribute attr, PlayerAttribute playerAttr)
     {
         Attr = attr;

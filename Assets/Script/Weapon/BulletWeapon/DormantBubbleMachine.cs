@@ -4,27 +4,16 @@ public class DormantBubbleMachine : IPlayerUnAccumulateWeapon
 {
     public DormantBubbleMachine(GameObject obj, ICharacter character) : base(obj, character)
     {
-        m_Attr = AttributeFactory.Instance.GetPlayerWeaponAttr(PlayerWeaponType.DormantBubbleMachine);
-    }
-    protected override void OnEnter()
-    {
-        base.OnEnter();
-
-    }
-    public override void OnUpdate()
-    {
-        base.OnUpdate();
+        m_Attr = WeaponCommand.Instance.GetPlayerWeaponShareAttr(PlayerWeaponType.DormantBubbleMachine);
     }
     protected override void OnFire()
     {
         base.OnFire();
+        PlayRecoilAnim();
+        ShowFireSpark(BulletColorType.Green);
         for (int i = -2; i <= 2; i++)
         {
-            ItemPool.Instance.GetPlayerBullet(PlayerBulletType.Bullet_11, m_Attr, FirePoint.transform.position, GetRot(i * 6)).AddToController();
+            CreateBullet(PlayerBulletType.Bullet_11, m_Attr,i).AddToController();
         }
-    }
-    private Quaternion GetRot(int angle)
-    {
-        return Quaternion.Euler(m_GameObject.transform.eulerAngles.x, m_GameObject.transform.eulerAngles.y, angle + m_GameObject.transform.eulerAngles.z + Random.Range(-m_Attr.ScatteringRate, m_Attr.ScatteringRate));
     }
 }

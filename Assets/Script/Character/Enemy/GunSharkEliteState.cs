@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class GunSharkEliteState : IEnemy
+public class GunSharkEliteState : IEmployeeEnemy
 {
     public GunSharkEliteState(GameObject obj) : base(obj) { }
     protected override void OnCharacterStart()

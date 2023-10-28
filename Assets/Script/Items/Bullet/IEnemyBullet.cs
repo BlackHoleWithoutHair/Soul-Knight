@@ -2,15 +2,25 @@ using UnityEngine;
 
 public abstract class IEnemyBullet : IBullet
 {
-    protected int Damage;
     protected EnemyBulletType type;
-    public IEnemyBullet(GameObject obj,EnemyWeaponShareAttribute attr) : base(obj, attr)
+    protected new IEnemyWeapon m_Weapon { get => base.m_Weapon as IEnemyWeapon; set => base.m_Weapon = value; }
+    public IEnemyBullet(GameObject obj) : base(obj)
     {
-        TriggerCenter.Instance.RegisterObserver(TriggerType.OnTriggerEnter, gameObject, "Player", OnHitPlayer);
+        TriggerCenter.Instance.RegisterObserver(TriggerType.OnTriggerEnter, gameObject, "Player", (obj) =>
+        {
+            PlayerAttribute attr = obj.transform.GetComponent<Symbol>().GetCharacter().m_Attr as PlayerAttribute;
+            if (attr.HurtInvincibleTimer >= attr.m_ShareAttr.HurtInvincibleTime)
+            {
+                OnHitWall();
+                (obj.transform.GetComponent<Symbol>().GetCharacter() as IPlayer).UnderAttack(m_Attr.Damage);
+            }
+        });
     }
-    protected override void AfterHitWallStart()
+    protected override void OnHitWall()
     {
-        base.AfterHitWallStart();
+        base.OnHitWall();
+        gameObject.GetComponent<BoxCollider2D>().enabled = false;
+        Remove();
         OnBulletParticleAppear();
 
     }
@@ -19,26 +29,5 @@ public abstract class IEnemyBullet : IBullet
         IEffectBoom boom = EffectFactory.Instance.GetEffectBoom(EffectBoomType.EffectBoom_1, gameObject.transform.position);
         boom.SetColor(Color.red);
         boom.AddToController();
-    }
-    private void OnHitPlayer(GameObject obj)
-    {
-        PlayerAttribute attr = obj.transform.GetComponent<Symbol>().GetCharacter().m_Attr as PlayerAttribute;
-        if (attr.HurtInvincibleTimer >= attr.m_ShareAttr.HurtInvincibleTime)
-        {
-            isHitWall = true;
-            (obj.transform.GetComponent<Symbol>().GetCharacter() as IPlayer).UnderAttack(Damage);
-        }
-    }
-    public override void Remove()
-    {
-        base.Remove();
-        if (!isDestroyOnRemove)
-        {
-            pool.ReturnItem(type, this);
-        }
-    }
-    public void SetDamage(int damage)
-    {
-        Damage=damage;
     }
 }

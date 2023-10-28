@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PanelSelectPet:IPanel
+public class PanelSelectPet : IPanel
 {
     private int CurrentSkinIndex;
     private Animator PetAnimator;
@@ -11,7 +11,7 @@ public class PanelSelectPet:IPanel
     private RectTransform ImageLeftSkin;
     private RectTransform ImageRightSkin;
     private RectTransform DivBottom;
-    public PanelSelectPet(IPanel parent):base(parent)
+    public PanelSelectPet(IPanel parent) : base(parent)
     {
         m_GameObject = UnityTool.Instance.GetGameObjectFromCanvas(GetType().Name);
         isShowPanelAfterExit = true;
@@ -26,12 +26,12 @@ public class PanelSelectPet:IPanel
         ImageLeftSkin = UnityTool.Instance.GetComponentFromChild<RectTransform>(gameObject, "ImageLeftSkin");
         ImageRightSkin = UnityTool.Instance.GetComponentFromChild<RectTransform>(gameObject, "ImageRightSkin");
         DivBottom = UnityTool.Instance.GetComponentFromChild<RectTransform>(gameObject, "DivBottom");
-        
-        Title.anchoredPosition = new Vector2(0,55);
+
+        Title.anchoredPosition = new Vector2(0, 55);
         DivBottom.anchoredPosition = new Vector2(0, -130);
-        ImageLeftSkin.anchoredPosition = new Vector2(-350,0);
+        ImageLeftSkin.anchoredPosition = new Vector2(-350, 0);
         ImageRightSkin.anchoredPosition = new Vector2(350, 0);
-        
+
         UnityTool.Instance.GetComponentFromChild<Button>(gameObject, "ButtonBack").onClick.AddListener(() =>
         {
             OnExit();

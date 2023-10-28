@@ -133,6 +133,8 @@ public class UnityTool
     {
         switch (type)
         {
+            case BulletColorType.White:
+                return Color.white;
             case BulletColorType.Red:
                 return new Color(253f / 255f, 78f / 255f, 38f / 255f);
 
@@ -153,7 +155,9 @@ public class UnityTool
 
             case BulletColorType.Purple:
                 return new Color(157f / 255f, 0, 253f / 255f);
-
+            case BulletColorType.Magenta:
+                return Color.magenta;
+            
             default: return Color.white;
         }
     }
@@ -170,7 +174,7 @@ public class UnityTool
         if (typeof(Enum).IsAssignableFrom(type))
         {
             //Debug.Log(type.ToString() + " " + s);
-           
+
             return Enum.Parse(type, s);
         }
         return Convert.ChangeType(s, type);
@@ -193,7 +197,7 @@ public class UnityTool
         Type type = typeof(T);
         Type lastType = null;
         List<ListInfo> listOfListInfo = new List<ListInfo>();
-        string[] lineText = textAsset.text.Replace("\r","").Split('\n');
+        string[] lineText = textAsset.text.Replace("\r", "").Split('\n');
         string[] fieldName = lineText[0].Split(',');
         foreach (string s in fieldName)
         {
@@ -287,17 +291,17 @@ public class UnityTool
             return;
         }
         list.Clear();
-        string[] textLine = textAsset.text.Replace("\r","").Split('\n');
+        string[] textLine = textAsset.text.Replace("\r", "").Split('\n');
         string[] textMaterialType = textLine[0].Split(",");
         for (int i = 1; i < textLine.Length; i++)
         {
             if (textLine[i] == "") continue;
             string[] textRow = textLine[i].Split(",");
             CompositionData data = new CompositionData();
-            bool isExist=true;
+            bool isExist = true;
             for (int j = 1; j < textRow.Length; j++)
             {
-                if(Enum.TryParse(textRow[0],out PlayerWeaponType type))
+                if (Enum.TryParse(textRow[0], out PlayerWeaponType type))
                 {
                     data.weaponType = type;
                 }
@@ -314,7 +318,7 @@ public class UnityTool
                     data.materialInfos.Add(info);
                 }
             }
-            if(isExist)
+            if (isExist)
             {
                 list.Add(data);
             }
@@ -378,13 +382,17 @@ public class UnityTool
             }
         }
     }
-    public void DestroyAllActiveObjExcept(Transform trans)
+    public void ClearResidualChild(Transform parent, int beginAt)
     {
-        for (int i = 0; i < trans.parent.childCount; i++)
+        if (beginAt==0)
         {
-            if (trans.parent.GetChild(i).gameObject.activeSelf && trans.parent.GetChild(i).gameObject != trans.gameObject)
+            parent.GetChild(0).gameObject.SetActive(false);
+        }
+        else
+        {
+            for (int i = beginAt; i < parent.childCount; i++)
             {
-                UnityEngine.Object.Destroy(trans.parent.GetChild(i).gameObject);
+                UnityEngine.Object.Destroy(parent.GetChild(i).gameObject);
             }
         }
     }

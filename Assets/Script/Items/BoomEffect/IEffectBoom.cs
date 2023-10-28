@@ -19,9 +19,9 @@ public class IEffectBoom : Item
         m_BoomAnimator.gameObject.SetActive(true);
         m_BoomAnimator.Play("Idle", 0, 0);
     }
-    public override void GameUpdate()
+    protected override void OnUpdate()
     {
-        base.GameUpdate();
+        base.OnUpdate();
         info = m_BoomAnimator.GetCurrentAnimatorStateInfo(0);
         if (info.normalizedTime > 1)
         {
@@ -33,10 +33,9 @@ public class IEffectBoom : Item
         m_BoomAnimator.GetComponent<SpriteRenderer>().color = color;
         m_MainModule.startColor = color;
     }
-
-    public override void Remove()
+    protected override void OnExit()
     {
-        base.Remove();
+        base.OnExit();
         if (!isDestroyOnRemove)
         {
             pool.ReturnItem(type, this);

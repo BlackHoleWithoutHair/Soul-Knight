@@ -39,13 +39,14 @@ namespace MiddleScene
             base.OnEnter();
             m_GameObject.SetActive(true);
             canvasGroup.DOFade(1, 0.3f).SetUpdate(true);
-            UnityTool.Instance.DestroyAllActiveObjExcept(DivVerSeed.transform);
-            for (int i = 0; i < ModelContainer.Instance.GetModel<ArchiveModel>().GameData.seedDatas.Count; i++)
+            int i = 0;
+            for (i = 0; i < ModelContainer.Instance.GetModel<ArchiveModel>().GameData.seedDatas.Count; i++)
             {
                 DivVerSeed.SetActive(true);
-                if (i == 0)
+                if (i <DivVerSeed.transform.parent.childCount)
                 {
-                    SetSeedInfo(DivVerSeed, ModelContainer.Instance.GetModel<ArchiveModel>().GameData.seedDatas[i]);
+                    Transform child = DivVerSeed.transform.parent.GetChild(i);
+                    SetSeedInfo(child.gameObject, ModelContainer.Instance.GetModel<ArchiveModel>().GameData.seedDatas[i]);
                 }
                 else
                 {
@@ -53,13 +54,13 @@ namespace MiddleScene
                     SetSeedInfo(obj, ModelContainer.Instance.GetModel<ArchiveModel>().GameData.seedDatas[i]);
                 }
             }
+            UnityTool.Instance.ClearResidualChild(DivVerSeed.transform.parent, i);
             Time.timeScale = 0;
             EventCenter.Instance.NotisfyObserver(EventType.OnPause);
         }
         public override void OnExit()
         {
             base.OnExit();
-
             Time.timeScale = 1;
             canvasGroup.DOFade(0, 0.3f).OnComplete(() =>
             {
@@ -80,6 +81,7 @@ namespace MiddleScene
                 }
                 OnExit();
             });
+            obj.SetActive(true);
         }
     }
 }

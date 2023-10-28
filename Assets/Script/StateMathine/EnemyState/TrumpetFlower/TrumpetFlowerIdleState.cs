@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Net.Sockets;
 using UnityEngine;
 
 public class TrumpetFlowerIdleState : EnemyState
@@ -18,7 +17,7 @@ public class TrumpetFlowerIdleState : EnemyState
     }
     private IEnumerator WaitForAttack()
     {
-        yield return new WaitForSeconds(Random.Range(4, 7));
+        yield return new WaitForSeconds(5.5f);
         m_Controller.SetOtherState(typeof(TrumpetFlowerAttackState));
     }
 }

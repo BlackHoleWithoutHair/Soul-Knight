@@ -2,15 +2,18 @@
 
 public class Arrow_1 : IPlayerBullet
 {
-    public Arrow_1(GameObject obj,PlayerWeaponShareAttribute attr) : base(obj, attr)
+    public Arrow_1(GameObject obj) : base(obj)
     {
         type = PlayerBulletType.Arrow_1;
     }
-    protected override void AfterHitWallStart()
+    protected override void OnHitWall()
     {
-        base.AfterHitWallStart();
-        IEffectBoom boom = EffectFactory.Instance.GetEffectBoom(EffectBoomType.EffectBoom_1, gameObject.transform.position);
-        boom.SetColor(new Color(0, 0, 0));
-        boom.AddToController();
+        base.OnHitWall();
+        CreateBoomEffect(EffectBoomType.EffectBoom_1, BulletColorType.White);
+    }
+    protected override void OnHitCharacter()
+    {
+        base.OnHitCharacter();
+        CreateBoomEffect(EffectBoomType.EffectBoom_1, BulletColorType.White);
     }
 }

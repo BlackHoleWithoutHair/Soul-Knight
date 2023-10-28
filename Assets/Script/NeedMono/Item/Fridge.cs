@@ -20,11 +20,11 @@ public class Fridge : MonoBehaviour
         if (isEnter)
         {
             ItemName.SetActive(true);
-            if (InputUtility.Instance.GetKeyDown(KeyAction.Use)&&isReceiveInput)
+            if (InputUtility.Instance.GetKeyDown(KeyAction.Use) && isReceiveInput)
             {
                 isReceiveInput = false;
                 m_Animator.SetBool("isOpen", !m_Animator.GetBool("isOpen"));
-                
+
                 EventCenter.Instance.NotisfyObserver(EventType.OnWantUseFridge);
             }
         }

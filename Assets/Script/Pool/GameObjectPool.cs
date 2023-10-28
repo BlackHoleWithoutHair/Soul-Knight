@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.Pool;
 
-public class GameObjectPool:Singleton<GameObjectPool>
+public class GameObjectPool : Singleton<GameObjectPool>
 {
     private static GameObject BulletParent;
     public class GameObjectPoolInfo
@@ -51,7 +51,7 @@ public class GameObjectPool:Singleton<GameObjectPool>
 
     public GameObject GetDecHp(Vector2 pos)
     {
-        GameObject obj= objInfos[0].bulletPool.Get();
+        GameObject obj = objInfos[0].bulletPool.Get();
         obj.transform.position = pos;
         return obj;
     }

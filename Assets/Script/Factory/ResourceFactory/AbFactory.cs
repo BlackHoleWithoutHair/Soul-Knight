@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class AbFactory : IResourceFactory
@@ -13,6 +14,14 @@ public class AbFactory : IResourceFactory
     {
         return default(T);
     }
+    public List<T> GetResources<T>(string name) where T : UnityEngine.Object
+    {
+        return null;
+    }
+    public AudioClip GetAudioClip(string name)
+    {
+        return null;
+    }
     public Sprite GetWeaponSprite(string name)
     {
         return null;
@@ -26,6 +35,14 @@ public class AbFactory : IResourceFactory
         return null;
     }
     public Sprite GetPlantSprite(string name)
+    {
+        return null;
+    }
+    public Sprite GetProfileSprite(string name)
+    {
+        return null;
+    }
+    public Sprite GetTalentSprite(string name)
     {
         return null;
     }

@@ -41,6 +41,7 @@ public class GoblinShamanAttackState : EnemyState
 
             case EnemyCondition.Attack:
                 m_State = EnemyCondition.Roaming;
+                m_Character.m_Weapon.StartBeforeFireUpdate();
                 CoroutinePool.Instance.StartCoroutine(Warning(0.4f, () =>
                 {
                     CoroutinePool.Instance.StartCoroutine(UseWeapon());

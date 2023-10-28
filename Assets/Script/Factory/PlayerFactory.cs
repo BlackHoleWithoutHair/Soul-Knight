@@ -1,15 +1,15 @@
 using UnityEngine;
 
-public class PlayerFactory:Singleton<PlayerFactory>
+public class PlayerFactory : Singleton<PlayerFactory>
 {
     private PlayerFactory() { }
-    public IPlayerPet GetPlayerPet(PetType type,IPlayer player)
+    public IPlayerPet GetPlayerPet(PetType type, IPlayer player)
     {
         IPlayerPet pet = null;
         GameObject obj = GameObject.Find("LittleCool");
-        if(obj==null)
+        if (obj == null)
         {
-            obj = Object.Instantiate(ProxyResourceFactory.Instance.Factory.GetPlayer("LittleCool"),(Vector2)player.transform.position+Random.insideUnitCircle*4,Quaternion.identity);
+            obj = Object.Instantiate(ProxyResourceFactory.Instance.Factory.GetPlayer("LittleCool"), (Vector2)player.transform.position + Random.insideUnitCircle * 4, Quaternion.identity);
         }
         pet = new LittleCool(obj, player);
         pet.transform.GetComponent<Animator>().runtimeAnimatorController = ProxyResourceFactory.Instance.Factory.GetPetAnimatorController(type.ToString());

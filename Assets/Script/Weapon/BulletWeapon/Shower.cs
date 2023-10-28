@@ -9,7 +9,7 @@ public class Shower : IPlayerUnAccumulateWeapon
     private bool isStartWater;
     public Shower(GameObject obj, ICharacter character) : base(obj, character)
     {
-        m_Attr = AttributeFactory.Instance.GetPlayerWeaponAttr(PlayerWeaponType.Shower);
+        m_Attr = WeaponCommand.Instance.GetPlayerWeaponShareAttr(PlayerWeaponType.Shower);
         TriggerCenter.Instance.RegisterObserver(TriggerType.OnTriggerEnter, m_Character.gameObject, (obj) =>
         {
             if (obj.name.Contains("Garden"))
@@ -40,8 +40,8 @@ public class Shower : IPlayerUnAccumulateWeapon
         base.OnFire();
         if (m_Garden == null)
         {
-            IBullet bullet = ItemPool.Instance.GetPlayerBullet(PlayerBulletType.Bullet_7, m_Attr, FirePoint.transform.position, GetShotRot());
-            bullet.SetColor(new Color(68f / 255f, 170f / 255f, 1));
+            IBullet bullet = CreateBullet(PlayerBulletType.Bullet_7, m_Attr);
+            bullet.SetColor(BulletColorType.Cyan);
             bullet.AddToController();
         }
         else

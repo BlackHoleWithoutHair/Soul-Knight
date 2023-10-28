@@ -11,8 +11,7 @@ public class Shotgun : IEnemyWeapon
         base.OnFire();
         for (int angle = -30; angle <= 30; angle += 15)
         {
-            IBullet bullet = EffectFactory.Instance.GetEnemyBullet(EnemyBulletType.EnemyBullet3, m_Attr, FirePoint.transform.position, GetShotRotation() * Quaternion.Euler(0, 0, angle));
-            (bullet as IEnemyBullet).SetDamage((m_Character.m_Attr as EnemyAttribute).m_ShareAttr.Damage);
+            IBullet bullet = EffectFactory.Instance.GetEnemyBullet(EnemyBulletType.EnemyBullet3, m_Attr, m_Character.m_Attr.GetShareAttr() as EnemyShareAttr, FirePoint.transform.position, GetShotRotation() * Quaternion.Euler(0, 0, angle));
             bullet.AddToController();
         }
     }

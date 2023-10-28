@@ -26,9 +26,9 @@ public class ILaser : Item
         line.endWidth = 0.5f;
         EndLightCircle.transform.position = hit.point;
     }
-    public override void GameUpdate()
+    protected override void OnUpdate()
     {
-        base.GameUpdate();
+        base.OnUpdate();
         if (line.startWidth > 0)
         {
             line.startWidth -= Time.deltaTime * 2;

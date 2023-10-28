@@ -7,7 +7,7 @@ public class Beam : IPlayerBullet
     private AnimatorStateInfo info;
     private bool isFindEnemy;
     private PlayerController controller;
-    public Beam(GameObject obj, PlayerWeaponShareAttribute attr) : base(obj, attr)
+    public Beam(GameObject obj) : base(obj)
     {
         type = PlayerBulletType.Beam;
     }
@@ -40,9 +40,9 @@ public class Beam : IPlayerBullet
             Remove();
         }
     }
-    protected override void BeforeHitWallUpdate()
+    protected override void BeforeHitObstacleUpdate()
     {
-        base.BeforeHitWallUpdate();
+        base.BeforeHitObstacleUpdate();
         if (isFindEnemy)
         {
             info = m_Animator.GetCurrentAnimatorStateInfo(0);

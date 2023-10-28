@@ -26,7 +26,7 @@ public class GardenUI
         m_TextNextTime = UnityTool.Instance.GetComponentFromChild<TextMeshProUGUI>(m_GameObject, "TextNextTime");
         m_TextState = UnityTool.Instance.GetComponentFromChild<TextMeshProUGUI>(m_GameObject, "TextState");
         GrowTime = garden.Plant.GetPlantInfo().GrowTime;
-        CoroutinePool.Instance.StartCoroutine(UpdateLoop(),this);
+        CoroutinePool.Instance.StartCoroutine(UpdateLoop(), this);
     }
     public void GameUpdate()
     {

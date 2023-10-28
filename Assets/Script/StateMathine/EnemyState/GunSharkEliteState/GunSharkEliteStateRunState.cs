@@ -1,4 +1,3 @@
-using System.Data;
 using UnityEngine;
 
 public class GunSharkEliteStateRunState : EnemyState

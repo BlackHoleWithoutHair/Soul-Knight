@@ -2,23 +2,23 @@
 
 public class BulletBasketball : IPlayerBullet
 {
-    public BulletBasketball(GameObject obj, PlayerWeaponShareAttribute attr) : base(obj, attr)
+    public BulletBasketball(GameObject obj) : base(obj)
     {
         type = PlayerBulletType.Basketball;
     }
-    protected override void BeforeHitWallUpdate()
+    public override void OnEnter()
     {
-        base.BeforeHitWallUpdate();
+        base.OnEnter();
+        ReboundTimes = 3;
     }
-    protected override void AfterHitWallStart()
+    protected override void OnHitWall()
     {
-        base.AfterHitWallStart();
-        IEffectBoom boom = EffectFactory.Instance.GetEffectBoom(EffectBoomType.EffectBoom_1,gameObject.transform.position);
-        boom.SetColor(Color.white);
-        boom.AddToController();
+        base.OnHitWall();
+        CreateBoomEffect(EffectBoomType.EffectBoom_1, BulletColorType.White);
     }
-    protected override void AfterHitWallUpdate()
+    protected override void OnHitCharacter()
     {
-        base.AfterHitWallUpdate();
+        base.OnHitCharacter();
+        CreateBoomEffect(EffectBoomType.EffectBoom_1, BulletColorType.White);
     }
 }

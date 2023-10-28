@@ -46,59 +46,54 @@ public class PanelSmithingTable : IPanel
         {
             if (isOn)
             {
-                ClearChildren(ButtonWeapon.transform.parent);
                 WeaponCount = 0;
                 foreach (PlayerWeaponType type in Enum.GetValues(typeof(PlayerWeaponType)))
                 {
-                    PlayerWeaponShareAttribute attr = AttributeFactory.Instance.GetPlayerWeaponAttr(type);
+                    PlayerWeaponShareAttribute attr = WeaponCommand.Instance.GetPlayerWeaponShareAttr(type);
                     if (attr.Category == category)
-                    {
-                        if (WeaponCount < 1)
+                    { 
+                        if(WeaponCount<ButtonWeapon.transform.parent.childCount)
                         {
-                            ButtonWeapon.transform.GetChild(0).GetComponent<Image>().sprite = ProxyResourceFactory.Instance.Factory.GetWeaponSprite(type.ToString());
-                            ButtonWeapon.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = LanguageCommand.Instance.GetTranslation(attr.Type.ToString());
-                            ButtonWeapon.GetComponent<Button>().onClick.AddListener(() =>
-                            {
-                                EnterPanel(typeof(PanelSmithingAlert));
-                                EventCenter.Instance.NotisfyObserver(EventType.OnConfirmSmithingWeapon, attr);
-                            });
+                            Transform child = ButtonWeapon.transform.parent.GetChild(WeaponCount);
+                            SetWeaponButton(child.gameObject, attr);
                         }
                         else
                         {
                             GameObject obj = UnityEngine.Object.Instantiate(ButtonWeapon, ButtonWeapon.transform.parent);
-                            obj.name = type.ToString();
-                            obj.transform.GetChild(0).GetComponent<Image>().sprite = ProxyResourceFactory.Instance.Factory.GetWeaponSprite(type.ToString());
-                            obj.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = LanguageCommand.Instance.GetTranslation(type.ToString());
-                            obj.GetComponent<Button>().onClick.AddListener(() =>
-                            {
-                                EnterPanel(typeof(PanelSmithingAlert));
-                                EventCenter.Instance.NotisfyObserver(EventType.OnConfirmSmithingWeapon, attr);
-                            });
+                            SetWeaponButton(obj, attr);
                         }
                         WeaponCount++;
                     }
                 }
+                if(WeaponCount!=ButtonWeapon.transform.parent.childCount)
+                {
+                    UnityTool.Instance.ClearResidualChild(ButtonWeapon.transform.parent,WeaponCount);
+                }
             }
         });
-
     }
-    private void ClearChildren(Transform t)
+    private void SetWeaponButton(GameObject obj,PlayerWeaponShareAttribute attr)
     {
-        for (int i = 0; i < t.childCount; i++)
+        obj.name = attr.Type.ToString();
+        obj.transform.GetChild(0).GetComponent<Image>().sprite = ProxyResourceFactory.Instance.Factory.GetWeaponSprite(attr.Type.ToString());
+        obj.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = LanguageCommand.Instance.GetTranslation(attr.Type.ToString());
+        obj.GetComponent<Button>().onClick.AddListener(() =>
         {
-            if (t.GetChild(i).gameObject != ButtonWeapon)
-            {
-                UnityEngine.Object.Destroy(t.GetChild(i).gameObject);
-            }
-        }
+            EnterPanel(typeof(PanelSmithingAlert));
+            GetPanel<PanelSmithingAlert>().SetAttr(attr);
+        });
+        obj.SetActive(true);
     }
     private string GetWeaponTypeByCategory(WeaponCategory category)
     {
         foreach (PlayerWeaponType type in Enum.GetValues(typeof(PlayerWeaponType)))
         {
-            if (AttributeFactory.Instance.GetPlayerWeaponAttr(type).Category == category)
+            if(type!=PlayerWeaponType.None)
             {
-                return type.ToString();
+                if (WeaponCommand.Instance.GetPlayerWeaponShareAttr(type).Category == category)
+                {
+                    return type.ToString();
+                }
             }
         }
         return null;

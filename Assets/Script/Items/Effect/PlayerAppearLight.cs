@@ -7,15 +7,10 @@ public class PlayerAppearLight : Item
     public PlayerAppearLight(GameObject obj) : base(obj)
     {
         m_Animator = gameObject.GetComponent<Animator>();
-
     }
-    protected override void Init()
+    protected override void OnUpdate()
     {
-        base.Init();
-    }
-    public override void GameUpdate()
-    {
-        base.GameUpdate();
+        base.OnUpdate();
         info = m_Animator.GetCurrentAnimatorStateInfo(0);
         if (info.normalizedTime > 1)
         {

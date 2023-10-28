@@ -2,9 +2,9 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PanelLuckyCat:IPanel
+public class PanelLuckyCat : IPanel
 {
-    public PanelLuckyCat(IPanel parent):base(parent)
+    public PanelLuckyCat(IPanel parent) : base(parent)
     {
         m_GameObject = UnityTool.Instance.GetGameObjectFromCanvas(GetType().Name);
         isShowPanelAfterExit = true;

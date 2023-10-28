@@ -1,15 +1,15 @@
 ﻿using UnityEngine;
 
-public class IPlayerPet:ICharacter
+public class IPlayerPet : ICharacter
 {
     protected IPlayer m_Player;
     protected PetStateController m_StateController;
-    public IPlayerPet(GameObject obj,IPlayer player):base(obj)
+    public IPlayerPet(GameObject obj, IPlayer player) : base(obj)
     {
         m_Player = player;
         gameObject.SetActive(false);
         m_Animator = transform.GetComponent<Animator>();
-        m_rb=transform.GetComponent<Rigidbody2D>();
+        m_rb = transform.GetComponent<Rigidbody2D>();
     }
     protected override void OnCharacterStart()
     {

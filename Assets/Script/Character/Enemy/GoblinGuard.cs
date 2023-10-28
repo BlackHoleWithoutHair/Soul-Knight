@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class GoblinGuard : IEnemy
+public class GoblinGuard : IEmployeeEnemy
 {
     public GoblinGuard(GameObject obj) : base(obj) { }
     protected override void OnCharacterStart()

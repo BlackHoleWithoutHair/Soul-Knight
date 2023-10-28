@@ -25,7 +25,7 @@ public class RangerIdleState : PlayerState
             return;
         }
         player.GetUsedWeapon().OnUpdate();
-        if (InputUtility.Instance.GetKeyDown(KeyAction.Skill))
+        if (InputUtility.Instance.GetKeyDown(KeyAction.Skill)&&player.CanUseSkill())
         {
             if (player.m_Attr.CurrentSkillType == SkillType.Roll)
             {

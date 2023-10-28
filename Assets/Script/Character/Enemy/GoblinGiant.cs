@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class GoblinGiant : IEnemy
+public class GoblinGiant : IEmployeeEnemy
 {
     public GoblinGiant(GameObject obj) : base(obj) { }
     protected override void OnCharacterStart()

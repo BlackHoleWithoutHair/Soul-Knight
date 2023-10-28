@@ -144,9 +144,9 @@ namespace MiddleScene
             });
             ButtonUpgrade.onClick.AddListener(() =>
             {
-                if (ArchiveCommand.Instance.GetMaterialNum(MaterialType.Gem)>= int.Parse(TextSpend.text))
+                if (ArchiveCommand.Instance.GetMaterialNum(MaterialType.Gem) >= int.Parse(TextSpend.text))
                 {
-                    ArchiveCommand.Instance.SpendMaterial(MaterialType.Gem,int.Parse(TextSpend.text));
+                    ArchiveCommand.Instance.SpendMaterial(MaterialType.Gem, int.Parse(TextSpend.text));
                     m_Attr.CurrentLv += 1;
                     ModelContainer.Instance.GetModel<ArchiveModel>().SaveGameData();
                 }

@@ -12,6 +12,7 @@ public abstract class CharacterAttribute
     public CharacterAttribute(CharacterShareAttr attr)
     {
         m_Attr = attr;
+        m_ShareAttr = new CharacterAttrStrategy(this);
     }
     public CharacterShareAttr GetShareAttr()
     {

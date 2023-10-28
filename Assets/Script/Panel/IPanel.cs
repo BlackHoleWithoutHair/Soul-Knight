@@ -92,7 +92,7 @@ public abstract class IPanel
     protected virtual void EnterPanel(Type type)
     {
         List<IPanel> panels = children.Where(x => x.GetType() == type).ToList();
-        if (panels.Count==1)
+        if (panels.Count == 1)
         {
             panels[0].gameObject.SetActive(true);
             panels[0].OnResume();
@@ -103,6 +103,10 @@ public abstract class IPanel
         {
             Debug.Log("存在多个相同类型的Panel，这是不允许的");
         }
+    }
+    protected T GetPanel<T>() where T : IPanel
+    {
+        return children.Where(p => p is T).ToArray()[0] as T;
     }
 }
 

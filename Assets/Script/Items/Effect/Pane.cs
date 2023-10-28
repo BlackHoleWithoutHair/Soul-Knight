@@ -11,16 +11,16 @@ public class Pane : Item
     {
         m_Animator = gameObject.GetComponent<Animator>();
         m_AppearLightAnim = gameObject.transform.Find("AppearLight").GetComponent<Animator>();
-    }   
+    }
     protected override void Init()
     {
         base.Init();
         gameObject.transform.position = position;
         Timer = 0;
     }
-    public override void GameUpdate()
+    protected override void OnUpdate()
     {
-        base.GameUpdate();
+        base.OnUpdate();
         Timer += Time.deltaTime;
         info = m_Animator.GetCurrentAnimatorStateInfo(0);
         LightInfo = m_AppearLightAnim.GetCurrentAnimatorStateInfo(0);

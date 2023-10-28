@@ -4882,8 +4882,7 @@ GameObject:
   - component: {fileID: 5653226540802952306}
   - component: {fileID: 2558652460077399050}
   - component: {fileID: 9121341324036284424}
-  - component: {fileID: 3387806647037303119}
-  - component: {fileID: 8197803792299169959}
+  - component: {fileID: 4806510092570108509}
   m_Layer: 0
   m_Name: EnemyRedArrow
   m_TagString: Untagged
@@ -5007,19 +5006,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.375, y: 0.3125}
   m_EdgeRadius: 0
---- !u!114 &3387806647037303119
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2861900960055977463}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b56600d8ecb5ff4da80a4f0f1f44350, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &8197803792299169959
+--- !u!114 &4806510092570108509
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

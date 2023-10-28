@@ -1,7 +1,7 @@
-﻿using UnityEngine;
-using UnityEditor;
-using System;
+﻿using System;
 using System.IO;
+using UnityEditor;
+using UnityEngine;
 
 namespace litefeel
 {
@@ -45,7 +45,7 @@ namespace litefeel
             string rootPath = Path.GetDirectoryName(fntPatn);
             string fontPath = string.Format("{0}/{1}.fontsettings", rootPath, fntName);
             Texture2D[] textures = DoImportTextures(parse, rootPath, fnt);
-            
+
             Font font = AssetDatabase.LoadMainAssetAtPath(fontPath) as Font;
             if (font == null)
             {
@@ -63,7 +63,7 @@ namespace litefeel
                 // unity 5.4+ cannot refresh it immediately, must import it
                 AssetDatabase.ImportAsset(fontPath);
             }
-            
+
             font.material = material;
             material.shader = Shader.Find(textures.Length > 1 ? "BFI/Font" + textures.Length : "UI/Default");
             material.mainTexture = textures[0];
@@ -84,7 +84,7 @@ namespace litefeel
             UpdateKernings(so, parse.kernings);
             so.ApplyModifiedProperties();
             so.SetIsDifferentCacheDirty();
-            
+
             AssetDatabase.SaveAssets();
 
 #if UNITY_5_5_OR_NEWER
@@ -118,7 +118,7 @@ namespace litefeel
             }
             return textures;
         }
-        
+
         private static void UpdateKernings(SerializedObject so, Kerning[] kernings)
         {
             int len = kernings != null ? kernings.Length : 0;
@@ -151,7 +151,7 @@ namespace litefeel
                 kerningsProp.DeleteArrayElementAtIndex(i);
             }
         }
-        
+
         private static void DelBitmapFont(string fntPath)
         {
             if (!IsFnt(fntPath)) return;
@@ -176,7 +176,7 @@ namespace litefeel
             var tmpPath = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
             AssetDatabase.ExportPackage(fontPath, tmpPath);
             AssetDatabase.DeleteAsset(fontPath);
-            
+
             var startTime = DateTime.Now;
             EditorApplication.CallbackFunction func = null;
             func = () =>

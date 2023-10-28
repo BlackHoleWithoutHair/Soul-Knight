@@ -48,10 +48,6 @@ public class KnightWalkState : PlayerState
             m_Controller.SetOtherState(typeof(KnightDieState));
             return;
         }
-        if (InputUtility.Instance.GetKeyDown(KeyAction.Skill))
-        {
-            player.Skill.StartSkill();
-        }
     }
     protected override void StateEnd()
     {

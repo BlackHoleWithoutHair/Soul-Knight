@@ -17,6 +17,7 @@ namespace BattleScene
         public bool isFinishGenerate => m_isFinishGenerate;
         void Start()
         {
+            Time.timeScale = 1;
             m_Generator = GameObject.Find("Generator").GetComponent<DungeonGeneratorGrid2D>();
             finder = GameObject.Find("AStarPath").GetComponent<AstarPath>();
             m_isFinishGenerate = false;

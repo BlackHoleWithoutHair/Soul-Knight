@@ -8,7 +8,8 @@ public abstract class ICharacter
     protected Animator m_Animator;
     protected Rigidbody2D m_rb;
     public bool IsDie { get; protected set; }
-    public bool ShouldBeRemove { get; protected set; }
+    public bool isShouldRemove;
+    public bool isAlreadyRemove { get; private set; }
     protected bool m_isLeft;
     public bool isLeft
     {
@@ -61,19 +62,18 @@ public abstract class ICharacter
     }
     public virtual void GameUpdate()
     {
-        if(!isInit)
+        if (!isInit)
         {
             isInit = true;
             OnInit();
         }
-        if (m_Attr.CurrentHp <= 0 && IsDie == false)
-        {
-            IsDie = true;
-            OnCharacterDieStart();
-        }
         if (IsDie == true)
         {
             OnCharaterDieUpdate();
+            if (isShouldRemove && !isAlreadyRemove)
+            {
+                isAlreadyRemove = true;
+            }
         }
         else
         {
@@ -93,9 +93,9 @@ public abstract class ICharacter
                     isSuspend = false;
                     OnCharacterSuspendExit();
                 }
-                if(!m_Attr.isRun)
+                if (!m_Attr.isRun)
                 {
-                    if(!isStopRun)
+                    if (!isStopRun)
                     {
                         isStopRun = true;
                         OnCharacterStopRunEnter();
@@ -104,7 +104,7 @@ public abstract class ICharacter
                 }
                 else
                 {
-                    if(isStopRun)
+                    if (isStopRun)
                     {
                         isStopRun = false;
                         OnCharacterStopExit();
@@ -126,12 +126,17 @@ public abstract class ICharacter
             return;
         }
     }
-    protected virtual void OnCharacterUpdate() 
+    protected virtual void OnCharacterUpdate()
     {
-        if(!isStart)
+        if (!isStart)
         {
             isStart = true;
             OnCharacterStart();
+        }
+        if (m_Attr.CurrentHp <= 0 && !IsDie)
+        {
+            IsDie = true;
+            OnCharacterDieStart();
         }
     }
     protected virtual void OnCharacterSuspendEnter()
@@ -140,7 +145,10 @@ public abstract class ICharacter
     }
     protected virtual void OnCharacterSuspendUpdate()
     {
-        m_rb.velocity = Vector2.zero;
+        if (m_rb != null)
+        {
+            m_rb.velocity = Vector2.zero;
+        }
     }
     protected virtual void OnCharacterSuspendExit()
     {
@@ -154,6 +162,10 @@ public abstract class ICharacter
     protected virtual void OnCharacterStopExit() { }
     protected virtual void OnCharacterDieStart() { }
     protected virtual void OnCharaterDieUpdate() { }
+    protected void Remove()
+    {
+        isShouldRemove = true;
+    }
     public virtual void UnderAttack(int damage)
     {
         m_Attr.CurrentHp -= damage;
@@ -162,9 +174,9 @@ public abstract class ICharacter
     {
         PlayerPopupNum pop = EffectFactory.Instance.GetEffect(EffectType.PlayerPopupNum, gameObject.transform.position) as PlayerPopupNum;
         pop.SetColor(UnityTool.Instance.GetBulletColor(BulletColorType.Red));
-        pop.SetText("+"+num);
+        pop.SetText("+" + num);
         pop.AddToController();
-        if(m_Attr.CurrentHp<m_Attr.m_ShareAttr.MaxHp)
+        if (m_Attr.CurrentHp < m_Attr.m_ShareAttr.MaxHp)
         {
             m_Attr.CurrentHp += num;
         }

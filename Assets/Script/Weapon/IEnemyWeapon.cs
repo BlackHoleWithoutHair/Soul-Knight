@@ -11,7 +11,7 @@ public class IEnemyWeapon : IWeapon
     {
         return RotOrigin.transform.rotation;
     }
-    protected virtual void OnBeforeFireStart() { }
+    protected virtual void OnBeforeFireStart() { }//需要前置动作时重写，如弓的蓄力瞄准
     protected virtual void OnBeforeFireUpdate()
     {
         if (!isBeforeFireStart)
@@ -22,6 +22,7 @@ public class IEnemyWeapon : IWeapon
     }
     protected override void OnFire()
     {
+        base.OnFire();
         isBeforeFireStartUpdate = false;
         isBeforeFireStart = false;
         isFire = false;

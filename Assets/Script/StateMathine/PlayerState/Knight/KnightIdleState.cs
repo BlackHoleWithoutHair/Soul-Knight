@@ -2,14 +2,7 @@ using UnityEngine;
 
 public class KnightIdleState : PlayerState
 {
-    public KnightIdleState(PlayerStateController controller) : base(controller)
-    {
-
-    }
-    protected override void StateStart()
-    {
-        base.StateStart();
-    }
+    public KnightIdleState(PlayerStateController controller) : base(controller) { }
     protected override void StateUpdate()
     {
         base.StateUpdate();
@@ -24,10 +17,6 @@ public class KnightIdleState : PlayerState
         {
             m_Controller.SetOtherState(typeof(KnightDieState));
             return;
-        }
-        if (InputUtility.Instance.GetKeyDown(KeyAction.Skill))
-        {
-            player.Skill.StartSkill();
         }
     }
     protected override void StateEnd()

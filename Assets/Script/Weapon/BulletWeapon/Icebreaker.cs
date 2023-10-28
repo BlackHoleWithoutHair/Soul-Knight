@@ -4,7 +4,7 @@ public class Icebreaker : IPlayerLaserWeapon
 {
     public Icebreaker(GameObject obj, ICharacter character) : base(obj, character)
     {
-        m_Attr = AttributeFactory.Instance.GetPlayerWeaponAttr(PlayerWeaponType.Icebreaker);
+        m_Attr = WeaponCommand.Instance.GetPlayerWeaponShareAttr(PlayerWeaponType.Icebreaker);
     }
     protected override void OnFire()
     {

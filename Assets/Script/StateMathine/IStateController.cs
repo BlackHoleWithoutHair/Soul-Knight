@@ -14,37 +14,6 @@ public abstract class IStateController
         stateDic = new Dictionary<string, IState>();
         StateList = new List<IState>();
     }
-    public virtual void SetOtherState(string name)
-    {
-        if (!isStateChange)
-        {
-            if (!stateDic.ContainsKey(name))
-            {
-                Type type = Type.GetType(name);
-                if (type == null)
-                {
-                    Debug.Log("IStateController 无法将" + name + "转换为type");
-                    return;
-                }
-                IState state = (IState)Activator.CreateInstance(type, this);
-                stateDic.Add(name, state);
-            }
-            if (m_State != null)
-            {
-                m_State.OnExit();
-            }
-            if (stateDic[name] != GetLast(StateList))
-            {
-                m_State = stateDic[name];
-                StateList.Add(m_State);
-            }
-            if (StateList.Count == 3)
-            {
-                StateList.RemoveAt(0);
-            }
-        }
-        isStateChange = true;
-    }
     public virtual void SetOtherState(Type type)
     {
         if (!isStateChange)

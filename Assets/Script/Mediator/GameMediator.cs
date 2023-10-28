@@ -13,11 +13,12 @@
         }
     }
     public bool isFinishSelecctPlayer { get; private set; }
-    protected GameMediator() 
+    protected GameMediator()
     {
         EventCenter.Instance.RegisterObserver(EventType.OnSceneChangeComplete, () =>
         {
             controllers.Clear();
+            systems.Clear();
         });
         EventCenter.Instance.RegisterObserver(EventType.OnFinishSelectPlayer, () =>
         {

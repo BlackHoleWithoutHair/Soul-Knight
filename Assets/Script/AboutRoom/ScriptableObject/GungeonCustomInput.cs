@@ -1,7 +1,6 @@
 using Edgar.Unity;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEditor.UI;
 using UnityEngine;
 [CreateAssetMenu(fileName = "GungeonCustomInput", menuName = "ScriptableObjects/GungeonCustomInput")]
 public class GungeonCustomInput : DungeonGeneratorInputBaseGrid2D
@@ -18,7 +17,7 @@ public class GungeonCustomInput : DungeonGeneratorInputBaseGrid2D
     {
         AllRooms = new List<RoomInfo>();
         var levelDescription = new LevelDescriptionGrid2D();
-        if(MemoryModelCommand.Instance.GetSmallStage()==5)
+        if (MemoryModelCommand.Instance.GetSmallStage() == 5)
         {
             selectLevelGraph = roomConfig.LevelGraphBoss;
         }

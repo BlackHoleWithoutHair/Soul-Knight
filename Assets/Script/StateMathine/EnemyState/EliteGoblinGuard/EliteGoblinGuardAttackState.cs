@@ -33,7 +33,7 @@ public class EliteGoblinGuardAttackState : EnemyState
                     RoamingTimer = 0;
                     m_State = EnemyCondition.Attack;
                 }
-                if(isReachTarget)
+                if (isReachTarget)
                 {
                     TargetPos = GetRamdomPositionAroundEnemy(5);
                 }

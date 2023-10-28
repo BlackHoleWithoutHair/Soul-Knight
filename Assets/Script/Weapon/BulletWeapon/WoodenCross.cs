@@ -6,13 +6,13 @@ public class WoodenCross : IPlayerUnAccumulateWeapon
     private Animator m_Animator;
     public WoodenCross(GameObject obj, ICharacter characeter) : base(obj, characeter)
     {
-        m_Attr = AttributeFactory.Instance.GetPlayerWeaponAttr(PlayerWeaponType.WoodenCross);
+        m_Attr = WeaponCommand.Instance.GetPlayerWeaponShareAttr(PlayerWeaponType.WoodenCross);
         CanBeRotated = false;
     }
     protected override void OnInit()
     {
         base.OnInit();
-        m_Animator = m_GameObject.GetComponent<Animator>();
+        m_Animator = gameObject.GetComponent<Animator>();
         RotOrigin.transform.Find(m_Attr.Type.ToString()).rotation = Quaternion.Euler(0, 0, 90);
     }
     protected override void OnFire()
@@ -27,7 +27,7 @@ public class WoodenCross : IPlayerUnAccumulateWeapon
         yield return new WaitForSeconds(0.17f);
         for (int i = 0; i < 2; i++)
         {
-            ItemPool.Instance.GetPlayerBullet(PlayerBulletType.Beam, m_Attr, Vector2.zero, Quaternion.identity).AddToController();
+            CreateBullet(PlayerBulletType.Beam, m_Attr).AddToController();
         }
     }
 }

@@ -10,6 +10,7 @@ public class ModelContainer : Singleton<ModelContainer>
         models.Add(new PlayerInputModel());
         models.Add(new ArchiveModel());
         models.Add(new PlantModel());
+        models.Add(new WeaponModel());
 
         models.Add(new PlayerModel());
         models.Add(new EnemyModel());

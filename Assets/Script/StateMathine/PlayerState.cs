@@ -51,7 +51,7 @@ public class PlayerState : IState
 
         Vector2 updateDeltaPosition = Vector2.zero;
 
-        float distance = velocity.magnitude*Time.deltaTime;
+        float distance = velocity.magnitude * Time.deltaTime;
         Vector2 direction = velocity.normalized;
 
         m_Collider.Cast(direction, contactFilter2D, raycastHit2DList, distance);

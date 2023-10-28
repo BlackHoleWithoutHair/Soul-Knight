@@ -36,6 +36,8 @@ public class SkillFactory
             case SkillType.FireOnAllCylinders:
                 skill = new FireOnAllCylinders(character);
                 break;
+            case SkillType.FullScaleAttack:
+                
             case SkillType.RecoveryMagicalCircle:
                 skill = new RecoveryMagicalCircle(character);
                 break;

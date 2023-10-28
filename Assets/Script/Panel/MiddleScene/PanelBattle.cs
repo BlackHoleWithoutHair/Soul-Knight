@@ -1,4 +1,5 @@
 using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
 namespace MiddleScene
 {
@@ -21,6 +22,7 @@ namespace MiddleScene
             children.Add(new PanelSeed(this));
             children.Add(new PanelUnlockGarden(this));
             children.Add(new PanelLuckyCat(this));
+            children.Add(new PanelBackpack(this));
 
             EventCenter.Instance.RegisterObserver(EventType.OnWantUseSafeBox, () =>
             {
@@ -73,6 +75,10 @@ namespace MiddleScene
             TextMp.text = GetPlayer().m_Attr.CurrentMp + "/" + GetPlayer().m_Attr.m_ShareAttr.Magic;
             TextArmor.text = GetPlayer().m_Attr.CurrentArmor + "/" + GetPlayer().m_Attr.m_ShareAttr.Armor;
             TextGem.text = ArchiveCommand.Instance.GetMaterialNum(MaterialType.Gem).ToString();
+            if(Input.GetKeyDown(KeyCode.B))
+            {
+                EnterPanel(typeof(PanelBackpack));
+            }
         }
         private IPlayer GetPlayer()
         {

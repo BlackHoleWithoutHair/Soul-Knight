@@ -26,7 +26,6 @@ public class ClientManager : BaseManager
         message = new Message();
         InitSocket();
         InitUDP();
-        BeginReceive();
     }
 
     public override void OnDestroy()
@@ -40,11 +39,21 @@ public class ClientManager : BaseManager
         socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
         try
         {
-            socket.Connect("127.0.0.1", 9999);
+            IPEndPoint ep = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 9999);
+            IAsyncResult connResult = socket.BeginConnect(ep, null, null);
+            connResult.AsyncWaitHandle.WaitOne(2);
+            if (connResult.IsCompleted)
+            {
+                BeginReceive();
+            }
+            else
+            {
+                UnityEngine.Debug.Log("连接TCP服务器超时");
+            }
         }
         catch
         {
-            UnityEngine.Debug.Log("连接服务器失败");
+            UnityEngine.Debug.Log("连接TCP服务器失败");
         }
 
     }
@@ -77,7 +86,7 @@ public class ClientManager : BaseManager
         }
         catch
         {
-            Debug.Log("服务器连接失败");
+            Debug.Log("TCP服务器连接失败");
             return;
         }
 
@@ -91,14 +100,22 @@ public class ClientManager : BaseManager
         endPoint = ipEndPoint;
         try
         {
-            udpClient.Connect(endPoint);
+            IAsyncResult udpResult = udpClient.BeginConnect(endPoint, null, null);
+            udpResult.AsyncWaitHandle.WaitOne(2);
+            if (udpResult.IsCompleted)
+            {
+                aucThread = new Thread(ReceiveMsg);
+                aucThread.Start();
+            }
+            else
+            {
+                UnityEngine.Debug.Log("UDP服务器连接超时");
+            }
         }
         catch
         {
             Debug.Log("UDP连接失败");
         }
-        aucThread = new Thread(ReceiveMsg);
-        aucThread.Start();
     }
     private void ReceiveMsg()
     {

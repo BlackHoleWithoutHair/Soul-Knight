@@ -4,11 +4,13 @@ public class AK47 : IPlayerUnAccumulateWeapon
 {
     public AK47(GameObject obj, ICharacter character) : base(obj, character)
     {
-        m_Attr = AttributeFactory.Instance.GetPlayerWeaponAttr(PlayerWeaponType.AK47);
+        m_Attr = WeaponCommand.Instance.GetPlayerWeaponShareAttr(PlayerWeaponType.AK47);
     }
     protected override void OnFire()
     {
         base.OnFire();
-        ItemPool.Instance.GetPlayerBullet(PlayerBulletType.Bullet_1, m_Attr, FirePoint.transform.position, GetShotRot()).AddToController();
+        ShowFireSpark(BulletColorType.Yellow);
+        PlayRecoilAnim();
+        CreateBullet(PlayerBulletType.Bullet_1, m_Attr).AddToController();
     }
 }

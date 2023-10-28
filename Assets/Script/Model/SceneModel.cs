@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine.SceneManagement;
+﻿using UnityEngine.SceneManagement;
 
 public class SceneModel : AbstractModel
 {

@@ -1,4 +1,4 @@
-﻿public class PetStateController:IStateController
+﻿public class PetStateController : IStateController
 {
     protected IPlayerPet m_Pet;
     public ICharacter target;

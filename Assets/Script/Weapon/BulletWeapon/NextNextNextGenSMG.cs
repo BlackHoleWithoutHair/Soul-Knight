@@ -7,18 +7,9 @@ public class NextNextNextGenSMG : IPlayerUnAccumulateWeapon
     private float BurstInterval;
     public NextNextNextGenSMG(GameObject obj, ICharacter character) : base(obj, character)
     {
-        m_Attr = AttributeFactory.Instance.GetPlayerWeaponAttr(PlayerWeaponType.NextNextNextGenSMG);
+        m_Attr = WeaponCommand.Instance.GetPlayerWeaponShareAttr(PlayerWeaponType.NextNextNextGenSMG);
         BurstTimes = 4;
         BurstInterval = 0.075f;
-    }
-    protected override void OnEnter()
-    {
-        base.OnEnter();
-
-    }
-    public override void OnUpdate()
-    {
-        base.OnUpdate();
     }
     protected override void OnFire()
     {
@@ -30,8 +21,8 @@ public class NextNextNextGenSMG : IPlayerUnAccumulateWeapon
         while (BurstTimes > 0)
         {
             BurstTimes--;
-            ItemPool.Instance.GetPlayerBullet(PlayerBulletType.Bullet_2, m_Attr, FirePoint.transform.position + Vector3.up * 0.25f, GetShotRot()).AddToController();
-            ItemPool.Instance.GetPlayerBullet(PlayerBulletType.Bullet_2, m_Attr, FirePoint.transform.position - Vector3.up * 0.25f, GetShotRot()).AddToController();
+            CreateBullet(PlayerBulletType.Bullet_2, m_Attr, FirePoint.transform.position + Vector3.up * 0.25f).AddToController();
+            CreateBullet(PlayerBulletType.Bullet_2, m_Attr, FirePoint.transform.position - Vector3.up * 0.25f).AddToController();
             yield return new WaitForSeconds(BurstInterval);
         }
         BurstTimes = 4;

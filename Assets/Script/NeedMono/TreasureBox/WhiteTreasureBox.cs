@@ -18,22 +18,18 @@ public class WhiteTreasureBox : ITreasureBox
             if (isPlayerEnter && !isCreateItem)
             {
                 isCreateItem = true;
+                m_Animator.enabled = true;
+            }
+            info = m_Animator.GetCurrentAnimatorStateInfo(0);
+            if (info.normalizedTime > 1 && !isFinish)
+            {
+                isFinish = true;
                 for (int i = 0; i < 2; i++)
                 {
                     ItemFactory.Instance.GetItem(ItemType.EnergyBall, (Vector2)ballPoint.transform.position + Random.insideUnitCircle).AddToController();
                 }
                 ItemFactory.Instance.GetCoin(CoinType.Coppers, (Vector2)ballPoint.transform.position + Random.insideUnitCircle * 2).AddToController();
-                m_Animator.enabled = true;
-            }
-            info = m_Animator.GetCurrentAnimatorStateInfo(0);
-            if (info.normalizedTime > 1)
-            {
-                isFinish = true;
             }
         }
-    }
-    protected override void OnFinishOpen()
-    {
-        base.OnFinishOpen();
     }
 }

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Boar : IEnemy
+public class Boar : IEmployeeEnemy
 {
     public Boar(GameObject obj) : base(obj) { }
     protected override void OnCharacterStart()

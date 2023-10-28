@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class TrumpetFlower : IEnemy
+public class TrumpetFlower : IEmployeeEnemy
 {
     public TrumpetFlower(GameObject obj) : base(obj) { }
     protected override void OnCharacterStart()

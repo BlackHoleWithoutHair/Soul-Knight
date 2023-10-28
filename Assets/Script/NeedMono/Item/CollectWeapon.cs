@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class CollectWeapon : MonoBehaviour
 {
-    public PlayerWeaponType type;
     private IPlayer player;
     private Collider2D collision;
     private GameObject NameObj;
@@ -15,7 +14,7 @@ public class CollectWeapon : MonoBehaviour
         {
             NameObj = transform.Find("WeaponName").gameObject;
             text = NameObj.transform.Find("Text").GetComponent<TextMeshProUGUI>();
-            text.text = LanguageCommand.Instance.GetTranslation(type.ToString());
+            text.text = LanguageCommand.Instance.GetTranslation(name);
         }
     }
     private void Update()
@@ -25,7 +24,7 @@ public class CollectWeapon : MonoBehaviour
             if (InputUtility.Instance.GetKeyDown(KeyAction.Use))
             {
                 player = collision.GetComponent<Symbol>().GetCharacter() as IPlayer;
-                player.AddWeapon(type);
+                player.AddWeapon(System.Enum.Parse<PlayerWeaponType>(name));
                 Destroy(gameObject);
             }
             NameObj?.SetActive(true);
@@ -50,10 +49,6 @@ public class CollectWeapon : MonoBehaviour
         {
             isEnter = false;
         }
-    }
-    public void SetWeaponType(PlayerWeaponType type)
-    {
-        this.type = type;
     }
     public void SetWeaponBoxColliderInfo(Vector2 size, Vector2 offect)
     {

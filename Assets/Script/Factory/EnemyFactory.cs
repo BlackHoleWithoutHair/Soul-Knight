@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.ComponentModel;
 using UnityEngine;
 
 public class EnemyDistribution
@@ -26,7 +25,7 @@ public class EnemyFactory
     {
         UnityTool.Instance.WriteEnemyDistributionFromTextAssetToList(distributions, ProxyResourceFactory.Instance.Factory.GetExcelTextAsset("ForestEnemyDistribution"));
     }
-    public IEnemy GetEnemy(EnemyType type,bool isElite)
+    public IEnemy GetEnemy(EnemyType type, bool isElite)
     {
         GameObject obj = Object.Instantiate(ProxyResourceFactory.Instance.Factory.GetEnemy(type));
         Transform parent = obj.transform.Find("GunOriginPoint");
@@ -89,11 +88,11 @@ public class EnemyFactory
                 break;
 
         }
-        if(weaponType!=EnemyWeaponType.None)
+        if (weaponType != EnemyWeaponType.None)
         {
             enemy.AddWeapon(WeaponFactory.Instance.GetEnemyWeapon(weaponType, enemy));
         }
-        (enemy as ICharacter).m_Attr = AttributeFactory.Instance.GetEnemyAttr(type, isElite, weaponType);
+        enemy.m_Attr = AttributeFactory.Instance.GetEnemyAttr(type, isElite, weaponType);
         obj.GetComponent<Symbol>().SetCharacter(enemy);
         if (enemy == null)
         {
@@ -105,19 +104,20 @@ public class EnemyFactory
     {
         GameObject obj = Object.Instantiate(ProxyResourceFactory.Instance.Factory.GetBoss(type));
         IBoss boss = null;
-        switch(type)
+        switch (type)
         {
             case BossType.DevilSnare:
-                boss=new DevilSnare(obj); 
+                boss = new DevilSnare(obj);
                 break;
         }
+        obj.GetComponent<Symbol>().SetCharacter(boss);
         return boss;
     }
     public IEnemy GetRandomEnemy()
     {
         int smallStage = MemoryModelCommand.Instance.GetSmallStage();
         bool isElite = Random.Range(0, 10) == 0 ? true : false;
-        while(true)
+        while (true)
         {
             foreach (EnemyDistribution distribution in distributions)
             {

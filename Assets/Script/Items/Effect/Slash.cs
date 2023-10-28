@@ -13,9 +13,9 @@ public class Slash : Item
     {
         base.Init();
     }
-    public override void GameUpdate()
+    protected override void OnUpdate()
     {
-        base.GameUpdate();
+        base.OnUpdate();
         info = m_Animator.GetCurrentAnimatorStateInfo(0);
         if (info.normalizedTime > 1)
         {

@@ -1,6 +1,6 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
-using System;
 
 public class IPlant
 {
@@ -34,7 +34,7 @@ public class IPlant
             yield return new WaitForSeconds(1);
             if (m_PlantInfo.WetTime.GetTotleSeconds() > 0)
             {
-                m_PlantInfo.GrowTime.AddSecond(1*43200);
+                m_PlantInfo.GrowTime.AddSecond(1 * 43200);
                 m_PlantInfo.WetTime.SubSecond(1);
                 PlantState = PlantState.Great;
             }
@@ -42,7 +42,7 @@ public class IPlant
             {
                 PlantState = PlantState.NeedWater;
             }
-            if(PlantState!=PlantState.Ripening)
+            if (PlantState != PlantState.Ripening)
             {
                 int tmpState = 0;
                 for (int i = 0; i < PlantCommand.Instance.GetStateNum(m_PlantInfo.SeedType); i++)
@@ -79,7 +79,7 @@ public class IPlant
         switch (attr.HarvestType)
         {
             case HarvestType.Material:
-                ArchiveCommand.Instance.AddMaterial(Enum.Parse<MaterialType>(attr.HarvestName),attr.HarvestNum);
+                ArchiveCommand.Instance.AddMaterial(Enum.Parse<MaterialType>(attr.HarvestName), attr.HarvestNum);
                 break;
             case HarvestType.Weapon:
                 break;

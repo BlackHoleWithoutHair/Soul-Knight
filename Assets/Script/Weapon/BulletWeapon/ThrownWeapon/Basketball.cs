@@ -5,10 +5,10 @@ public class Basketball : IPlayerUnAccumulateWeapon
 {
     public Basketball(GameObject obj, ICharacter player) : base(obj, player)
     {
-        m_Attr = AttributeFactory.Instance.GetPlayerWeaponAttr(PlayerWeaponType.Basketball);
+        m_Attr = WeaponCommand.Instance.GetPlayerWeaponShareAttr(PlayerWeaponType.Basketball);
         CanBeRotated = false;
-        m_GameObject.transform.GetChild(0).localScale = new Vector3(0.8f, 0.8f, 1f);
-        m_GameObject.GetComponent<Animator>().enabled = true;
+        gameObject.transform.GetChild(0).localScale = new Vector3(0.8f, 0.8f, 1f);
+        gameObject.GetComponent<Animator>().enabled = true;
     }
 
     protected override void OnFire()
@@ -19,9 +19,9 @@ public class Basketball : IPlayerUnAccumulateWeapon
     }
     private IEnumerator HideWeapon()
     {
-        m_GameObject.SetActive(false);
+        gameObject.SetActive(false);
         yield return new WaitForSeconds(1f / m_Attr.FireRate - 0.1f);
-        m_GameObject.SetActive(true);
+        gameObject.SetActive(true);
     }
     //protected override Vector2 GetShotDirection()
     //{

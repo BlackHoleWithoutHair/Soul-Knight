@@ -6,6 +6,7 @@ namespace MainMenuScene
         private GameFacade mediator;
         void Start()
         {
+            Time.timeScale = 1;
             mediator = new GameFacade();
         }
 

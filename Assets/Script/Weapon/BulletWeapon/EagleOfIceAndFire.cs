@@ -6,16 +6,8 @@ public class EagleOfIceAndFire : IPlayerUnAccumulateWeapon
     private float BurstInterval;
     public EagleOfIceAndFire(GameObject obj, ICharacter character) : base(obj, character)
     {
-        m_Attr = AttributeFactory.Instance.GetPlayerWeaponAttr(PlayerWeaponType.EagleOfIceAndFire);
+        m_Attr = WeaponCommand.Instance.GetPlayerWeaponShareAttr(PlayerWeaponType.EagleOfIceAndFire);
         BurstInterval = 0.15f;
-    }
-    protected override void OnEnter()
-    {
-        base.OnEnter();
-    }
-    public override void OnUpdate()
-    {
-        base.OnUpdate();
     }
     protected override void OnFire()
     {
@@ -24,18 +16,22 @@ public class EagleOfIceAndFire : IPlayerUnAccumulateWeapon
     }
     private IEnumerator BurstMode()
     {
-        IBullet bullet = null;
+        IPlayerBullet bullet = null;
         PlayerWeaponShareAttribute attr = UnityTool.Instance.DeepCopyByReflection(m_Attr);
-        bullet = ItemPool.Instance.GetPlayerBullet(PlayerBulletType.Bullet_8, attr, FirePoint.transform.position, GetShotRot());
-        bullet.m_Attr.DebuffType = BuffType.Freeze;
-        bullet.SetColor(new Color(0, 255, 255));
+        attr.DebuffType = BuffType.Freeze;
+        CreateBullet(PlayerBulletType.Bullet_8, attr);
+        bullet.SetColor(BulletColorType.Blue);
         bullet.AddToController();
+        ShowFireSpark(BulletColorType.Blue);
+        PlayRecoilAnim();
         yield return new WaitForSeconds(BurstInterval);
         attr = UnityTool.Instance.DeepCopyByReflection(m_Attr);
-        bullet = ItemPool.Instance.GetPlayerBullet(PlayerBulletType.Bullet_8, attr, FirePoint.transform.position, GetShotRot());
-        bullet.m_Attr.DebuffType = BuffType.Burn;
-        bullet.SetColor(new Color(204f / 255f, 34f / 255f, 34f / 255f));
+        attr.DebuffType = BuffType.Burn;
+        CreateBullet(PlayerBulletType.Bullet_8, attr);
+        bullet.SetColor(BulletColorType.Red);
         bullet.AddToController();
+        ShowFireSpark(BulletColorType.Red);
+        PlayRecoilAnim();
         yield return new WaitForSeconds(BurstInterval);
     }
 }

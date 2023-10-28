@@ -25,7 +25,7 @@
     }
     public int GetBigStage()
     {
-        return (model.Stage-1)/5 + 1;
+        return (model.Stage - 1) / 5 + 1;
     }
     public int GetSmallStage()
     {

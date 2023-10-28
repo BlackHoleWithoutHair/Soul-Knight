@@ -27,7 +27,7 @@ public class AssassinIdleState : PlayerState
         }
         if (InputUtility.Instance.GetKeyDown(KeyAction.Skill))
         {
-            player.Skill.StartSkill();
+            player.m_Skill.StartSkill();
         }
     }
     protected override void StateEnd()

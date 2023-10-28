@@ -2,15 +2,18 @@ using UnityEngine;
 
 public class Bullet_7 : IPlayerBullet
 {
-    public Bullet_7(GameObject obj, PlayerWeaponShareAttribute attr) : base(obj, attr)
+    public Bullet_7(GameObject obj) : base(obj)
     {
         type = PlayerBulletType.Bullet_7;
     }
-    protected override void AfterHitWallStart()
+    protected override void OnHitWall()
     {
-        base.AfterHitWallStart();
-        IEffectBoom boom = EffectFactory.Instance.GetEffectBoom(EffectBoomType.EffectBoom_1, gameObject.transform.position);
-        boom.SetColor(new Color(0.4f, 0f, 0.06f));
-        boom.AddToController();
+        base.OnHitWall();
+        CreateBoomEffect(EffectBoomType.EffectBoom_1, BulletColorType.Red);
+    }
+    protected override void OnHitCharacter()
+    {
+        base.OnHitCharacter();
+        CreateBoomEffect(EffectBoomType.EffectBoom_1, BulletColorType.Red);
     }
 }

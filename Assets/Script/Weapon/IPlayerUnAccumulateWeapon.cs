@@ -2,10 +2,7 @@ using UnityEngine;
 
 public class IPlayerUnAccumulateWeapon : IPlayerWeapon
 {
-    public IPlayerUnAccumulateWeapon(GameObject obj, ICharacter character) : base(obj, character)
-    {
-
-    }
+    public IPlayerUnAccumulateWeapon(GameObject obj, ICharacter character) : base(obj, character) { }
     protected override void OnEnter()
     {
         base.OnEnter();

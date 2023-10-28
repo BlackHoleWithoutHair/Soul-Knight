@@ -14,6 +14,7 @@ public enum BuffStackType
 }
 public enum BulletColorType
 {
+    White,
     Red,
     Orange,
     Yellow,
@@ -21,6 +22,7 @@ public enum BulletColorType
     Cyan,
     Blue,
     Purple,
+    Magenta,
 }
 public enum CameraType
 {
@@ -119,6 +121,7 @@ public enum EnemyBulletType
     EnemyBullet3,
     EnemyBullet4,
     EnemyBullet5,
+    EnemyBullet6,
     EnemyRedArrow,
 }
 public enum LaserType
@@ -134,6 +137,7 @@ public enum EffectType
     AppearLight,
     RecoveryMagicCircle,
     PlayerPopupNum,
+    Spark,
 }
 public enum EffectBoomType
 {

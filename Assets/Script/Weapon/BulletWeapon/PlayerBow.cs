@@ -8,8 +8,8 @@ public class PlayerBow : IPlayerAccumulateWeapon
 
     public PlayerBow(GameObject obj, ICharacter player) : base(obj, player)
     {
-        m_Attr = AttributeFactory.Instance.GetPlayerWeaponAttr(PlayerWeaponType.Bow);
-        firstSprite = UnityTool.Instance.GetComponentFromChild<SpriteRenderer>(m_GameObject, m_Attr.Type.ToString());
+        m_Attr = WeaponCommand.Instance.GetPlayerWeaponShareAttr(PlayerWeaponType.Bow);
+        firstSprite = UnityTool.Instance.GetComponentFromChild<SpriteRenderer>(gameObject, m_Attr.Type.ToString());
         nextSprite = firstSprite.transform.GetChild(0).GetComponent<SpriteRenderer>();
         firstSprite.transform.localRotation = Quaternion.Euler(0, 0, 0);
         CanBeRotated = false;
@@ -22,7 +22,7 @@ public class PlayerBow : IPlayerAccumulateWeapon
         firstSprite.enabled = false;
         nextSprite.enabled = true;
         firstSprite.transform.localRotation = Quaternion.Euler(0, 0, 45);
-        arrow = ItemPool.Instance.GetPlayerBullet(PlayerBulletType.Arrow_1, m_Attr, FirePoint.transform.position, GetShotRot());
+        arrow = CreateBullet(PlayerBulletType.Arrow_1, m_Attr);
         arrow.gameObject.transform.SetParent(FirePoint.transform);
         arrow.gameObject.transform.localPosition = Vector3.zero;
         arrow.gameObject.transform.localRotation = Quaternion.identity;

@@ -1,8 +1,8 @@
-﻿using UnityEngine;
-using System.Xml;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using System.Xml;
+using UnityEngine;
 
 namespace litefeel
 {
@@ -76,7 +76,7 @@ namespace litefeel
             for (int i = 0; i < chars.Count; i++)
             {
                 XmlNode charNode = chars[i];
-                charInfos[i] =  CreateCharInfo(
+                charInfos[i] = CreateCharInfo(
                     ToInt(charNode, "id"),
                     ToInt(charNode, "x"),
                     ToInt(charNode, "y"),
@@ -130,7 +130,7 @@ namespace litefeel
             {
                 ReadTextPage(ref lines[j + 2]);
             }
-            
+
             // don't use count of chars, count is incorrect if has space 
             //ReadTextCharCount(ref lines[3]);
             List<CharacterInfo> list = new List<CharacterInfo>();
@@ -144,7 +144,7 @@ namespace litefeel
             charInfos = list.ToArray();
 
             // skip empty line
-            for (; i <l; i++)
+            for (; i < l; i++)
             {
                 if (lines[i].Length > 0)
                     break;
@@ -195,7 +195,7 @@ namespace litefeel
                     case "base": lineBaseHeight = int.Parse(values[i]); break;
                     case "scaleW": textureWidth = int.Parse(values[i]); break;
                     case "scaleH": textureHeight = int.Parse(values[i]); break;
-                    case "pages": textureNames = new string[int.Parse(values[i])];break;
+                    case "pages": textureNames = new string[int.Parse(values[i])]; break;
                 }
             }
         }
@@ -235,7 +235,7 @@ namespace litefeel
             }
             return false;
         }
-        
+
         private bool ReadTextChar(int idx, ref string line, ref List<CharacterInfo> list)
         {
             if (!line.StartsWith("char")) return false;
@@ -272,7 +272,7 @@ namespace litefeel
             {
                 switch (keys[i])
                 {
-                    case "first" : kerning.first = int.Parse(values[i]); break;
+                    case "first": kerning.first = int.Parse(values[i]); break;
                     case "second": kerning.second = int.Parse(values[i]); break;
                     case "amount": kerning.amount = int.Parse(values[i]); break;
                 }

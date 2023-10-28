@@ -1,17 +1,17 @@
 ﻿using UnityEngine;
 
-public class PetState:IState
+public class PetState : IState
 {
     protected new PetStateController m_Controller { get => base.m_Controller as PetStateController; set => base.m_Controller = value; }
     protected Rigidbody2D m_rb;
     protected IPlayerPet pet;
     protected IPlayer player;
     protected Animator m_Animator;
-    public PetState(PetStateController controller):base(controller)
+    public PetState(PetStateController controller) : base(controller)
     {
-        pet=m_Controller.GetPet();
+        pet = m_Controller.GetPet();
         player = pet.GetPlayer();
-        m_Animator=pet.gameObject.GetComponent<Animator>();
+        m_Animator = pet.gameObject.GetComponent<Animator>();
         m_rb = pet.transform.GetComponent<Rigidbody2D>();
     }
     protected float GetDistanceToTarget(GameObject target)

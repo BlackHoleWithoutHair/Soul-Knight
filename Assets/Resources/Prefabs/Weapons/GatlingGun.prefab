@@ -196,6 +196,7 @@ GameObject:
   - component: {fileID: 732190108742390749}
   - component: {fileID: 732190108742390738}
   - component: {fileID: 7574186559129128651}
+  - component: {fileID: 5131789421443752197}
   m_Layer: 0
   m_Name: GatlingGun
   m_TagString: Untagged
@@ -296,6 +297,26 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.25, y: 0.625}
   m_EdgeRadius: 0
+--- !u!95 &5131789421443752197
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 732190108742390748}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: eb45eada7e1ee1e43883b9be2c2c4edf, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!1 &1124667271707111348
 GameObject:
   m_ObjectHideFlags: 0

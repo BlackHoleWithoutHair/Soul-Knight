@@ -2,15 +2,11 @@ using UnityEngine;
 
 public class Paladin : IPlayer
 {
-    public Paladin(GameObject obj, PlayerAttribute attr) : base(obj, attr)
-    {
-
-    }
+    public Paladin(GameObject obj, PlayerAttribute attr) : base(obj, attr) { }
     protected override void OnCharacterStart()
     {
         base.OnCharacterStart();
         m_StateController.SetOtherState(typeof(PaladinIdleState));
-        SetWeaponLayer(m_Attr.FirstWeapon);
     }
     protected override void OnCharacterUpdate()
     {
@@ -20,12 +16,6 @@ public class Paladin : IPlayer
     {
         base.OnCharaterDieUpdate();
         m_StateController.GameUpdate();
-    }
-    public override void AddWeapon(PlayerWeaponType type)
-    {
-        base.AddWeapon(type);
-        SetWeaponLayer(m_Attr.FirstWeapon);
-        SetWeaponLayer(m_Attr.SecondWeapon);
     }
     private void SetWeaponLayer(IWeapon weapon)
     {

@@ -33,9 +33,9 @@ public class GoblinGiantAttackState : EnemyState
                     RoamingTimer = 0;
                     m_State = EnemyCondition.Attack;
                 }
-                if(isReachTarget)
+                if (isReachTarget)
                 {
-                    TargetPos = GetRamdomPositionAroundEnemy(5);
+                    TargetPos = GetRamdomPositionAroundEnemy(10);
                 }
                 MoveToTarget(TargetPos);
                 break;
@@ -47,7 +47,6 @@ public class GoblinGiantAttackState : EnemyState
                 {
                     CoroutinePool.Instance.StartCoroutine(UseWeapon());
                 }), this);
-
                 break;
         }
         if (Timer > 7)

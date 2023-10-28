@@ -20,9 +20,9 @@ public class EffectBoom_2 : IEffectBoom
         m_Boom1Animator.gameObject.SetActive(true);
         m_Boom1Animator.Play("Boom1", 0, 0);
     }
-    public override void GameUpdate()
+    protected override void OnUpdate()
     {
-        base.GameUpdate();
+        base.OnUpdate();
         info = m_Boom1Animator.GetCurrentAnimatorStateInfo(0);
         if (info.normalizedTime > 1 && !isFogActive)
         {
@@ -37,9 +37,9 @@ public class EffectBoom_2 : IEffectBoom
         yield return new WaitForSeconds(0.5f);
         Remove();
     }
-    public override void Remove()
+    protected override void OnExit()
     {
-        base.Remove();
+        base.OnExit();
         m_Fog.gameObject.SetActive(false);
     }
 }

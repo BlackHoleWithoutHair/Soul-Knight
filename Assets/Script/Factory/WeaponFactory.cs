@@ -2,6 +2,7 @@ using UnityEngine;
 
 public enum PlayerWeaponType
 {
+    None,
     BadPistol,
     TheCode,
     H2O,
@@ -292,7 +293,7 @@ public class WeaponFactory
     public GameObject GetPlayerWeaponObj(PlayerWeaponType type, Vector2 pos)
     {
         GameObject obj = Object.Instantiate(ProxyResourceFactory.Instance.Factory.GetWeapon(type));
-        obj.GetComponent<CollectWeapon>().SetWeaponType(type);
+        obj.name=type.ToString();
         UnityTool.Instance.GetComponentFromChild<SpriteRenderer>(obj, type.ToString()).sortingLayerName = "Floor";
         UnityTool.Instance.GetComponentFromChild<SpriteRenderer>(obj, type.ToString()).sortingOrder = 10;
         UnityTool.Instance.GetComponentFromChild<BoxCollider2D>(obj, type.ToString()).enabled = true;

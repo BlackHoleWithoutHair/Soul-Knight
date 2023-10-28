@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-public class BossModel:AbstractModel
+public class BossModel : AbstractModel
 {
     public List<BossShareAttr> attrs;
     protected override void OnInit()

@@ -1,11 +1,11 @@
 public class EnemyStateController : IStateController
 {
-    protected IEnemy m_Character;
-    public EnemyStateController(IEnemy enemy) : base()
+    protected IEmployeeEnemy m_Character;
+    public EnemyStateController(IEmployeeEnemy enemy) : base()
     {
         m_Character = enemy;
     }
-    public IEnemy GetCharacter()
+    public IEmployeeEnemy GetCharacter()
     {
         return m_Character;
     }

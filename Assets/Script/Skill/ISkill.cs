@@ -1,19 +1,15 @@
-using UnityEngine;
-
 public class ISkill
 {
-    public SkillAttribute m_Attr;
-    protected IPlayer m_Player;
-    protected Animator m_Animator;
+
+    protected ICharacter m_Character;
+
     public bool isSkillUpdate { get; private set; }
-    private bool isSkillEverUse;//技能是否曾经使用过，防止Exit被意外执行
     private bool isInit;
     private bool isStart;
     private bool isFinishSkill;
-    public ISkill(IPlayer character)
+    public ISkill(ICharacter character)
     {
-        m_Player = character;
-        m_Animator = UnityTool.Instance.GetComponentFromChild<Animator>(m_Player.gameObject, "Sprite");
+        m_Character = character;
     }
     protected virtual void OnInit() { }
     protected virtual void OnSkillStart()
@@ -35,17 +31,11 @@ public class ISkill
             }
             OnSkillDuration();
         }
-        else if (!isFinishSkill && isSkillEverUse)
-        {
-            isFinishSkill = true;
-            OnFinishSkill();
-        }
     }
     protected virtual void OnSkillDuration() { }
-    protected virtual void OnFinishSkill() { }
+    protected virtual void OnSkillFinish() { }
     public void StartSkill()
     {
-        isSkillEverUse = true;
         isSkillUpdate = true;
         isFinishSkill = false;
         isStart = false;
@@ -53,5 +43,10 @@ public class ISkill
     public void StopSkill()
     {
         isSkillUpdate = false;
+        if (!isFinishSkill)
+        {
+            isFinishSkill = true;
+            OnSkillFinish();
+        }
     }
 }

@@ -24,7 +24,7 @@ public abstract class EnemyState : IState
     protected GameObject FindPlayerPoint;
     protected GameObject Exclamation;
     protected EnemyAttribute m_Attr;
-    protected IEnemy m_Character;
+    protected IEmployeeEnemy m_Character;
     protected EnemyCondition m_State;
 
     private const float MIN_MOVE_DISTANCE = 0.001f;
@@ -47,7 +47,7 @@ public abstract class EnemyState : IState
         m_Character = m_Controller.GetCharacter();
         m_Attr = m_Character.m_Attr;
         m_GameObject = m_Character.gameObject;
-        seeker=m_GameObject.GetComponent<Seeker>();
+        seeker = m_GameObject.GetComponent<Seeker>();
         m_HitPlayerBox = m_GameObject.transform.Find("HitPlayerBox")?.gameObject;
         Exclamation = m_GameObject.transform.Find("Exclamation")?.gameObject;
         m_Collider = m_GameObject.transform.Find("Collider")?.GetComponent<CapsuleCollider2D>();
@@ -124,13 +124,13 @@ public abstract class EnemyState : IState
         if (path == null) return;
         if (isReachTarget) return;
         Vector3 dir = (path.vectorPath[CurrentWayPoint] - m_GameObject.transform.position).normalized;
-         m_GameObject.transform.position +=dir * m_Attr.m_ShareAttr.Speed * Time.deltaTime;
+        m_GameObject.transform.position += dir * m_Attr.m_ShareAttr.Speed * Time.deltaTime;
 
         if (Vector2.Distance(path.vectorPath[CurrentWayPoint], m_GameObject.transform.position) < NextWayPointDis)
         {
             CurrentWayPoint++;
         }
-        if(CurrentWayPoint>= path.vectorPath.Count)
+        if (CurrentWayPoint >= path.vectorPath.Count)
         {
             isReachTarget = true;
         }
@@ -138,11 +138,11 @@ public abstract class EnemyState : IState
     }
     private IEnumerator SeekerLoop()
     {
-        while(true)
+        while (true)
         {
-            if(seeker.IsDone())
+            if (seeker.IsDone())
             {
-                if(OldTargetPos!=TargetPos)
+                if (OldTargetPos != TargetPos)
                 {
                     OldTargetPos = TargetPos;
                     seeker.StartPath(m_GameObject.transform.position, TargetPos, SavePath);
@@ -153,11 +153,11 @@ public abstract class EnemyState : IState
     }
     private void SavePath(Path path)
     {
-        if(!path.error)
+        if (!path.error)
         {
             this.path = path;
             CurrentWayPoint = 0;
-            isReachTarget= false;
+            isReachTarget = false;
         }
     }
     protected void Movement(Vector2 velocity)
@@ -238,9 +238,13 @@ public abstract class EnemyState : IState
     protected Vector2 GetRamdomPositionAroundEnemy(float dis)
     {
         Vector2 result = (Vector2)m_GameObject.transform.position + Random.insideUnitCircle * dis;
-        while (IsPointInCollider(result)||!IsPointInFloor(result))
+        while (IsPointInCollider(result) || !IsPointInFloor(result))
         {
             result = (Vector2)m_GameObject.transform.position + Random.insideUnitCircle * dis;
+            if (result.magnitude < 3)
+            {
+                result = result.normalized * 3;
+            }
         }
         return result;
     }
@@ -250,7 +254,7 @@ public abstract class EnemyState : IState
         {
             m_Character.isLeft = false;
         }
-        else if(dir.x<-0.01)
+        else if (dir.x < -0.01)
         {
             m_Character.isLeft = true;
         }

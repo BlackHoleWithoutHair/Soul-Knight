@@ -15,7 +15,7 @@ public class SafeBox : MonoBehaviour
     {
         if (isPlayerEnter)
         {
-            if (InputUtility.Instance.GetKeyDown(KeyAction.Use)&&isReceiveInput)
+            if (InputUtility.Instance.GetKeyDown(KeyAction.Use) && isReceiveInput)
             {
                 isReceiveInput = false;
                 EventCenter.Instance.NotisfyObserver(EventType.OnWantUseSafeBox);

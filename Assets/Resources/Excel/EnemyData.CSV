@@ -31,3 +31,5 @@ GunShark,TRUE,None,40,4,5,FALSE
 ,,,,,,
 GoblinGiant,FALSE,Hammer,40,3,2,FALSE
 GoblinGiant,TRUE,Hammer,120,4,3,FALSE
+,,,,,,
+Stake,FALSE,None,99999,0,0,FALSE

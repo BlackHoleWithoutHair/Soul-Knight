@@ -1,16 +1,18 @@
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using UnityEngine;
 
 public class ResourcesFactory : IResourceFactory
 {
     private string DataPath = "Datas/";
     private string ExcelPath = "Excel/";
+    private string AudioPath = "Audios/";
     private string ImageWeaponPath = "Images/Weapon/";
     private string ImageSkillPath = "Images/Skill/";
     private string ImageMaterialPath = "Images/Materials/";
     private string ImagePlantsPath = "Images/Seeds/";
+    private string ImageProfilePath = "Images/Profile/";
+    private string ImageTalentPath = "Images/Talent/";
     private string CharacterAnimatorPath = "Animations/Character";
     private string PetAnimatorPath = "Animations/Pet/";
     private string PlayerPath = "Prefabs/Players/";
@@ -81,6 +83,14 @@ public class ResourcesFactory : IResourceFactory
                 return default(T);
         }
     }
+    public List<T> GetResources<T>(string name) where T : UnityEngine.Object
+    {
+        return Resources.LoadAll<T>("").Where(r => r.name == name).ToList();
+    }
+    public AudioClip GetAudioClip(string name)
+    {
+        return Resources.Load<AudioClip>(AudioPath + name);
+    }
     public Sprite GetWeaponSprite(string name)
     {
         return Resources.Load<Sprite>(ImageWeaponPath + name);
@@ -96,6 +106,14 @@ public class ResourcesFactory : IResourceFactory
     public Sprite GetPlantSprite(string name)
     {
         return Resources.Load<Sprite>(ImagePlantsPath + name);
+    }
+    public Sprite GetProfileSprite(string name)
+    {
+        return Resources.Load<Sprite>(ImageProfilePath+name);
+    }
+    public Sprite GetTalentSprite(string name)
+    {
+        return Resources.Load<Sprite>(ImageTalentPath + name);
     }
     public TextAsset GetExcelTextAsset(string name)
     {
@@ -176,7 +194,7 @@ public class ResourcesFactory : IResourceFactory
     {
         if (EffectDic.TryGetValue(type, out GameObject obj))
         {
-            if(obj==null)
+            if (obj == null)
             {
                 Debug.Log("error");
             }

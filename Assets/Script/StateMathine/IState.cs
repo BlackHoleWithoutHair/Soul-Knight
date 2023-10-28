@@ -13,23 +13,23 @@ public abstract class IState
         StateUpdate();
     }
     protected virtual void StateInit() { }
-    protected virtual void StateStart() 
+    protected virtual void StateStart()
     {
-        if(!isInit)
+        if (!isInit)
         {
             isInit = true;
             StateInit();
         }
     }
-    protected virtual void StateUpdate() 
+    protected virtual void StateUpdate()
     {
-        if(!isStart)
+        if (!isStart)
         {
             isStart = true;
             StateStart();
         }
     }
-    protected virtual void StateEnd() 
+    protected virtual void StateEnd()
     {
         isStart = false;
     }

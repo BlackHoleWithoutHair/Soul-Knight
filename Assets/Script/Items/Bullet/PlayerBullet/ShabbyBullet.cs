@@ -2,15 +2,18 @@ using UnityEngine;
 
 public class ShabbyBullet : IPlayerBullet
 {
-    public ShabbyBullet(GameObject obj, PlayerWeaponShareAttribute attr) : base(obj, attr)
+    public ShabbyBullet(GameObject obj) : base(obj)
     {
         type = PlayerBulletType.ShabbyBullet;
     }
-    protected override void AfterHitWallStart()
+    protected override void OnHitWall()
     {
-        base.AfterHitWallStart();
-        IEffectBoom boom = EffectFactory.Instance.GetEffectBoom(EffectBoomType.EffectBoom_1, gameObject.transform.position);
-        boom.SetColor(new Color(1, 1, 0));
-        boom.AddToController();
+        base.OnHitWall();
+        CreateBoomEffect(EffectBoomType.EffectBoom_1, BulletColorType.Yellow);
+    }
+    protected override void OnHitCharacter()
+    {
+        base.OnHitCharacter();
+        CreateBoomEffect(EffectBoomType.EffectBoom_1, BulletColorType.Yellow);
     }
 }

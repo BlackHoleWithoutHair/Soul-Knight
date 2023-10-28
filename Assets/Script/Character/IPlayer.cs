@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 
 public abstract class IPlayer : ICharacter
@@ -5,11 +6,8 @@ public abstract class IPlayer : ICharacter
     public new PlayerAttribute m_Attr { get => base.m_Attr as PlayerAttribute; protected set => base.m_Attr = value; }
     protected PlayerStateController m_StateController;
     public PlayerControlInput m_Input;
-    private IPlayerWeapon oldFirstWeapon;
-    private IPlayerWeapon oldSecondWeapon;
     private IPlayerPet m_Pet;
-    private ISkill m_Skill;
-    public ISkill Skill => m_Skill;
+    public IPlayerSkill m_Skill { get; protected set; }
     private Vector2 mouseDir;
     private IEnemy currentEnemy;
     private IEnemy lastAimedEnemy;
@@ -22,56 +20,44 @@ public abstract class IPlayer : ICharacter
         m_Input = new PlayerControlInput();
         m_Animator = gameObject.transform.Find("Sprite").GetComponent<Animator>();
         m_rb = gameObject.GetComponent<Rigidbody2D>();
-        if (m_Attr.FirstWeapon != null)
+        m_Attr.Weapons.Clear();
+        foreach(PlayerWeaponType type in m_Attr.WeaponTypes)
         {
-            if (m_Attr.FirstWeapon.gameObject == null)
-            {
-                m_Attr.FirstWeapon = WeaponFactory.Instance.GetPlayerWeapon(m_Attr.FirstWeapon.m_Attr.Type, this);
-            }
+            m_Attr.Weapons.Add(WeaponFactory.Instance.GetPlayerWeapon(type, this));
         }
-        if (m_Attr.SecondWeapon != null)
+        if (m_Attr.Weapons.Count!=0)
         {
-            if (m_Attr.SecondWeapon.gameObject == null)
-            {
-                m_Attr.SecondWeapon = WeaponFactory.Instance.GetPlayerWeapon(m_Attr.SecondWeapon.m_Attr.Type, this);
-            }
+            UseWeapon(m_Attr.Weapons[0]);
         }
-        if (m_Attr.FirstWeapon != null)
-        {
-            UseWeapon(m_Attr.FirstWeapon);
-        }
-        oldFirstWeapon = m_Attr.FirstWeapon;
-        oldSecondWeapon = m_Attr.SecondWeapon;
         m_Attr.isRun = true;
+    }
+    protected override void OnInit()
+    {
+        base.OnInit();
+        GameMediator.Instance.GetSystem<TalentSystem>().AddTalen(TalentType.Precision, this);
+        GameMediator.Instance.GetSystem<TalentSystem>().AddTalen(TalentType.BulletRebound, this);
+        GameMediator.Instance.GetSystem<TalentSystem>().AddTalen(TalentType.BulletPenetrate, this);
+        m_Attr.CurrentHp = m_Attr.m_ShareAttr.MaxHp;
+        m_Attr.CurrentMp = m_Attr.m_ShareAttr.Magic;
+        m_Attr.CurrentArmor = m_Attr.m_ShareAttr.Armor;
+        m_Pet = PlayerFactory.Instance.GetPlayerPet(ModelContainer.Instance.GetModel<MemoryModel>().PetType, this);
+        GameMediator.Instance.GetController<PlayerController>().AddPet(m_Pet);
     }
     protected override void OnCharacterStart()
     {
         base.OnCharacterStart();
         m_StateController = new PlayerStateController(this);
-        m_Attr.CurrentHp = m_Attr.m_ShareAttr.MaxHp;
-        m_Attr.CurrentMp = m_Attr.m_ShareAttr.Magic;
-        m_Attr.CurrentArmor = m_Attr.m_ShareAttr.Armor;
         m_Attr.HurtArmorRecoveryTimer = m_Attr.m_ShareAttr.HurtArmorRecoveryTime;
-        m_Skill = SkillFactory.Instance.GetSkill(m_Attr.CurrentSkillType, this);
-        m_Pet = PlayerFactory.Instance.GetPlayerPet(ModelContainer.Instance.GetModel<MemoryModel>().PetType,this);
-        GameMediator.Instance.GetController<PlayerController>().AddPet(m_Pet);
-        if (m_Attr.FirstWeapon == null)//本来没有一把武器会出问题
-        {
-            m_Attr.FirstWeapon = WeaponFactory.Instance.GetPlayerWeapon(m_Attr.m_ShareAttr.IdleWeapon, this);
-            m_Attr.FirstWeapon.isBeingUsed = true;
-        }
-    }
-    protected override void AlwaysUpdate()
-    {
-        base.AlwaysUpdate();
-        m_Attr.HurtArmorRecoveryTimer += Time.deltaTime;
-        m_Attr.HurtInvincibleTimer += Time.deltaTime;
+        m_Skill = SkillFactory.Instance.GetSkill(m_Attr.CurrentSkillType, this) as IPlayerSkill;
     }
     protected override void OnCharacterUpdate()
     {
         base.OnCharacterUpdate();
         m_StateController.GameUpdate();
         m_Skill.OnUpdate();
+        m_Attr.HurtArmorRecoveryTimer += Time.deltaTime;
+        m_Attr.HurtInvincibleTimer += Time.deltaTime;
+        m_Attr.SkillCoolTimer += Time.deltaTime;
         if (m_Attr.HurtArmorRecoveryTimer > m_Attr.m_ShareAttr.HurtArmorRecoveryTime)
         {
             m_Attr.ArmorRecoveryTimer += Time.deltaTime;
@@ -83,16 +69,6 @@ public abstract class IPlayer : ICharacter
                     m_Attr.CurrentArmor += 1;
                 }
             }
-        }
-        if (oldFirstWeapon != m_Attr.FirstWeapon)
-        {
-            oldFirstWeapon = m_Attr.FirstWeapon;
-            OnFirstWeaponChange();
-        }
-        if (oldSecondWeapon != m_Attr.SecondWeapon)
-        {
-            oldSecondWeapon = m_Attr.SecondWeapon;
-            OnSecondWeaponChange();
         }
         WeaponControl();
         currentEnemy = GetClosestEnemy();
@@ -108,7 +84,7 @@ public abstract class IPlayer : ICharacter
     }
     private void WeaponControl()
     {
-        if (m_Attr.SecondWeapon?.isBeingUsed == true || m_Attr.FirstWeapon?.isBeingUsed == true)
+        if (m_Attr.Weapons.Any(weapon=>weapon.isBeingUsed))
         {
             if (m_Input.isMouseControl)
             {
@@ -200,104 +176,95 @@ public abstract class IPlayer : ICharacter
         m_Attr.CurrentMp += num;
         m_Attr.CurrentMp = Mathf.Clamp(m_Attr.CurrentMp, 0, m_Attr.m_ShareAttr.Magic);
     }
-    protected virtual void OnFirstWeaponChange()
-    {
-        //m_Attr.FirstWeapon.OnEnter();
-    }
-    protected virtual void OnSecondWeaponChange()
-    {
-        //m_Attr.SecondWeapon.OnEnter();
-    }
     public virtual void AddWeapon(PlayerWeaponType type)
     {
-        IPlayerWeapon weapon = WeaponFactory.Instance.GetPlayerWeapon(type, this);
-        if (m_Attr.FirstWeapon == null)
+        if (m_Attr.Weapons.Count == 3)
         {
-            m_Attr.FirstWeapon = weapon;
-
-        }
-        else if (m_Attr.SecondWeapon == null)
-        {
-            m_Attr.SecondWeapon = weapon;
-            m_Attr.SecondWeapon.gameObject.SetActive(false);
+            GameMediator.Instance.GetSystem<BackpackSystem>().AddWeapon(type);
         }
         else
         {
-            if (m_Attr.FirstWeapon.isBeingUsed)
+            m_Attr.WeaponTypes.Add(type);
+            IPlayerWeapon weapon = WeaponFactory.Instance.GetPlayerWeapon(type, this);
+            if (m_Attr.Weapons.Count != 0)
             {
-                WeaponFactory.Instance.GetPlayerWeaponObj(m_Attr.FirstWeapon.m_Attr.Type, gameObject.transform.position);
-                Object.Destroy(m_Attr.FirstWeapon.gameObject);
-                m_Attr.FirstWeapon = weapon;
-                UseWeapon(m_Attr.FirstWeapon);
-
+                weapon.gameObject.SetActive(false);
             }
-            else
-            {
-                WeaponFactory.Instance.GetPlayerWeaponObj(m_Attr.SecondWeapon.m_Attr.Type, gameObject.transform.position);
-                Object.Destroy(m_Attr.SecondWeapon.gameObject);
-                m_Attr.SecondWeapon = weapon;
-                UseWeapon(m_Attr.SecondWeapon);
-
-            }
+            m_Attr.Weapons.Add(weapon);
         }
     }
     private void UseWeapon(IPlayerWeapon weapon)
     {
-        weapon.isBeingUsed = true;
-        weapon.gameObject.SetActive(true);
-        IPlayerWeapon anotherWeapon = GetAnotherWeapon(weapon);
-        if (anotherWeapon != null)
+        IPlayerWeapon w = GetUsedWeapon();
+        if(w!=null)
         {
-            anotherWeapon.OnExit();
-            anotherWeapon.isBeingUsed = false;
-            if (anotherWeapon.gameObject != null)
+            w.OnExit();
+            w.isBeingUsed = false;
+        }
+        foreach(IPlayerWeapon item in m_Attr.Weapons)
+        {
+            if(item!=weapon)
             {
-                anotherWeapon.gameObject.SetActive(false);
+                item.gameObject.SetActive(false);
             }
         }
+        weapon.isBeingUsed = true;
+        weapon.gameObject.SetActive(true);
     }
-    private IPlayerWeapon GetAnotherWeapon(IPlayerWeapon weapon)
+    public void RemoveWeapon(PlayerWeaponType weapon)
     {
-        if (weapon == m_Attr.FirstWeapon)
+        if(weapon==GetUsedWeapon().m_Attr.Type)
         {
-            return m_Attr.SecondWeapon;
-        }
-        if (weapon == m_Attr.SecondWeapon)
-        {
-            return m_Attr.FirstWeapon;
-        }
-        return null;
-    }
-    private void SwapWeapon()
-    {
-        if (m_Attr.FirstWeapon == null || m_Attr.SecondWeapon == null)
-        {
-            return;
-        }
-        if (m_Attr.FirstWeapon.isBeingUsed)
-        {
-            UseWeapon(m_Attr.SecondWeapon);
+            int i;
+            for (i = 0; i < m_Attr.Weapons.Count; i++)
+            {
+                if (m_Attr.Weapons[i].m_Attr.Type == weapon)
+                {
+                    m_Attr.Weapons.RemoveAt(i);
+                    break;
+                }
+            }
+            if(i<m_Attr.Weapons.Count)
+            {
+                UseWeapon(m_Attr.Weapons[i]);
+            }
+            else if(i-1<m_Attr.Weapons.Count&&i-1>=0)
+            {
+                UseWeapon(m_Attr.Weapons[i-1]);
+            }
         }
         else
         {
-            UseWeapon(m_Attr.FirstWeapon);
+            for (int i = 0; i < m_Attr.Weapons.Count; i++)
+            {
+                if (m_Attr.Weapons[i].m_Attr.Type == weapon)
+                {
+                    m_Attr.Weapons.RemoveAt(i);
+                    break;
+                }
+            }
         }
+    }
+    private void SwapWeapon()
+    {
+        if (m_Attr.Weapons.Count <= 1) return;
+        int index=0;
+        for(int i=0;i<m_Attr.Weapons.Count;i++)
+        {
+            if (m_Attr.Weapons[i].isBeingUsed)
+            {
+                index = i;
+            }
+        }
+        UseWeapon(m_Attr.Weapons[(index + 1) % m_Attr.Weapons.Count]);
     }
     public IPlayerWeapon GetUsedWeapon()
     {
-        if (m_Attr.FirstWeapon != null)
+        foreach (IPlayerWeapon weapon in m_Attr.Weapons)
         {
-            if (m_Attr.FirstWeapon.isBeingUsed)
+            if (weapon.isBeingUsed)
             {
-                return m_Attr.FirstWeapon;
-            }
-        }
-
-        if (m_Attr.SecondWeapon != null)
-        {
-            if (m_Attr.SecondWeapon.isBeingUsed)
-            {
-                return m_Attr.SecondWeapon;
+                return weapon;
             }
         }
         return null;
@@ -346,5 +313,9 @@ public abstract class IPlayer : ICharacter
         EffectFactory.Instance.GetEffect(EffectType.AppearLight, gameObject.transform.position).AddToController();
         m_Pet?.EnterBattleScene();
         gameObject.SetActive(true);
+    }
+    public bool CanUseSkill()
+    {
+        return (m_Attr.SkillCoolTimer > m_Skill.m_Attr.m_ShareAttr.SkillCoolTime) ? true : false;
     }
 }

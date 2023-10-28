@@ -3,14 +3,7 @@ using UnityEngine;
 public class RangerWalkState : PlayerState
 {
     private Vector2 dir;
-    public RangerWalkState(PlayerStateController controller) : base(controller)
-    {
-
-    }
-    protected override void StateStart()
-    {
-        base.StateStart();
-    }
+    public RangerWalkState(PlayerStateController controller) : base(controller) { }
     protected override void StateUpdate()
     {
         base.StateUpdate();
@@ -45,7 +38,7 @@ public class RangerWalkState : PlayerState
         }
         m_rb.velocity = m_Attr.m_ShareAttr.Speed * dir.normalized;
         player.GetUsedWeapon().OnUpdate();
-        if (InputUtility.Instance.GetKeyDown(KeyAction.Skill))
+        if (InputUtility.Instance.GetKeyDown(KeyAction.Skill)&&player.CanUseSkill())
         {
             if (player.m_Attr.CurrentSkillType == SkillType.Roll)
             {

@@ -25,8 +25,7 @@ public class Handgun : IEnemyWeapon
             {
                 Cumulate = 0;
                 ShotTimes += 1;
-                IBullet bullet = EffectFactory.Instance.GetEnemyBullet(EnemyBulletType.EnemyBullet1, m_Attr, FirePoint.transform.position, GetShotRotation());
-                (bullet as IEnemyBullet).SetDamage((m_Character.m_Attr as EnemyAttribute).m_ShareAttr.Damage);
+                IBullet bullet = EffectFactory.Instance.GetEnemyBullet(EnemyBulletType.EnemyBullet1, m_Attr, m_Character.m_Attr.GetShareAttr() as EnemyShareAttr, FirePoint.transform.position, GetShotRotation());
                 bullet.AddToController();
             }
             if (ShotTimes == 2)

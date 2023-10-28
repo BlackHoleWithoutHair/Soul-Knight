@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyController : AbstractController
 {
     private List<IEnemy> enemies;
-    private List<IBoss> bosses;
+    public List<IBoss> bosses { get; private set; }
     public EnemyController()
     {
         enemies = new List<IEnemy>();
@@ -16,7 +16,7 @@ public class EnemyController : AbstractController
         base.Init();
         if (GameObject.Find("Stake"))
         {
-            IEnemy dummy = EnemyFactory.Instance.GetEnemy(EnemyType.Stake,false);
+            IEnemy dummy = EnemyFactory.Instance.GetEnemy(EnemyType.Stake, false);
             dummy.gameObject.transform.position = GameObject.Find("Stake").transform.position;
             enemies.Add(dummy);
         }
@@ -24,9 +24,9 @@ public class EnemyController : AbstractController
     protected override void AlwaysUpdate()
     {
         base.AlwaysUpdate();
-        for(int i=0;i<enemies.Count;i++)
+        for (int i = 0; i < enemies.Count; i++)
         {
-            if (enemies[i].ShouldBeRemove)
+            if (enemies[i].isAlreadyRemove)
             {
                 enemies.RemoveAt(i);
             }
@@ -35,27 +35,37 @@ public class EnemyController : AbstractController
                 enemies[i].GameUpdate();
             }
         }
-        foreach(IBoss boss in bosses)
+        for (int i = 0; i < bosses.Count; i++)
         {
-            boss.GameUpdate();
+            if (bosses[i].isAlreadyRemove)
+            {
+                bosses.RemoveAt(i);
+            }
+            else
+            {
+                bosses[i].GameUpdate();
+            }
         }
     }
-    public void AddBoss(Vector2 pos)
+    public void AddBoss(Room room, Vector2 pos)
     {
         IBoss boss = EnemyFactory.Instance.GetBoss(BossType.DevilSnare);
+        boss.m_Room = room;
+        boss.m_Room.CurrentEnemyNum += 1;
         boss.transform.position = pos;
         bosses.Add(boss);
     }
-    public void SpawnEnemy(Room room,Vector2 pos,bool isRun,bool isElite)
+    public void SpawnEnemy(Room room, Vector2 pos, bool isRun, bool isElite)
     {
-        CoroutinePool.Instance.StartCoroutine(WaitForSpawnEnemy(room,pos,isRun,isElite));
+        CoroutinePool.Instance.StartCoroutine(WaitForSpawnEnemy(room, pos, isRun, isElite));
+        room.CurrentEnemyNum += 1;
     }
-    private IEnumerator WaitForSpawnEnemy(Room room, Vector2 pos,bool isRun,bool isElite)
+    private IEnumerator WaitForSpawnEnemy(Room room, Vector2 pos, bool isRun, bool isElite)
     {
         EffectFactory.Instance.GetEffect(EffectType.Pane, pos).AddToController();
         yield return new WaitForSeconds(0.8f);
         IEnemy enemy = null;
-        if(isElite)
+        if (isElite)
         {
             enemy = EnemyFactory.Instance.GetEliteEnemy();
         }
@@ -65,7 +75,7 @@ public class EnemyController : AbstractController
         }
         enemy.m_Room = room;
         enemy.gameObject.transform.position = pos;
-        enemy.m_Attr.isRun=isRun;
+        enemy.m_Attr.isRun = isRun;
         enemies.Add(enemy);
     }
 }

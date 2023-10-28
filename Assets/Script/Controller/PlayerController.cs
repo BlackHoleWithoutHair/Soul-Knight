@@ -1,7 +1,6 @@
 using SoulKnightProtocol;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public class PlayerController : AbstractController
@@ -126,14 +125,14 @@ public class PlayerController : AbstractController
                 player.GameUpdate();
             }
         }
-        foreach(IPlayerPet pet in pets)
+        foreach (IPlayerPet pet in pets)
         {
             pet.GameUpdate();
         }
     }
     public void SetPlayer(PlayerAttribute attr)
     {
-        m_Player = PlayerFactory.Instance.GetPlayer(attr.m_ShareAttr.Type,attr);
+        m_Player = PlayerFactory.Instance.GetPlayer(attr.m_ShareAttr.Type, attr);
         if (ModelContainer.Instance.GetModel<MemoryModel>().isOnlineMode)
         {
             CoroutinePool.Instance.StartCoroutine(SendUpdatePack());
@@ -162,10 +161,10 @@ public class PlayerController : AbstractController
             players[players.Count - 1].EnterBattleScene();
         }
     }
-    public void AddPet(PetType type,IPlayer player)
+    public void AddPet(PetType type, IPlayer player)
     {
         pets.Add(PlayerFactory.Instance.GetPlayerPet(type, player));
-        if(SceneModelCommand.Instance.GetActiveSceneName()==SceneName.MiddleScene)
+        if (SceneModelCommand.Instance.GetActiveSceneName() == SceneName.MiddleScene)
         {
             pets.ForEach(x => x.gameObject.SetActive(true));
         }
